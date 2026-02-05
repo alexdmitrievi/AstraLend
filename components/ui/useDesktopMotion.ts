@@ -5,22 +5,26 @@ import { useReducedMotion } from "framer-motion";
 
 export default function useDesktopMotion() {
   const prefersReducedMotion = useReducedMotion();
-  const [isDesktop, setIsDesktop] = useState(() => {
-    if (typeof window === "undefined") {
-      return false;
-    }
-    return window.matchMedia("(min-width: 1024px)").matches;
-  });
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
-    const handleChange = () => setIsDesktop(mediaQuery.matches);
+    setIsMounted(true);
 
-    handleChange();
-    mediaQuery.addEventListener("change", handleChange);
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
 
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    checkDesktop();
+    window.addEventListener("resize", checkDesktop);
+
+    return () => window.removeEventListener("resize", checkDesktop);
   }, []);
 
-  return !prefersReducedMotion && isDesktop;
+  return {
+    shouldAnimate: isMounted && isDesktop && !prefersReducedMotion,
+    isDesktop,
+    isMounted,
+    prefersReducedMotion,
+  };
 }

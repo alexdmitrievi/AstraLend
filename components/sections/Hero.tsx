@@ -6,7 +6,7 @@ import useDesktopMotion from "../ui/useDesktopMotion";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const shouldAnimate = useDesktopMotion();
+  const { isMounted, shouldAnimate } = useDesktopMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -21,6 +21,7 @@ export default function Hero() {
           viewport: { once: true, amount: 0.7 },
         }
       : { initial: false };
+  const fadeUpProps = (delay = 0) => (isMounted ? fadeUp(delay) : {});
 
   return (
     <section id="hero" ref={sectionRef} className="relative overflow-hidden">
@@ -40,26 +41,26 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-[92vh] w-full max-w-6xl flex-col justify-center gap-10 px-4 py-24 text-beige sm:px-6 lg:gap-14 lg:px-8 lg:py-28">
-        <motion.div {...fadeUp(0)} className="max-w-[480px] lg:max-w-[560px]">
-          <h1 className="font-heading text-4xl font-semibold leading-tight sm:text-5xl lg:text-[68px] lg:leading-[1.04] lg:tracking-[0.01em]">
+        <motion.div {...fadeUpProps(0)} className="max-w-[480px] lg:max-w-[560px]">
+          <h1 className="font-heading text-4xl font-semibold leading-tight sm:text-5xl lg:text-[length:var(--font-h1)] lg:leading-[1.05] lg:tracking-[0.01em] xl:text-[4.5rem]">
             Мебель, которая становится наследием
           </h1>
           <span className="mt-6 block h-px w-24 bg-graphite/70 lg:mt-8 lg:w-32" />
-          <p className="mt-6 font-body text-sm uppercase tracking-[0.2em] text-beige/70 lg:text-[15px] lg:tracking-[0.12em]">
+          <p className="mt-6 font-body text-sm uppercase tracking-[0.2em] text-beige/70 lg:text-[0.9375rem] lg:tracking-[0.08em]">
             Столярное производство полного цикла
           </p>
         </motion.div>
 
-        <motion.div {...fadeUp(0.1)} className="flex flex-wrap gap-4 lg:gap-6">
+        <motion.div {...fadeUpProps(0.1)} className="flex flex-wrap gap-4 lg:gap-6">
           <a
             href="#lead"
-            className="focus-ring font-body rounded-none bg-graphite px-6 py-3 text-sm font-semibold text-white transition hover:bg-charcoal lg:px-9 lg:py-[18px] lg:text-[16px] shadow-elevated hover-shadow lg:hover:-translate-y-0.5"
+            className="focus-ring font-body rounded-none bg-graphite px-6 py-3 text-sm font-semibold text-white transition hover:bg-charcoal lg:px-[36px] lg:py-[18px] lg:text-[1.0625rem] shadow-elevated hover-shadow lg:hover:-translate-y-0.5"
           >
             Рассчитать проект
           </a>
           <a
             href="#portfolio"
-            className="focus-ring font-body rounded-none border border-graphite px-6 py-3 text-sm font-semibold text-graphite transition hover:bg-graphite hover:text-white lg:px-9 lg:py-[18px] lg:text-[16px] shadow-elevated hover-shadow lg:hover:-translate-y-0.5"
+            className="focus-ring font-body rounded-none border border-graphite px-6 py-3 text-sm font-semibold text-graphite transition hover:bg-graphite hover:text-white lg:px-[36px] lg:py-[18px] lg:text-[1.0625rem] shadow-elevated hover-shadow lg:hover:-translate-y-0.5"
           >
             Смотреть работы
           </a>

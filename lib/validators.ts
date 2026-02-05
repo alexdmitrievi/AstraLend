@@ -1,12 +1,14 @@
 import { z } from "zod";
 
-export const furnitureTypes = [
-  "Кухня",
-  "Шкаф",
-  "Гардеробная",
-  "Коммерческая",
-  "Другое",
-] as const;
+export const furnitureTypes = ["business", "sofa", "bed", "chair", "other"] as const;
+
+export const furnitureTypeLabels: Record<(typeof furnitureTypes)[number], string> = {
+  business: "Мебель для бизнеса",
+  sofa: "Диван",
+  bed: "Кровать",
+  chair: "Кресло",
+  other: "Прочие изделия",
+};
 
 export const leadSchema = z.object({
   name: z

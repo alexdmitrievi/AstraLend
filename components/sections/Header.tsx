@@ -43,28 +43,28 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-steel/60 bg-stone/95 backdrop-blur-sm lg:bg-stone/90 lg:backdrop-blur-lg lg:transition lg:duration-300 ${
+      className={`sticky top-0 z-50 border-b border-steel/60 bg-stone/95 backdrop-blur-sm lg:bg-cream/90 lg:backdrop-blur-xl lg:transition lg:duration-300 ${
         isScrolled
-          ? "lg:bg-stone/80 lg:backdrop-blur-lg lg:shadow-[0_10px_30px_rgba(44,44,44,0.08)]"
+          ? "lg:bg-cream/80 lg:backdrop-blur-xl lg:shadow-[0_10px_30px_rgba(44,44,44,0.08)]"
           : ""
       }`}
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8 lg:py-4">
         <a
           href="#hero"
-          className="focus-ring font-heading text-lg font-semibold tracking-[0.2em] text-graphite lg:text-[22px] lg:tracking-[0.16em]"
+          className="focus-ring font-heading text-lg font-semibold tracking-[0.2em] text-graphite lg:text-[1.375rem]"
         >
           АСТРА
         </a>
 
         <nav
-          className="hidden items-center gap-3 text-sm text-charcoal/80 md:flex lg:gap-12 lg:text-[16px]"
+          className="hidden items-center gap-3 text-sm text-charcoal/80 md:flex lg:gap-10 lg:text-[length:var(--font-nav)] xl:gap-12"
           aria-label="Основная навигация"
         >
           {navLinks.map((link) => (
             <a
               key={link.href}
-              className="focus-ring rounded-full px-3 py-1 text-charcoal transition hover:text-graphite lg:px-4 lg:py-2 lg:text-[16px]"
+              className="focus-ring rounded-full px-3 py-1 text-charcoal transition hover:text-graphite lg:px-4 lg:py-2 lg:text-[length:var(--font-nav)]"
               href={link.href}
               onClick={handleAnchorClick}
             >
@@ -76,7 +76,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <a
             href="#lead"
-            className="focus-ring hidden rounded-none bg-graphite px-5 py-2 text-sm font-semibold text-white transition hover:bg-charcoal md:inline-flex lg:px-8 lg:py-4 lg:text-[16px]"
+            className="focus-ring hidden rounded-none bg-graphite px-5 py-2 text-sm font-semibold text-white transition hover:bg-charcoal md:inline-flex lg:px-8 lg:py-4 lg:text-[length:var(--font-nav)]"
             onClick={handleAnchorClick}
           >
             Рассчитать проект

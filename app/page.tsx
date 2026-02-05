@@ -102,7 +102,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="bg-stone text-graphite">
+    <div className="bg-stone text-graphite lg:bg-cream lg:text-[color:var(--color-text-primary)]">
       <Header />
       <main id="main">
         <Hero />
