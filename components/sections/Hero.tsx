@@ -54,13 +54,13 @@ export default function Hero() {
         <motion.div {...fadeUpProps(0.1)} className="flex flex-wrap gap-4 lg:gap-6">
           <a
             href="#lead"
-            className="focus-ring font-body rounded-none bg-graphite px-6 py-3 text-sm font-semibold text-white transition hover:bg-charcoal lg:px-[36px] lg:py-[18px] lg:text-[1.0625rem] shadow-elevated hover-shadow lg:hover:-translate-y-0.5"
+            className="focus-ring font-body inline-flex h-[48px] w-full items-center justify-center rounded-none bg-graphite px-6 py-3 text-sm font-semibold leading-none text-white transition hover:bg-charcoal sm:w-auto lg:h-[60px] lg:px-[36px] lg:py-[18px] lg:text-[1.0625rem] lg:leading-none shadow-elevated hover-shadow lg:hover:-translate-y-0.5 box-border"
           >
             Рассчитать проект
           </a>
           <a
             href="#portfolio"
-            className="focus-ring font-body rounded-none border border-graphite px-6 py-3 text-sm font-semibold text-graphite transition hover:bg-graphite hover:text-white lg:px-[36px] lg:py-[18px] lg:text-[1.0625rem] shadow-elevated hover-shadow lg:hover:-translate-y-0.5"
+            className="focus-ring font-body inline-flex h-[48px] w-full items-center justify-center rounded-none border border-graphite px-6 py-3 text-sm font-semibold leading-none text-graphite transition hover:bg-graphite hover:text-white sm:w-auto lg:h-[60px] lg:px-[36px] lg:py-[18px] lg:text-[1.0625rem] lg:leading-none shadow-elevated hover-shadow lg:hover:-translate-y-0.5 box-border"
           >
             Смотреть работы
           </a>

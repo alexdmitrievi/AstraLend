@@ -7,7 +7,11 @@ import Footer from "../components/sections/Footer";
 
 export default function HomePage() {
   const clients = [
-    { name: "Альфа-Банк" },
+    {
+      name: "Банк «ВТБ»",
+      logoText: "Б",
+      logoTextClassName: "text-[12px] leading-none tracking-normal",
+    },
     { name: "Точка кипения" },
     { name: "Ресторан Шато" },
     { name: "Pine Bar" },

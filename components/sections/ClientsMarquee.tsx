@@ -6,6 +6,8 @@ import useDesktopMotion from "../ui/useDesktopMotion";
 type Client = {
   name: string;
   logo?: string;
+  logoText?: string;
+  logoTextClassName?: string;
 };
 
 type ClientsMarqueeProps = {
@@ -67,8 +69,10 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
                       loading="lazy"
                     />
                   ) : (
-                    <span className="flex h-9 w-9 items-center justify-center rounded-none border border-steel text-[10px] uppercase tracking-[0.2em] text-charcoal lg:h-10 lg:w-10">
-                      {getInitials(client.name) || "LG"}
+                    <span
+                      className={`flex h-9 w-9 items-center justify-center rounded-none border border-steel text-[10px] uppercase tracking-[0.2em] text-charcoal lg:h-10 lg:w-10 ${client.logoTextClassName ?? ""}`}
+                    >
+                      {(client.logoText ?? getInitials(client.name)) || "LG"}
                     </span>
                   )}
                   <span className="whitespace-nowrap">{client.name}</span>
