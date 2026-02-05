@@ -93,6 +93,18 @@
   @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
 }
 
+.section-title-row {
+  @apply flex items-center gap-4 lg:gap-6;
+}
+
+.section-title-divider {
+  @apply h-px w-10 bg-graphite/60;
+}
+
+.section-title {
+  @apply font-heading text-3xl font-semibold leading-tight sm:text-4xl lg:text-[length:var(--font-h2)] lg:leading-tight lg:tracking-[0.01em];
+}
+
 .hero-texture {
   pointer-events: none;
   opacity: 0.5;
@@ -306,6 +318,12 @@
     grid-template-columns: 1fr 1fr;
     align-items: stretch;
     gap: 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-cta {
+    display: none;
   }
 }
 

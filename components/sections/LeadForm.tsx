@@ -99,61 +99,61 @@ export default function LeadForm() {
 
   return (
     <section id="lead" className="bg-cream py-16 sm:py-20 section-desktop">
+      <motion.div {...fadeUpProps(0)} className="section-header">
+        <div className="section-title-row">
+          <div className="section-title-divider" aria-hidden="true" />
+          <h2 className="section-title">
+            Обсудим ваш проект
+          </h2>
+        </div>
+      </motion.div>
+
       <motion.div
-        {...fadeUpProps(0)}
-        className="contact-section-inner contact-grid section-header mt-8 grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-stretch"
+        {...fadeUpProps(0.1)}
+        className="section-header mt-6 sm:mt-8 lg:mt-10"
       >
-        <div className="contact-left lg:flex lg:h-full lg:flex-col lg:justify-between">
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="h-px w-10 bg-graphite/70" aria-hidden="true" />
-                <h2 className="font-heading text-3xl font-semibold leading-tight sm:text-4xl lg:text-[length:var(--font-h2)] lg:leading-tight lg:tracking-[0.01em]">
-                  Обсудим ваш проект
-                </h2>
-              </div>
-            </div>
-            <p className="text-lg text-charcoal lg:text-[1.25rem] lg:leading-relaxed">
-              Ответим с вариантами материалов и стоимостью. Обычно — в течение рабочего
-              дня.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {[
-                "Договор",
-                "Гарантия",
-                "Собственное производство",
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-steel/70 bg-warm/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-charcoal"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="contact-cta mt-6">
-            <a
-              href={telegramLink}
-              className="telegram-button"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="20"
-                height="20"
+        <div className="space-y-6">
+          <p className="text-lg text-charcoal lg:text-[1.25rem] lg:leading-relaxed">
+            Ответим с вариантами материалов и стоимостью. Обычно — в течение рабочего
+            дня.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {[
+              "Договор",
+              "Гарантия",
+              "Собственное производство",
+            ].map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-steel/70 bg-warm/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-charcoal"
               >
-                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
-              </svg>
-              <span>Написать в Telegram</span>
-            </a>
+                {item}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="contact-info-column space-y-3">
+        <div className="contact-cta mt-6 md:hidden">
+          <a
+            href={telegramLink}
+            className="telegram-button"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              width="20"
+              height="20"
+            >
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+            </svg>
+            <span>Написать в Telegram</span>
+          </a>
+        </div>
+
+        <div className="contact-info-column mt-10 space-y-3">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="contact-form rounded-none border border-steel bg-linen p-6 lg:flex lg:h-full lg:flex-col lg:rounded-2xl lg:p-8 lg:shadow-elevated"
@@ -275,13 +275,33 @@ export default function LeadForm() {
               />
             </div>
             <div className="mt-6 space-y-6">
-              <button
-                type="submit"
-                className="focus-ring w-full rounded-none border border-graphite bg-graphite px-6 py-4 text-sm font-semibold text-white transition hover:bg-charcoal disabled:cursor-not-allowed disabled:opacity-60 lg:rounded-lg lg:text-[length:var(--font-nav)]"
-                disabled={status === "loading"}
-              >
-                {status === "loading" ? "Отправляем..." : "Обсудить проект"}
-              </button>
+              <div className="space-y-3">
+                <button
+                  type="submit"
+                  className="focus-ring w-full rounded-none border border-graphite bg-graphite px-6 py-4 text-sm font-semibold text-white transition hover:bg-charcoal disabled:cursor-not-allowed disabled:opacity-60 lg:rounded-lg lg:text-[length:var(--font-nav)]"
+                  disabled={status === "loading"}
+                >
+                  {status === "loading" ? "Отправляем..." : "Обсудить проект"}
+                </button>
+
+                <a
+                  href={telegramLink}
+                  className="telegram-button hidden w-full justify-center md:flex"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                  </svg>
+                  <span>Написать в Telegram</span>
+                </a>
+              </div>
 
               {status === "success" && (
                 <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">

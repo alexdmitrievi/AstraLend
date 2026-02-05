@@ -116,9 +116,9 @@ export default function Portfolio({ categories }: PortfolioProps) {
   return (
     <section className="portfolio-section bg-cream-light py-16 sm:py-20 section-desktop">
       <motion.div {...fadeUpProps(0)} className="section-header">
-        <div className="flex items-center gap-4 lg:gap-6">
-          <div className="h-px w-10 bg-graphite/60" aria-hidden="true" />
-          <h2 className="font-heading text-3xl font-semibold sm:text-4xl lg:text-[length:var(--font-h2)] lg:leading-tight lg:tracking-[0.01em]">
+        <div className="section-title-row">
+          <div className="section-title-divider" aria-hidden="true" />
+          <h2 className="section-title">
             Наши работы
           </h2>
         </div>

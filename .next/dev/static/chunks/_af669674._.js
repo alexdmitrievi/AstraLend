@@ -529,10 +529,10 @@ function ClientsMarquee({ clients }) {
                 ...fadeUpProps(0),
                 className: "section-header",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex items-center gap-4 lg:gap-6",
+                    className: "section-title-row",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "h-px w-10 bg-graphite/60",
+                            className: "section-title-divider",
                             "aria-hidden": "true"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/ClientsMarquee.tsx",
@@ -540,7 +540,7 @@ function ClientsMarquee({ clients }) {
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: "font-heading text-2xl font-semibold lg:text-[length:var(--font-h2)] lg:tracking-[0.01em]",
+                            className: "section-title",
                             children: "Нам доверяют"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/ClientsMarquee.tsx",
@@ -782,10 +782,10 @@ function Portfolio({ categories }) {
                 className: "section-header",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex items-center gap-4 lg:gap-6",
+                        className: "section-title-row",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "h-px w-10 bg-graphite/60",
+                                className: "section-title-divider",
                                 "aria-hidden": "true"
                             }, void 0, false, {
                                 fileName: "[project]/components/sections/Portfolio.tsx",
@@ -793,7 +793,7 @@ function Portfolio({ categories }) {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                className: "font-heading text-3xl font-semibold sm:text-4xl lg:text-[length:var(--font-h2)] lg:leading-tight lg:tracking-[0.01em]",
+                                className: "section-title",
                                 children: "Наши работы"
                             }, void 0, false, {
                                 fileName: "[project]/components/sections/Portfolio.tsx",
@@ -1124,413 +1124,453 @@ function LeadForm() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         id: "lead",
         className: "bg-cream py-16 sm:py-20 section-desktop",
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-            ...fadeUpProps(0),
-            className: "contact-section-inner contact-grid section-header mt-8 grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-stretch",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "contact-left lg:flex lg:h-full lg:flex-col lg:justify-between",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                ...fadeUpProps(0),
+                className: "section-header",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "section-title-row",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "space-y-6",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "space-y-4",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex items-center gap-4",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "h-px w-10 bg-graphite/70",
-                                                "aria-hidden": "true"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 110,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                className: "font-heading text-3xl font-semibold leading-tight sm:text-4xl lg:text-[length:var(--font-h2)] lg:leading-tight lg:tracking-[0.01em]",
-                                                children: "Обсудим ваш проект"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 111,
-                                                columnNumber: 17
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 109,
-                                        columnNumber: 15
-                                    }, this)
-                                }, void 0, false, {
-                                    fileName: "[project]/components/sections/LeadForm.tsx",
-                                    lineNumber: 108,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-lg text-charcoal lg:text-[1.25rem] lg:leading-relaxed",
-                                    children: "Ответим с вариантами материалов и стоимостью. Обычно — в течение рабочего дня."
-                                }, void 0, false, {
-                                    fileName: "[project]/components/sections/LeadForm.tsx",
-                                    lineNumber: 116,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex flex-wrap gap-3",
-                                    children: [
-                                        "Договор",
-                                        "Гарантия",
-                                        "Собственное производство"
-                                    ].map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "rounded-full border border-steel/70 bg-warm/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-charcoal",
-                                            children: item
-                                        }, item, false, {
-                                            fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 126,
-                                            columnNumber: 17
-                                        }, this))
-                                }, void 0, false, {
-                                    fileName: "[project]/components/sections/LeadForm.tsx",
-                                    lineNumber: 120,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/sections/LeadForm.tsx",
-                            lineNumber: 107,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "contact-cta mt-6",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                href: telegramLink,
-                                className: "telegram-button",
-                                target: "_blank",
-                                rel: "noreferrer",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 24 24",
-                                        fill: "currentColor",
-                                        width: "20",
-                                        height: "20",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                            d: "M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 149,
-                                            columnNumber: 17
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 142,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        children: "Написать в Telegram"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 151,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                lineNumber: 136,
-                                columnNumber: 13
-                            }, this)
+                            className: "section-title-divider",
+                            "aria-hidden": "true"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/LeadForm.tsx",
-                            lineNumber: 135,
+                            lineNumber: 104,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                            className: "section-title",
+                            children: "Обсудим ваш проект"
+                        }, void 0, false, {
+                            fileName: "[project]/components/sections/LeadForm.tsx",
+                            lineNumber: 105,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/LeadForm.tsx",
-                    lineNumber: 106,
+                    lineNumber: 103,
                     columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "contact-info-column space-y-3",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                        onSubmit: handleSubmit(onSubmit),
-                        className: "contact-form rounded-none border border-steel bg-linen p-6 lg:flex lg:h-full lg:flex-col lg:rounded-2xl lg:p-8 lg:shadow-elevated",
-                        "aria-live": "polite",
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/sections/LeadForm.tsx",
+                lineNumber: 102,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                ...fadeUpProps(0.1),
+                className: "section-header mt-6 sm:mt-8 lg:mt-10",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "space-y-6",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "space-y-6 lg:flex-1",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                className: "text-charcoal text-sm",
-                                                htmlFor: "name",
-                                                children: "Имя"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 164,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                id: "name",
-                                                type: "text",
-                                                placeholder: "Ваше имя",
-                                                className: "focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:h-14 lg:rounded-lg lg:py-0",
-                                                ...register("name"),
-                                                "aria-invalid": Boolean(errors.name),
-                                                "aria-describedby": errors.name ? "name-error" : undefined
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 167,
-                                                columnNumber: 17
-                                            }, this),
-                                            errors.name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                id: "name-error",
-                                                className: "mt-2 text-sm text-rose-600",
-                                                children: errors.name.message
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 177,
-                                                columnNumber: 19
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 163,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                className: "text-charcoal text-sm",
-                                                htmlFor: "contact",
-                                                children: "Телефон или мессенджер"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 184,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                id: "contact",
-                                                type: "text",
-                                                placeholder: "+7 999 000-00-00",
-                                                className: "focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:h-14 lg:rounded-lg lg:py-0",
-                                                ...register("contact"),
-                                                "aria-invalid": Boolean(errors.contact),
-                                                "aria-describedby": errors.contact ? "contact-error" : undefined
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 187,
-                                                columnNumber: 17
-                                            }, this),
-                                            errors.contact && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                id: "contact-error",
-                                                className: "mt-2 text-sm text-rose-600",
-                                                children: errors.contact.message
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 197,
-                                                columnNumber: 19
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 183,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                className: "text-charcoal text-sm",
-                                                htmlFor: "furnitureType",
-                                                children: "Тип изделия"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 204,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                                id: "furnitureType",
-                                                className: "focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite focus-visible:border-graphite focus-visible:ring-0 lg:h-14 lg:rounded-lg lg:py-0",
-                                                ...register("furnitureType"),
-                                                "aria-invalid": Boolean(errors.furnitureType),
-                                                "aria-describedby": errors.furnitureType ? "furniture-type-error" : undefined,
-                                                children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$validators$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["furnitureTypes"].map((type)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                        value: type,
-                                                        children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$validators$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["furnitureTypeLabels"][type]
-                                                    }, type, false, {
-                                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                                        lineNumber: 217,
-                                                        columnNumber: 21
-                                                    }, this))
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 207,
-                                                columnNumber: 17
-                                            }, this),
-                                            errors.furnitureType && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                id: "furniture-type-error",
-                                                className: "mt-2 text-sm text-rose-600",
-                                                children: errors.furnitureType.message
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 223,
-                                                columnNumber: 19
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 203,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                className: "text-charcoal text-sm",
-                                                htmlFor: "comment",
-                                                children: "Комментарий (необязательно)"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 230,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                                id: "comment",
-                                                rows: 4,
-                                                placeholder: "Кратко опишите задачу или пожелания",
-                                                className: "focus-ring mt-2 w-full resize-none rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:rounded-lg lg:py-3",
-                                                ...register("comment"),
-                                                "aria-invalid": Boolean(errors.comment),
-                                                "aria-describedby": errors.comment ? "comment-error" : undefined
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 233,
-                                                columnNumber: 17
-                                            }, this),
-                                            errors.comment && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                id: "comment-error",
-                                                className: "mt-2 text-sm text-rose-600",
-                                                children: errors.comment.message
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 243,
-                                                columnNumber: 19
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 229,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex items-start gap-3",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                id: "consent",
-                                                type: "checkbox",
-                                                className: "focus-ring mt-1 h-4 w-4 rounded border-steel bg-warm text-graphite accent-graphite",
-                                                ...register("consent"),
-                                                "aria-invalid": Boolean(errors.consent),
-                                                "aria-describedby": errors.consent ? "consent-error" : undefined
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 250,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                className: "text-charcoal text-sm",
-                                                htmlFor: "consent",
-                                                children: "Я согласен(а) с политикой обработки персональных данных"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/LeadForm.tsx",
-                                                lineNumber: 258,
-                                                columnNumber: 17
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 249,
-                                        columnNumber: 15
-                                    }, this),
-                                    errors.consent && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        id: "consent-error",
-                                        className: "-mt-2 text-sm text-rose-600",
-                                        children: errors.consent.message
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 263,
-                                        columnNumber: 17
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        type: "text",
-                                        tabIndex: -1,
-                                        autoComplete: "off",
-                                        className: "hidden",
-                                        "aria-hidden": "true",
-                                        ...register("honeypot")
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 268,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-lg text-charcoal lg:text-[1.25rem] lg:leading-relaxed",
+                                children: "Ответим с вариантами материалов и стоимостью. Обычно — в течение рабочего дня."
+                            }, void 0, false, {
                                 fileName: "[project]/components/sections/LeadForm.tsx",
-                                lineNumber: 162,
-                                columnNumber: 13
+                                lineNumber: 116,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "mt-6 space-y-6",
+                                className: "flex flex-wrap gap-3",
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        type: "submit",
-                                        className: "focus-ring w-full rounded-none border border-graphite bg-graphite px-6 py-4 text-sm font-semibold text-white transition hover:bg-charcoal disabled:cursor-not-allowed disabled:opacity-60 lg:rounded-lg lg:text-[length:var(--font-nav)]",
-                                        disabled: status === "loading",
-                                        children: status === "loading" ? "Отправляем..." : "Обсудить проект"
-                                    }, void 0, false, {
+                                    "Договор",
+                                    "Гарантия",
+                                    "Собственное производство"
+                                ].map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "rounded-full border border-steel/70 bg-warm/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-charcoal",
+                                        children: item
+                                    }, item, false, {
                                         fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 278,
+                                        lineNumber: 126,
                                         columnNumber: 15
-                                    }, this),
-                                    status === "success" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700",
-                                        children: usedTelegramFallback ? "Открыли Telegram с вашим сообщением. Если окно не появилось, напишите нам вручную." : "Спасибо. Мы свяжемся с вами в ближайшее время."
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 287,
-                                        columnNumber: 17
-                                    }, this),
-                                    status === "error" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700",
-                                        children: "Не удалось отправить. Попробуйте ещё раз или напишите в мессенджер."
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 295,
-                                        columnNumber: 17
-                                    }, this)
-                                ]
-                            }, void 0, true, {
+                                    }, this))
+                            }, void 0, false, {
                                 fileName: "[project]/components/sections/LeadForm.tsx",
-                                lineNumber: 277,
-                                columnNumber: 13
+                                lineNumber: 120,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/sections/LeadForm.tsx",
-                        lineNumber: 157,
-                        columnNumber: 11
+                        lineNumber: 115,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "contact-cta mt-6 md:hidden",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                            href: telegramLink,
+                            className: "telegram-button",
+                            target: "_blank",
+                            rel: "noreferrer",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 24 24",
+                                    fill: "currentColor",
+                                    width: "20",
+                                    height: "20",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                        d: "M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/sections/LeadForm.tsx",
+                                        lineNumber: 150,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                    lineNumber: 143,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    children: "Написать в Telegram"
+                                }, void 0, false, {
+                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                    lineNumber: 152,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/sections/LeadForm.tsx",
+                            lineNumber: 137,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/components/sections/LeadForm.tsx",
+                        lineNumber: 136,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "contact-info-column mt-10 space-y-3",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                            onSubmit: handleSubmit(onSubmit),
+                            className: "contact-form rounded-none border border-steel bg-linen p-6 lg:flex lg:h-full lg:flex-col lg:rounded-2xl lg:p-8 lg:shadow-elevated",
+                            "aria-live": "polite",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "space-y-6 lg:flex-1",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                    className: "text-charcoal text-sm",
+                                                    htmlFor: "name",
+                                                    children: "Имя"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 164,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                    id: "name",
+                                                    type: "text",
+                                                    placeholder: "Ваше имя",
+                                                    className: "focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:h-14 lg:rounded-lg lg:py-0",
+                                                    ...register("name"),
+                                                    "aria-invalid": Boolean(errors.name),
+                                                    "aria-describedby": errors.name ? "name-error" : undefined
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 167,
+                                                    columnNumber: 17
+                                                }, this),
+                                                errors.name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    id: "name-error",
+                                                    className: "mt-2 text-sm text-rose-600",
+                                                    children: errors.name.message
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 177,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 163,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                    className: "text-charcoal text-sm",
+                                                    htmlFor: "contact",
+                                                    children: "Телефон или мессенджер"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 184,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                    id: "contact",
+                                                    type: "text",
+                                                    placeholder: "+7 999 000-00-00",
+                                                    className: "focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:h-14 lg:rounded-lg lg:py-0",
+                                                    ...register("contact"),
+                                                    "aria-invalid": Boolean(errors.contact),
+                                                    "aria-describedby": errors.contact ? "contact-error" : undefined
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 187,
+                                                    columnNumber: 17
+                                                }, this),
+                                                errors.contact && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    id: "contact-error",
+                                                    className: "mt-2 text-sm text-rose-600",
+                                                    children: errors.contact.message
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 197,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 183,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                    className: "text-charcoal text-sm",
+                                                    htmlFor: "furnitureType",
+                                                    children: "Тип изделия"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 204,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                    id: "furnitureType",
+                                                    className: "focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite focus-visible:border-graphite focus-visible:ring-0 lg:h-14 lg:rounded-lg lg:py-0",
+                                                    ...register("furnitureType"),
+                                                    "aria-invalid": Boolean(errors.furnitureType),
+                                                    "aria-describedby": errors.furnitureType ? "furniture-type-error" : undefined,
+                                                    children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$validators$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["furnitureTypes"].map((type)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                            value: type,
+                                                            children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$validators$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["furnitureTypeLabels"][type]
+                                                        }, type, false, {
+                                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                                            lineNumber: 217,
+                                                            columnNumber: 21
+                                                        }, this))
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 207,
+                                                    columnNumber: 17
+                                                }, this),
+                                                errors.furnitureType && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    id: "furniture-type-error",
+                                                    className: "mt-2 text-sm text-rose-600",
+                                                    children: errors.furnitureType.message
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 223,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 203,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                    className: "text-charcoal text-sm",
+                                                    htmlFor: "comment",
+                                                    children: "Комментарий (необязательно)"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 230,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                                    id: "comment",
+                                                    rows: 4,
+                                                    placeholder: "Кратко опишите задачу или пожелания",
+                                                    className: "focus-ring mt-2 w-full resize-none rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:rounded-lg lg:py-3",
+                                                    ...register("comment"),
+                                                    "aria-invalid": Boolean(errors.comment),
+                                                    "aria-describedby": errors.comment ? "comment-error" : undefined
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 233,
+                                                    columnNumber: 17
+                                                }, this),
+                                                errors.comment && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    id: "comment-error",
+                                                    className: "mt-2 text-sm text-rose-600",
+                                                    children: errors.comment.message
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 243,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 229,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex items-start gap-3",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                    id: "consent",
+                                                    type: "checkbox",
+                                                    className: "focus-ring mt-1 h-4 w-4 rounded border-steel bg-warm text-graphite accent-graphite",
+                                                    ...register("consent"),
+                                                    "aria-invalid": Boolean(errors.consent),
+                                                    "aria-describedby": errors.consent ? "consent-error" : undefined
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 250,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                    className: "text-charcoal text-sm",
+                                                    htmlFor: "consent",
+                                                    children: "Я согласен(а) с политикой обработки персональных данных"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 258,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 249,
+                                            columnNumber: 15
+                                        }, this),
+                                        errors.consent && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            id: "consent-error",
+                                            className: "-mt-2 text-sm text-rose-600",
+                                            children: errors.consent.message
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 263,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                            type: "text",
+                                            tabIndex: -1,
+                                            autoComplete: "off",
+                                            className: "hidden",
+                                            "aria-hidden": "true",
+                                            ...register("honeypot")
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 268,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                    lineNumber: 162,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "mt-6 space-y-6",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "space-y-3",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "submit",
+                                                    className: "focus-ring w-full rounded-none border border-graphite bg-graphite px-6 py-4 text-sm font-semibold text-white transition hover:bg-charcoal disabled:cursor-not-allowed disabled:opacity-60 lg:rounded-lg lg:text-[length:var(--font-nav)]",
+                                                    disabled: status === "loading",
+                                                    children: status === "loading" ? "Отправляем..." : "Обсудить проект"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 279,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                                    href: telegramLink,
+                                                    className: "telegram-button hidden w-full justify-center md:flex",
+                                                    target: "_blank",
+                                                    rel: "noreferrer",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                            xmlns: "http://www.w3.org/2000/svg",
+                                                            viewBox: "0 0 24 24",
+                                                            fill: "currentColor",
+                                                            width: "20",
+                                                            height: "20",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                d: "M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/sections/LeadForm.tsx",
+                                                                lineNumber: 300,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                                            lineNumber: 293,
+                                                            columnNumber: 19
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            children: "Написать в Telegram"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                                            lineNumber: 302,
+                                                            columnNumber: 19
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                                    lineNumber: 287,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 278,
+                                            columnNumber: 15
+                                        }, this),
+                                        status === "success" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700",
+                                            children: usedTelegramFallback ? "Открыли Telegram с вашим сообщением. Если окно не появилось, напишите нам вручную." : "Спасибо. Мы свяжемся с вами в ближайшее время."
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 307,
+                                            columnNumber: 17
+                                        }, this),
+                                        status === "error" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700",
+                                            children: "Не удалось отправить. Попробуйте ещё раз или напишите в мессенджер."
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/sections/LeadForm.tsx",
+                                            lineNumber: 315,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/sections/LeadForm.tsx",
+                                    lineNumber: 277,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/sections/LeadForm.tsx",
+                            lineNumber: 157,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/components/sections/LeadForm.tsx",
+                        lineNumber: 156,
+                        columnNumber: 9
                     }, this)
-                }, void 0, false, {
-                    fileName: "[project]/components/sections/LeadForm.tsx",
-                    lineNumber: 156,
-                    columnNumber: 9
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/components/sections/LeadForm.tsx",
-            lineNumber: 102,
-            columnNumber: 7
-        }, this)
-    }, void 0, false, {
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/sections/LeadForm.tsx",
+                lineNumber: 111,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
         fileName: "[project]/components/sections/LeadForm.tsx",
         lineNumber: 101,
         columnNumber: 5

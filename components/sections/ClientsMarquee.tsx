@@ -36,9 +36,9 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
   return (
     <section className="section-desktop bg-cream-light py-16 sm:py-20">
       <motion.div {...fadeUpProps(0)} className="section-header">
-        <div className="flex items-center gap-4 lg:gap-6">
-          <div className="h-px w-10 bg-graphite/60" aria-hidden="true" />
-          <h2 className="font-heading text-2xl font-semibold lg:text-[length:var(--font-h2)] lg:tracking-[0.01em]">
+        <div className="section-title-row">
+          <div className="section-title-divider" aria-hidden="true" />
+          <h2 className="section-title">
             Нам доверяют
           </h2>
         </div>
