@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-anthracite: #2b2d2f;
+  --color-gold: #c9a961;
+  --color-beige: #f5f1e8;
+  --color-graphite: #2c2c2c;
+  --color-charcoal: #4a4a4a;
+  --color-ash: #8a8a8a;
+  --color-steel: #d4d0c8;
+  --color-stone: #e8e4dc;
+  --color-linen: #f2f0eb;
+  --color-warm: #fafaf8;
+  --color-walnut: #6b5d4d;
+  --color-oak: #9c8b75;
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-montserrat);
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    color: var(--color-graphite);
+    background-color: var(--color-stone);
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-heading);
+    color: var(--color-graphite);
+  }
+}
+
+.glass {
+  @apply bg-warm/10 backdrop-blur-md;
+}
+
+.marquee {
+  animation: marquee 18s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}
+
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite/70 focus-visible:ring-offset-2 focus-visible:ring-offset-stone;
+}
+
+.hero-texture {
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: radial-gradient(
+      120% 100% at 50% 45%,
+      #2b2d2f00 58%,
+      #2b2d2f29 100%
+    ),
+    repeating-radial-gradient(
+      circle at 20% 30%,
+      #2b2d2f14 0 1px,
+      #2b2d2f00 1px 3px
+    );
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 100%, 3px 3px;
+}
+
