@@ -1,1 +1,32 @@
-[00:00:25.821] Server  LOG     ✓ Ready in 21.6s
+[00:00:07.440] Server  LOG     ✓ Ready in 5.8s
+[00:14:22.743] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:22:12.747] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:47.230] Server  LOG     ✓ Compiled in 542ms
+[00:28:37.635] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:47.878] Server  LOG     ✓ Compiled in 3.1s
+[00:28:48.049] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:29:44.607] Server  LOG     ✓ Compiled in 457ms
+[00:29:59.171] Server  LOG     ✓ Compiled in 266ms
+[00:30:41.219] Server  LOG     ✓ Compiled in 318ms
+[00:30:50.270] Server  LOG     ✓ Compiled in 412ms
+[00:30:59.426] Server  LOG     ✓ Compiled in 232ms
+[00:31:13.994] Server  LOG     ✓ Compiled in 352ms
+[00:31:38.102] Server  LOG     ✓ Compiled in 88ms
+[00:32:23.902] Server  LOG     ✓ Compiled in 680ms
+[00:32:33.587] Server  LOG     ✓ Compiled in 281ms
+[00:32:42.609] Server  LOG     ✓ Compiled in 136ms
+[01:08:02.348] Server  LOG     ✓ Compiled in 5.2s
+[01:08:12.480] Server  LOG     ✓ Compiled in 1334ms
+[01:08:25.774] Server  LOG     ✓ Compiled in 506ms
+[01:08:39.638] Server  LOG     ✓ Compiled in 337ms
+[01:09:48.152] Server  LOG     ✓ Compiled in 2.7s
+[01:09:55.366] Server  LOG     ✓ Compiled in 363ms
+[01:10:11.368] Server  LOG     ✓ Compiled in 1507ms
+[01:10:24.037] Server  LOG     ✓ Compiled in 643ms
+[01:10:31.343] Server  LOG     ✓ Compiled in 665ms
+[01:10:50.972] Server  LOG     ✓ Compiled in 288ms
+[01:11:09.607] Server  LOG     ✓ Compiled in 275ms
+[01:11:26.978] Server  LOG     ✓ Compiled in 271ms
+[01:12:00.383] Server  LOG     ✓ Compiled in 388ms
+[01:12:52.724] Server  LOG     ✓ Compiled in 252ms
+[01:15:32.941] Server  LOG     ✓ Compiled in 901ms

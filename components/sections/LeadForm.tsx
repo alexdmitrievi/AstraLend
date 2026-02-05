@@ -1,15 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { furnitureTypes, leadSchema, type LeadFormValues } from "../../lib/validators";
 import { track } from "../../lib/track";
+import useDesktopMotion from "../ui/useDesktopMotion";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
 export default function LeadForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
+  const shouldAnimate = useDesktopMotion();
   const {
     register,
     handleSubmit,
@@ -52,31 +55,73 @@ export default function LeadForm() {
     }
   };
 
+  const fadeUp = (delay = 0) =>
+    shouldAnimate
+      ? {
+          initial: { opacity: 0, y: 20 },
+          whileInView: { opacity: 1, y: 0 },
+          transition: { duration: 0.6, ease: "easeOut", delay },
+          viewport: { once: true, amount: 0.3 },
+        }
+      : { initial: false };
+
   return (
-    <section id="lead" className="py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto mt-8 grid w-full max-w-6xl gap-10 px-4 sm:px-6 lg:px-8 lg:grid-cols-[1.05fr_0.95fr]">
+    <section id="lead" className="py-16 sm:py-20 section-desktop lg:bg-warm">
+      <motion.div
+        {...fadeUp(0)}
+        className="mx-auto mt-8 grid w-full max-w-6xl gap-10 px-4 sm:px-6 lg:px-8 lg:grid-cols-[0.8fr_1fr] lg:gap-16"
+      >
         <div className="space-y-6">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <div className="h-px w-10 bg-graphite/70" aria-hidden="true" />
-              <h2 className="font-heading text-3xl font-semibold leading-tight sm:text-4xl">
+              <h2 className="font-heading text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem] lg:leading-tight lg:tracking-[0.01em]">
                 Обсудим ваш проект
               </h2>
             </div>
           </div>
-          <p className="text-lg text-charcoal">
+          <p className="text-lg text-charcoal lg:text-xl lg:leading-relaxed">
             Ответим с вариантами материалов и стоимостью. Обычно — в течение рабочего
             дня.
           </p>
+          <div className="hidden flex-wrap gap-3 lg:flex">
+            <span className="lead-badge inline-flex items-center border border-graphite/20 bg-warm px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-graphite">
+              Договор
+            </span>
+            <span className="lead-badge inline-flex items-center border border-graphite/20 bg-warm px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-graphite">
+              Гарантия
+            </span>
+            <span className="lead-badge inline-flex items-center border border-graphite/20 bg-warm px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-graphite">
+              Собственное производство
+            </span>
+          </div>
+          <a
+            href="https://t.me/USERNAME"
+            className="telegram-button hidden lg:inline-flex"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              width="20"
+              height="20"
+              aria-hidden="true"
+            >
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+            </svg>
+            <span>Написать в Telegram</span>
+          </a>
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs text-ash">
+          <p className="text-xs text-ash lg:hidden">
             Договор. Гарантия. Собственное производство.
           </p>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="rounded-none border border-steel bg-linen p-6"
+            className="rounded-none border border-steel bg-linen p-6 lg:rounded-lg lg:p-8 lg:shadow-elevated"
             aria-live="polite"
           >
             <div className="space-y-6">
@@ -88,7 +133,7 @@ export default function LeadForm() {
                   id="name"
                   type="text"
                   placeholder="Ваше имя"
-                  className="focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0"
+                  className="focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:h-12 lg:rounded-lg"
                   {...register("name")}
                   aria-invalid={Boolean(errors.name)}
                   aria-describedby={errors.name ? "name-error" : undefined}
@@ -108,7 +153,7 @@ export default function LeadForm() {
                   id="contact"
                   type="text"
                   placeholder="+7 999 000-00-00"
-                  className="focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0"
+                  className="focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:h-12 lg:rounded-lg"
                   {...register("contact")}
                   aria-invalid={Boolean(errors.contact)}
                   aria-describedby={errors.contact ? "contact-error" : undefined}
@@ -126,7 +171,7 @@ export default function LeadForm() {
                 </label>
                 <select
                   id="furnitureType"
-                  className="focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite focus-visible:border-graphite focus-visible:ring-0"
+                  className="focus-ring mt-2 w-full rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite focus-visible:border-graphite focus-visible:ring-0 lg:h-12 lg:rounded-lg"
                   {...register("furnitureType")}
                   aria-invalid={Boolean(errors.furnitureType)}
                   aria-describedby={
@@ -154,7 +199,7 @@ export default function LeadForm() {
                   id="comment"
                   rows={4}
                   placeholder="Кратко опишите задачу или пожелания"
-                  className="focus-ring mt-2 w-full resize-none rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0"
+                  className="focus-ring mt-2 w-full resize-none rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:rounded-lg"
                   {...register("comment")}
                   aria-invalid={Boolean(errors.comment)}
                   aria-describedby={errors.comment ? "comment-error" : undefined}
@@ -196,7 +241,7 @@ export default function LeadForm() {
 
               <button
                 type="submit"
-                className="focus-ring w-full rounded-none border border-graphite bg-graphite px-6 py-4 text-sm font-semibold text-white transition hover:bg-charcoal disabled:cursor-not-allowed disabled:opacity-60"
+                className="focus-ring w-full rounded-none border border-graphite bg-graphite px-6 py-4 text-sm font-semibold text-white transition hover:bg-charcoal disabled:cursor-not-allowed disabled:opacity-60 lg:text-[16px]"
                 disabled={status === "loading"}
               >
                 {status === "loading" ? "Отправляем..." : "Обсудить проект"}
@@ -216,7 +261,7 @@ export default function LeadForm() {
             </div>
           </form>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

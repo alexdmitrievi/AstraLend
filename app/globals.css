@@ -2,7 +2,9 @@
 
 @theme {
   --color-anthracite: #2b2d2f;
+  --color-ink: #1a1a1a;
   --color-gold: #c9a961;
+  --color-cream: #f5f5f0;
   --color-beige: #f5f1e8;
   --color-graphite: #2c2c2c;
   --color-charcoal: #4a4a4a;
@@ -19,15 +21,22 @@
 
 :root {
   color-scheme: light;
+  --font-nav: 16px;
+  --font-body: 18px;
+  --font-h1: 64px;
+  --font-h2: 42px;
+  --font-h3: 28px;
+  --font-small: 14px;
+  --font-body-family: var(--font-montserrat);
 }
 
-* {
+html {
   scroll-behavior: smooth;
 }
 
 @layer base {
   body {
-    font-family: var(--font-body);
+    font-family: var(--font-body-family);
     color: var(--color-graphite);
     background-color: var(--color-stone);
   }
@@ -36,6 +45,12 @@
   h2 {
     font-family: var(--font-heading);
     color: var(--color-graphite);
+  }
+}
+
+@layer utilities {
+  .font-body {
+    font-family: var(--font-body-family);
   }
 }
 
@@ -62,6 +77,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .marquee {
     animation: none;
   }
@@ -86,5 +105,126 @@
     );
   background-repeat: no-repeat, repeat;
   background-size: 100% 100%, 3px 3px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --color-graphite: #1a1a1a;
+    --section-padding-desktop: 112px;
+    --section-padding-desktop-lg: 128px;
+    --section-gap-desktop: 64px;
+    --card-radius-desktop: 28px;
+    --shadow-elevated: 0 24px 50px rgba(44, 44, 44, 0.16);
+    --shadow-hover: 0 32px 70px rgba(44, 44, 44, 0.2);
+    --hero-gradient: radial-gradient(
+        120% 120% at 60% 15%,
+        rgba(245, 241, 232, 0.65) 0%,
+        rgba(232, 228, 220, 0.25) 48%,
+        rgba(232, 228, 220, 0) 70%
+      ),
+      linear-gradient(
+        120deg,
+        rgba(44, 44, 44, 0.08) 0%,
+        rgba(44, 44, 44, 0.18) 45%,
+        rgba(44, 44, 44, 0.32) 100%
+      );
+    --marquee-duration: 24s;
+  }
+
+  .section-desktop {
+    padding-top: var(--section-padding-desktop);
+    padding-bottom: var(--section-padding-desktop);
+  }
+
+  .section-desktop-lg {
+    padding-top: var(--section-padding-desktop-lg);
+    padding-bottom: var(--section-padding-desktop-lg);
+  }
+
+  .desktop-gap {
+    gap: var(--section-gap-desktop);
+  }
+
+  .card-desktop {
+    border-radius: var(--card-radius-desktop);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  .hover-shadow:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  .hero-desktop-gradient {
+    background-image: var(--hero-gradient);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.7;
+  }
+
+  .marquee-desktop {
+    animation-duration: var(--marquee-duration);
+  }
+
+  .portfolio-slider {
+    overflow-x: auto;
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .portfolio-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .portfolio-slider.is-dragging {
+    cursor: grabbing;
+  }
+
+  .lead-badge {
+    border-radius: 999px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .portfolio-cta {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .portfolio-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .portfolio-section .portfolio-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.telegram-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  color: #1a1a1a;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.telegram-button:hover {
+  background: #1a1a1a;
+  color: #fff;
 }
 

@@ -546,7 +546,7 @@ function HomePage() {
             name: "Апарт-отель Nova"
         },
         {
-            name: "Расслабо|off"
+            name: "Расслабонoff"
         }
     ];
     const categories = [

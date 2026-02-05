@@ -12,7 +12,7 @@ export default function HomePage() {
     { name: "Ресторан Шато" },
     { name: "Pine Bar" },
     { name: "Апарт-отель Nova" },
-    { name: "Расслабо|off" },
+    { name: "Расслабонoff" },
   ];
 
   const categories = [
@@ -79,7 +79,7 @@ export default function HomePage() {
     },
     {
       id: "other",
-      title: "Прочие изделия",
+      title: "Мебель для бизнеса",
       description: "Пуфы, банкетки, изголовья, мягкие панели",
       items: [
         {
