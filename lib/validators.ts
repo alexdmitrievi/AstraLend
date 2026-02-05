@@ -16,23 +16,26 @@ export const leadSchema = z.object({
     .trim()
     .min(2, "Укажите имя")
     .max(80, "Имя слишком длинное"),
+
   contact: z
     .string()
     .trim()
     .min(5, "Укажите телефон или мессенджер")
     .max(120, "Слишком длинное значение"),
-  furnitureType: z.enum(furnitureTypes, {
-    required_error: "Выберите тип мебели",
-  }),
+
+  furnitureType: z.enum(furnitureTypes).pipe(z.enum(furnitureTypes, "Выберите тип мебели")),
+
   comment: z
     .string()
     .trim()
     .max(800, "Комментарий слишком длинный")
     .optional()
     .or(z.literal("")),
-  consent: z.literal(true, {
-    errorMap: () => ({ message: "Нужно согласие на обработку данных" }),
-  }),
+
+  consent: z
+    .boolean()
+    .refine((value) => value === true, { message: "Нужно согласие на обработку данных" }),
+
   honeypot: z.string().optional(),
 });
 
