@@ -109,7 +109,7 @@ export default function HomePage() {
     <div className="bg-stone text-graphite lg:bg-cream lg:text-[color:var(--color-text-primary)]">
       <Header />
       <main id="main">
-        <Hero />
+        <Hero heroImageSrc="/astra_main.png" />
         <div id="clients" tabIndex={-1} className="scroll-mt-24">
           <ClientsMarquee clients={clients} />
         </div>

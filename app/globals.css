@@ -65,22 +65,41 @@
   will-change: transform;
 }
 
+.marquee-mobile {
+  animation: marquee-mobile var(--marquee-mobile-duration, 18s) linear infinite;
+  will-change: transform;
+}
+
 .marquee:hover {
   animation-play-state: paused;
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
+  from {
+    transform: translateX(0px);
   }
 
-  100% {
-    transform: translateX(-50%);
+  to {
+    transform: translateX(calc(-1px * var(--marquee-set-width)));
+  }
+}
+
+@keyframes marquee-mobile {
+  from {
+    transform: translateX(0px);
+  }
+
+  to {
+    transform: translateX(calc(-1px * var(--marquee-set-width)));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .marquee {
+    animation: none;
+  }
+
+  .marquee-mobile {
     animation: none;
   }
 }

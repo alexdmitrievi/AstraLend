@@ -53,63 +53,156 @@ export default function Portfolio({ categories }: PortfolioProps) {
       return;
     }
 
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const dragThreshold = 6;
+    const wheelMultiplier = 1.2;
+    const keyScrollStep = 280;
+    let isPointerDown = false;
+    let isDragging = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let cancelClick = false;
+    let wheelRaf = 0;
+    let queuedWheelDelta = 0;
 
-    const handleMouseDown = (event: MouseEvent) => {
+    const getMaxScrollLeft = () =>
+      Math.max(0, slider.scrollWidth - slider.clientWidth);
+
+    const clampScrollLeft = (nextValue: number) =>
+      Math.max(0, Math.min(getMaxScrollLeft(), nextValue));
+
+    const canScrollInDirection = (delta: number) => {
+      if (delta > 0) {
+        return slider.scrollLeft < getMaxScrollLeft() - 1;
+      }
+      if (delta < 0) {
+        return slider.scrollLeft > 1;
+      }
+      return false;
+    };
+
+    const getWheelDelta = (event: WheelEvent) => {
+      let delta = event.deltaY;
+      if (event.deltaMode === 1) {
+        delta *= 16;
+      } else if (event.deltaMode === 2) {
+        delta *= slider.clientWidth;
+      }
+      return delta * wheelMultiplier;
+    };
+
+    const handleWheel = (event: WheelEvent) => {
       if (!mediaQuery.matches) {
         return;
       }
-      isDown = true;
-      slider.classList.add("is-dragging");
-      startX = event.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
-    };
-
-    const handleMouseLeave = () => {
-      if (!mediaQuery.matches) {
-        return;
-      }
-      isDown = false;
-      slider.classList.remove("is-dragging");
-    };
-
-    const handleMouseUp = () => {
-      if (!mediaQuery.matches) {
-        return;
-      }
-      isDown = false;
-      slider.classList.remove("is-dragging");
-    };
-
-    const handleMouseMove = (event: MouseEvent) => {
-      if (!mediaQuery.matches || !isDown) {
+      const delta = getWheelDelta(event);
+      if (!canScrollInDirection(delta)) {
         return;
       }
       event.preventDefault();
-      const x = event.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 2;
-      slider.scrollLeft = scrollLeft - walk;
+      queuedWheelDelta += delta;
+      if (!wheelRaf) {
+        wheelRaf = window.requestAnimationFrame(() => {
+          slider.scrollLeft = clampScrollLeft(
+            slider.scrollLeft + queuedWheelDelta
+          );
+          queuedWheelDelta = 0;
+          wheelRaf = 0;
+        });
+      }
+    };
+
+    const handleMouseDown = (event: MouseEvent) => {
+      if (!mediaQuery.matches || event.button !== 0) {
+        return;
+      }
+      isPointerDown = true;
+      isDragging = false;
+      cancelClick = false;
+      startX = event.pageX;
+      startScrollLeft = slider.scrollLeft;
+    };
+
+    const handleMouseMove = (event: MouseEvent) => {
+      if (!mediaQuery.matches || !isPointerDown) {
+        return;
+      }
+      const delta = event.pageX - startX;
+      if (!isDragging && Math.abs(delta) > dragThreshold) {
+        isDragging = true;
+        slider.classList.add("is-dragging");
+      }
+      if (!isDragging) {
+        return;
+      }
+      event.preventDefault();
+      slider.scrollLeft = clampScrollLeft(startScrollLeft - delta);
+    };
+
+    const endDrag = () => {
+      if (!mediaQuery.matches) {
+        return;
+      }
+      if (isDragging) {
+        cancelClick = true;
+      }
+      isPointerDown = false;
+      isDragging = false;
+      slider.classList.remove("is-dragging");
+    };
+
+    const handleClickCapture = (event: MouseEvent) => {
+      if (!mediaQuery.matches) {
+        return;
+      }
+      if (cancelClick) {
+        event.preventDefault();
+        event.stopPropagation();
+        cancelClick = false;
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!mediaQuery.matches) {
+        return;
+      }
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+        return;
+      }
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const delta = direction * keyScrollStep;
+      if (!canScrollInDirection(delta)) {
+        return;
+      }
+      event.preventDefault();
+      slider.scrollLeft = clampScrollLeft(slider.scrollLeft + delta);
     };
 
     const handleDragStart = (event: DragEvent) => {
       event.preventDefault();
     };
 
+    slider.addEventListener("wheel", handleWheel, { passive: false });
     slider.addEventListener("mousedown", handleMouseDown);
-    slider.addEventListener("mouseleave", handleMouseLeave);
-    slider.addEventListener("mouseup", handleMouseUp);
     slider.addEventListener("mousemove", handleMouseMove);
+    slider.addEventListener("mouseleave", endDrag);
+    slider.addEventListener("mouseup", endDrag);
+    slider.addEventListener("click", handleClickCapture, true);
+    slider.addEventListener("keydown", handleKeyDown);
     slider.addEventListener("dragstart", handleDragStart);
 
     return () => {
+      slider.removeEventListener("wheel", handleWheel);
       slider.removeEventListener("mousedown", handleMouseDown);
-      slider.removeEventListener("mouseleave", handleMouseLeave);
-      slider.removeEventListener("mouseup", handleMouseUp);
       slider.removeEventListener("mousemove", handleMouseMove);
+      slider.removeEventListener("mouseleave", endDrag);
+      slider.removeEventListener("mouseup", endDrag);
+      slider.removeEventListener("click", handleClickCapture, true);
+      slider.removeEventListener("keydown", handleKeyDown);
       slider.removeEventListener("dragstart", handleDragStart);
+      if (wheelRaf) {
+        window.cancelAnimationFrame(wheelRaf);
+      }
     };
   }, []);
 
@@ -157,6 +250,7 @@ export default function Portfolio({ categories }: PortfolioProps) {
       >
         <div
           ref={sliderRef}
+          tabIndex={0}
           className="portfolio-slider portfolio-cards-container flex gap-6 overflow-x-auto px-4 snap-x snap-mandatory scroll-px-4 sm:scroll-px-6 lg:flex-nowrap lg:px-8 lg:scroll-px-8"
         >
           {visibleItems.map((item) => (
