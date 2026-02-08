@@ -31,29 +31,26 @@ export default function Hero(props: HeroProps) {
     <>
       <motion.div
         {...fadeUpProps(0)}
-        className="max-w-[300px] sm:max-w-[400px] lg:max-w-[550px]"
+        className="max-w-[280px] sm:max-w-[400px] lg:max-w-[550px]"
       >
         <div
           className="text-white [&_h1]:text-white"
           style={{ textShadow: "0 2px 24px rgba(0,0,0,0.8)" }}
         >
-          <h1 className="font-heading text-[1.625rem] font-semibold leading-tight sm:text-[2.25rem] lg:text-[3.5rem] lg:leading-[1.1] xl:text-[4rem]">
+          <h1 className="font-heading text-[1.5rem] font-semibold leading-tight sm:text-[2.25rem] lg:text-[3.5rem] lg:leading-[1.1] xl:text-[4rem]">
             Мебель, которая становится наследием
           </h1>
-          <span className="mt-3 block h-px w-14 bg-white/50 sm:mt-5 lg:mt-6 lg:w-24" />
-          <p className="mt-3 hidden font-body text-xs uppercase tracking-[0.2em] text-white/70 sm:block lg:mt-5 lg:text-sm lg:tracking-[0.15em]">
-            Столярное производство полного цикла
-          </p>
+          <span className="mt-2 block h-px w-12 bg-white/50 sm:mt-5 lg:mt-6 lg:w-24" />
         </div>
       </motion.div>
 
       <motion.div
         {...fadeUpProps(0.1)}
-        className="mt-4 flex w-full flex-col gap-2 sm:mt-6 sm:flex-row sm:w-auto sm:gap-4 lg:mt-8 lg:gap-5"
+        className="mt-3 flex w-full flex-col gap-2 sm:mt-6 sm:flex-row sm:w-auto sm:gap-4 lg:mt-8 lg:gap-5"
       >
         <a
           href="#lead"
-          className="focus-ring font-body inline-flex h-[42px] w-full items-center justify-center rounded-none bg-white px-5 py-3 text-[13px] font-semibold leading-none text-graphite transition hover:bg-white/90 box-border
+          className="focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none bg-white px-5 py-3 text-[13px] font-semibold leading-none text-graphite transition hover:bg-white/90 box-border
                      sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm
                      lg:h-[60px] lg:min-w-[200px] lg:px-10 lg:text-base"
         >
@@ -62,7 +59,7 @@ export default function Hero(props: HeroProps) {
 
         <a
           href="#portfolio"
-          className="focus-ring font-body inline-flex h-[42px] w-full items-center justify-center rounded-none border border-white/50 px-5 py-3 text-[13px] font-normal leading-none text-white transition hover:bg-white/10 hover:border-white/70 box-border bg-black/20 backdrop-blur-sm
+          className="focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none border border-white/50 px-5 py-3 text-[13px] font-normal leading-none text-white transition hover:bg-white/10 hover:border-white/70 box-border bg-black/20 backdrop-blur-sm
                      sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm
                      lg:h-[60px] lg:min-w-[200px] lg:px-10 lg:text-base"
         >
@@ -78,14 +75,14 @@ export default function Hero(props: HeroProps) {
         
         {/* Background image */}
         <div className="absolute inset-0 z-0">
-          {/* MOBILE */}
+          {/* MOBILE: кресло в нижней половине экрана */}
           <Image
             src={heroImageSource}
             alt="Кресло АСТРА"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_70%] sm:hidden"
+            className="object-cover object-[center_65%] sm:hidden"
           />
           {/* DESKTOP */}
           <Image
@@ -100,16 +97,17 @@ export default function Hero(props: HeroProps) {
 
         {/* Overlays */}
         <div className="pointer-events-none absolute inset-0 z-10">
-          {/* MOBILE */}
-          <div className="sm:hidden absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 via-35% to-transparent to-60%" />
+          {/* MOBILE: сильный градиент сверху, текст в верхней трети */}
+          <div className="sm:hidden absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 via-30% to-transparent to-55%" />
           
-          {/* DESKTOP: градиент в верхнем левом углу */}
+          {/* DESKTOP */}
           <div className="hidden sm:block absolute inset-0 bg-gradient-to-br from-black/90 via-black/50 via-30% to-transparent to-50%" />
         </div>
 
-        {/* Content - у левого края на десктопе */}
+        {/* Content */}
+        {/* MOBILE: pt-4 — контент сразу под хедером, компактно */}
         <div className="relative z-20 flex h-full w-full flex-col justify-start
-                        px-4 pt-16 pb-8
+                        px-4 pt-4 pb-8
                         sm:px-8 sm:pt-10
                         lg:px-12 lg:pt-12">
           {heroText}

@@ -1,369 +1,661 @@
-[00:00:10.664] Server  LOG     ✓ Ready in 8.3s
-[00:00:20.178] Server  LOG     ○ Compiling / ...
-[00:00:29.183] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:05:53.113] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:11:33.048] Server  LOG     ✓ Compiled in 13.4s
-[00:15:02.735] Server  LOG     ✓ Compiled in 1192ms
-[00:23:59.343] Server  LOG     ✓ Compiled in 285ms
-[00:45:24.643] Server  LOG     ✓ Compiled in 5.9s
-[00:51:01.869] Server  LOG     ✓ Compiled in 636ms
-[00:56:57.102] Server  LOG     ✓ Compiled in 987ms
-[00:56:57.103] Browser WARN    Image with src "http://localhost:3000/astra_main.png" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
-[01:03:23.438] Server  LOG     ✓ Compiled in 971ms
-[01:08:14.821] Server  LOG     ✓ Compiled in 3.9s
-[01:29:28.260] Server  LOG     ✓ Compiled in 2.7s
-[01:48:52.977] Server  LOG     ✓ Compiled in 1426ms
-[01:59:17.017] Server  LOG     ✓ Compiled in 983ms
-[02:00:23.308] Server  LOG     ✓ Compiled in 642ms
-[02:01:37.901] Server  LOG     ✓ Compiled in 859ms
-[02:02:19.083] Server  LOG     ✓ Compiled in 428ms
-[02:08:55.693] Server  LOG     ✓ Compiled in 1330ms
-[02:08:56.014] Browser WARN    Image with src "http://localhost:3000/astra_main.png" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
-[02:10:15.073] Server  LOG     ✓ Compiled in 4.1s
-[02:11:08.584] Server  LOG     ✓ Compiled in 98ms
-[02:12:37.988] Server  LOG     ✓ Compiled in 102ms
-[02:13:22.368] Server  LOG     ✓ Compiled in 450ms
-[02:21:58.590] Server  LOG     ✓ Compiled in 189ms
-[02:21:59.007] Browser WARN    Image with src "http://localhost:3000/astra_main.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
-[02:22:05.251] Browser WARN    Image with src "http://localhost:3000/astra_main.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
-[02:22:32.587] Server  LOG     ✓ Compiled in 533ms
-[02:31:56.495] Server  LOG     ✓ Compiled in 299ms
-[02:32:11.876] Server  LOG     ✓ Compiled in 2.2s
-[05:55:36.846] Server  LOG     ✓ Compiled in 2.1s
-[06:10:44.348] Server  LOG     ✓ Compiled in 2.5s
-[06:10:53.106] Server  LOG     ✓ Compiled in 1656ms
-[06:20:19.549] Server  LOG     ✓ Compiled in 1976ms
-[06:26:01.832] Server  LOG     ✓ Compiled in 1645ms
-[06:36:58.676] Server  LOG     ✓ Compiled in 1259ms
-[06:40:57.619] Server  LOG     ✓ Compiled in 1389ms
-[06:41:42.355] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[06:44:43.436] Server  LOG     ✓ Compiled in 841ms
-[06:45:43.208] Server  LOG     ✓ Compiled in 304ms
-[06:52:24.265] Server  LOG     ✓ Compiled in 4.4s
-[06:55:22.047] Server  LOG     ✓ Compiled in 2.9s
-[06:56:52.469] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[07:02:11.822] Server  LOG     ✓ Compiled in 2.3s
-[07:10:49.192] Server  LOG     ✓ Compiled in 4.5s
-[07:11:39.560] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[07:16:16.323] Server  LOG     ✓ Compiled in 409ms
-[07:20:44.249] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[17:48:02.906] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[17:52:32.656] Server  LOG     ✓ Compiled in 1987ms
-[17:53:25.256] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[17:53:31.644] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[17:54:19.016] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[18:01:00.472] Server  LOG     ✓ Compiled in 1601ms
-[18:02:58.606] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[18:03:52.923] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[18:08:24.888] Server  LOG     ✓ Compiled in 1262ms
-[18:08:54.419] Server  LOG     ✓ Compiled in 177ms
-[18:15:13.755] Server  LOG     ✓ Compiled in 1569ms
-[19:26:04.020] Server  LOG     ✓ Compiled in 1156ms
-[19:26:23.650] Server  LOG     ✓ Compiled in 383ms
-[19:29:23.372] Server  LOG     ✓ Compiled in 683ms
-[19:34:20.767] Server  LOG     ✓ Compiled in 466ms
-[22:52:26.243] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:03:56.548] Server  LOG     ✓ Compiled in 12.4s
-[23:13:16.885] Server  LOG     ✓ Compiled in 7.9s
-[23:16:39.501] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:21:09.143] Server  LOG     ✓ Finished writing to filesystem cache in 18.7s
-[23:21:16.611] Server  LOG     ✓ Compiled in 58.3s
-[23:21:57.370] Server  LOG     ✓ Compiled in 17.7s
-[23:22:15.436] Server  LOG     ✓ Compiled in 1862ms
-[23:23:09.174] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:23:37.250] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:23:49.493] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:29:32.283] Server  LOG     ✓ Compiled in 26.1s
-[23:39:17.389] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:40:10.948] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:41:47.607] Server  ERROR   ⨯ ./components/sections/Hero.tsx:122:5
+[00:00:17.123] Server  LOG     ✓ Ready in 13.8s
+[00:00:20.875] Server  LOG     ○ Compiling / ...
+[00:00:36.558] Server  ERROR   ⨯ ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
 
 
-[23:41:47.681] Server  LOG     ✓ Compiled in 10s
-[23:41:48.358] Browser ERROR   ./components/sections/Hero.tsx:122:5
+[00:00:38.963] Server  ERROR   ⨯ ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:41:50.252] Browser ERROR   ./components/sections/Hero.tsx:122:5
+
+
+[00:00:45.604] Browser ERROR   uncaughtError: Error: ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:41:50.657] Server  LOG     ○ Compiling /_error ...
-[23:41:55.119] Browser ERROR   ./components/sections/Hero.tsx:122:5
+
+
+[00:00:47.651] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:41:55.260] Browser ERROR   ./components/sections/Hero.tsx:122:5
+[00:00:48.145] Browser ERROR   uncaughtError: Error: ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:41:55.743] Browser ERROR   ./components/sections/Hero.tsx:122:5
+
+
+[00:00:48.503] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:41:56.257] Browser ERROR   ./components/sections/Hero.tsx:122:5
+[00:00:48.503] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:42:00.374] Browser ERROR   uncaughtError: Error: ./components/sections/Hero.tsx:122:5
+[00:00:48.621] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-
-
-[23:42:00.553] Browser ERROR   ./components/sections/Hero.tsx:122:5
+[00:00:50.166] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:42:00.553] Browser ERROR   ./components/sections/Hero.tsx:122:5
+[00:00:50.166] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:42:04.622] Browser ERROR   ./components/sections/Hero.tsx:122:5
+[00:00:52.176] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:42:04.622] Browser ERROR   ./components/sections/Hero.tsx:122:5
+[00:01:38.823] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:42:05.578] Browser ERROR   ./components/sections/Hero.tsx:122:5
+[00:01:39.225] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  120 |       </div>
-  121 |     </section>
-> 122 |   );
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
       |     ^
-  123 |
-  124 |
+  179 |
 
 Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:42:19.477] Server  LOG     ✓ Compiled in 529ms
-[23:42:19.594] Browser ERROR   ./components/sections/Hero.tsx:121:15
+[00:01:44.525] Server  ERROR   ⨯ ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-  119 |         </div>
-  120 |       </div>
-> 121 |     </section>
-      |               ^
-  122 |
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |
 
-Expected ',', got '<eof>'
+Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:42:20.366] Browser ERROR   ./components/sections/Hero.tsx:121:15
-Parsing ecmascript source code failed
-  119 |         </div>
-  120 |       </div>
-> 121 |     </section>
-      |               ^
-  122 |
 
-Expected ',', got '<eof>'
+
+[00:01:45.106] Browser ERROR   uncaughtError: Error: ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |
+
+Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:44:03.585] Server  LOG     ✓ Compiled in 2.8s
-[23:44:04.574] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[23:44:06.643] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:50:02.240] Server  LOG     ✓ Compiled in 7.6s
-[23:50:03.200] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:50:07.711] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[23:55:38.026] Server  LOG     ✓ Compiled in 2.5s
-[23:55:38.299] Browser ERROR   ./components/sections/Hero.tsx:1:6
-Parsing ecmascript source code failed
-> 1 | # FIX: Hero + Navbar Desktop Alignment
-    |      ^
-  2 |
-  3 | ## PROBLEMS TO FIX (Desktop only, don't touch mobile):
-  4 |
 
-Expected ';', '}' or <eof>
+
+[00:01:45.347] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |
+
+Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:55:46.410] Browser ERROR   ./components/sections/Hero.tsx:1:6
+[00:01:45.347] Browser ERROR   ./components/sections/Header.tsx:178:5
 Parsing ecmascript source code failed
-> 1 | # FIX: Hero + Navbar Desktop Alignment
-    |      ^
-  2 |
-  3 | ## PROBLEMS TO FIX (Desktop only, don't touch mobile):
-  4 |
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |
 
-Expected ';', '}' or <eof>
+Expected '}', got '<eof>'
 
 Import trace:
   Server Component:
-    ./components/sections/Hero.tsx
+    ./components/sections/Header.tsx
     ./app/page.tsx
-[23:56:16.297] Server  LOG     ✓ Compiled in 309ms
-[23:56:22.245] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[24:02:45.393] Server  LOG     ✓ Compiled in 685ms
-[24:03:03.843] Server  LOG     ✓ Compiled in 779ms
-[24:07:53.666] Server  LOG     ✓ Compiled in 2.2s
-[24:08:24.428] Server  LOG     ✓ Compiled in 498ms
-[24:10:18.480] Server  LOG     ✓ Compiled in 2.5s
-[24:29:14.941] Server  LOG     ✓ Compiled in 4.8s
-[24:29:30.717] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[24:33:22.242] Server  LOG     ✓ Compiled in 4.9s
-[24:33:24.299] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[24:37:02.971] Server  LOG     ✓ Compiled in 1424ms
-[24:37:07.839] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[24:41:00.562] Server  LOG     ✓ Compiled in 5.5s
-[24:41:05.146] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[24:46:16.355] Server  LOG     ✓ Compiled in 5.3s
-[24:48:14.161] Server  LOG     ✓ Compiled in 1391ms
-[24:51:09.388] Server  LOG     ✓ Compiled in 5.7s
-[24:51:11.455] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[24:55:18.755] Server  LOG     ✓ Compiled in 2.8s
-[25:00:12.565] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[25:00:25.576] Server  LOG     ✓ Compiled in 4.6s
-[25:00:26.281] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[25:04:01.481] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[25:04:05.991] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[25:04:22.835] Server  LOG     ✓ Compiled in 693ms
+[00:01:46.225] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:01:46.225] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:04:29.743] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:04:30.086] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:04:31.847] Server  ERROR   ⨯ ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+
+
+[00:04:31.979] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:04:32.433] Browser ERROR   uncaughtError: Error: ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+
+
+[00:04:32.588] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:04:32.698] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:04:32.991] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:04:32.991] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:04:32.991] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:06:30.484] Server  ERROR   ⨯ ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+
+
+[00:06:31.157] Browser ERROR   uncaughtError: Error: ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+
+
+[00:06:31.403] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:06:31.403] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:06:31.643] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:06:31.643] Browser ERROR   ./components/sections/Header.tsx:180:3
+Parsing ecmascript source code failed
+  178 |   );
+  179 |
+> 180 |   export default Header;
+      |   ^^^^^^
+
+'import', and 'export' cannot be used outside of module code
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:06:37.023] Browser ERROR   ./components/sections/Header.tsx:148:3
+Parsing ecmascript source code failed
+  146 |
+  147 |       function Header() {
+> 148 |   return (
+      |   ^^^^^^
+  149 |     <>
+  150 |       {/* Mobile menu */}
+  151 |       <div
+
+Expected '</', got 'return'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:06:37.044] Browser ERROR   ./components/sections/Header.tsx:148:3
+Parsing ecmascript source code failed
+  146 |
+  147 |       function Header() {
+> 148 |   return (
+      |   ^^^^^^
+  149 |     <>
+  150 |       {/* Mobile menu */}
+  151 |       <div
+
+Expected '</', got 'return'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:06:57.855] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |   
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:06:58.231] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |   
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:07:05.781] Server  ERROR   ⨯ ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |   
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+
+
+[00:07:06.430] Browser ERROR   uncaughtError: Error: ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |   
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+
+
+[00:07:06.550] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |   
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:07:06.691] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |   
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:07:06.695] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |   
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:07:06.695] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |   
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:07:06.695] Browser ERROR   ./components/sections/Header.tsx:178:5
+Parsing ecmascript source code failed
+  176 |       </div>
+  177 |     </header>
+> 178 |   );
+      |     ^
+  179 |   
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Header.tsx
+    ./app/page.tsx
+[00:07:26.749] Server  LOG     ✓ Compiled in 618ms
+[00:07:30.623] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:33.410] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
