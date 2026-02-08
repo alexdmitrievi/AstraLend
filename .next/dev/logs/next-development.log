@@ -1,14 +1,311 @@
-[00:00:05.756] Server  LOG     ✓ Ready in 4.7s
-[00:00:17.239] Server  LOG     ○ Compiling / ...
-[00:00:25.566] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
-[00:01:46.062] Server  LOG     ✓ Compiled in 818ms
-[00:04:15.309] Server  LOG     ✓ Compiled in 1365ms
-[00:05:48.381] Server  LOG     ✓ Compiled in 312ms
-[00:11:41.089] Server  LOG     ✓ Compiled in 368ms
-[00:13:55.705] Server  LOG     ✓ Compiled in 534ms
-[00:22:43.304] Server  LOG     ✓ Compiled in 215ms
-[00:24:56.233] Server  LOG     ✓ Compiled in 338ms
-[00:28:05.599] Server  LOG     ✓ Compiled in 236ms
-[00:30:43.958] Server  LOG     ✓ Compiled in 438ms
-[00:35:23.984] Server  LOG     ✓ Compiled in 231ms
-[00:36:49.811] Server  LOG     ✓ Compiled in 275ms
+[00:00:10.664] Server  LOG     ✓ Ready in 8.3s
+[00:00:20.178] Server  LOG     ○ Compiling / ...
+[00:00:29.183] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:53.113] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:11:33.048] Server  LOG     ✓ Compiled in 13.4s
+[00:15:02.735] Server  LOG     ✓ Compiled in 1192ms
+[00:23:59.343] Server  LOG     ✓ Compiled in 285ms
+[00:45:24.643] Server  LOG     ✓ Compiled in 5.9s
+[00:51:01.869] Server  LOG     ✓ Compiled in 636ms
+[00:56:57.102] Server  LOG     ✓ Compiled in 987ms
+[00:56:57.103] Browser WARN    Image with src "http://localhost:3000/astra_main.png" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[01:03:23.438] Server  LOG     ✓ Compiled in 971ms
+[01:08:14.821] Server  LOG     ✓ Compiled in 3.9s
+[01:29:28.260] Server  LOG     ✓ Compiled in 2.7s
+[01:48:52.977] Server  LOG     ✓ Compiled in 1426ms
+[01:59:17.017] Server  LOG     ✓ Compiled in 983ms
+[02:00:23.308] Server  LOG     ✓ Compiled in 642ms
+[02:01:37.901] Server  LOG     ✓ Compiled in 859ms
+[02:02:19.083] Server  LOG     ✓ Compiled in 428ms
+[02:08:55.693] Server  LOG     ✓ Compiled in 1330ms
+[02:08:56.014] Browser WARN    Image with src "http://localhost:3000/astra_main.png" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[02:10:15.073] Server  LOG     ✓ Compiled in 4.1s
+[02:11:08.584] Server  LOG     ✓ Compiled in 98ms
+[02:12:37.988] Server  LOG     ✓ Compiled in 102ms
+[02:13:22.368] Server  LOG     ✓ Compiled in 450ms
+[02:21:58.590] Server  LOG     ✓ Compiled in 189ms
+[02:21:59.007] Browser WARN    Image with src "http://localhost:3000/astra_main.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+[02:22:05.251] Browser WARN    Image with src "http://localhost:3000/astra_main.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+[02:22:32.587] Server  LOG     ✓ Compiled in 533ms
+[02:31:56.495] Server  LOG     ✓ Compiled in 299ms
+[02:32:11.876] Server  LOG     ✓ Compiled in 2.2s
+[05:55:36.846] Server  LOG     ✓ Compiled in 2.1s
+[06:10:44.348] Server  LOG     ✓ Compiled in 2.5s
+[06:10:53.106] Server  LOG     ✓ Compiled in 1656ms
+[06:20:19.549] Server  LOG     ✓ Compiled in 1976ms
+[06:26:01.832] Server  LOG     ✓ Compiled in 1645ms
+[06:36:58.676] Server  LOG     ✓ Compiled in 1259ms
+[06:40:57.619] Server  LOG     ✓ Compiled in 1389ms
+[06:41:42.355] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[06:44:43.436] Server  LOG     ✓ Compiled in 841ms
+[06:45:43.208] Server  LOG     ✓ Compiled in 304ms
+[06:52:24.265] Server  LOG     ✓ Compiled in 4.4s
+[06:55:22.047] Server  LOG     ✓ Compiled in 2.9s
+[06:56:52.469] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:02:11.822] Server  LOG     ✓ Compiled in 2.3s
+[07:10:49.192] Server  LOG     ✓ Compiled in 4.5s
+[07:11:39.560] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:16:16.323] Server  LOG     ✓ Compiled in 409ms
+[07:20:44.249] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[17:48:02.906] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[17:52:32.656] Server  LOG     ✓ Compiled in 1987ms
+[17:53:25.256] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[17:53:31.644] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[17:54:19.016] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:01:00.472] Server  LOG     ✓ Compiled in 1601ms
+[18:02:58.606] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:03:52.923] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:08:24.888] Server  LOG     ✓ Compiled in 1262ms
+[18:08:54.419] Server  LOG     ✓ Compiled in 177ms
+[18:15:13.755] Server  LOG     ✓ Compiled in 1569ms
+[19:26:04.020] Server  LOG     ✓ Compiled in 1156ms
+[19:26:23.650] Server  LOG     ✓ Compiled in 383ms
+[19:29:23.372] Server  LOG     ✓ Compiled in 683ms
+[19:34:20.767] Server  LOG     ✓ Compiled in 466ms
+[22:52:26.243] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:03:56.548] Server  LOG     ✓ Compiled in 12.4s
+[23:13:16.885] Server  LOG     ✓ Compiled in 7.9s
+[23:16:39.501] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:21:09.143] Server  LOG     ✓ Finished writing to filesystem cache in 18.7s
+[23:21:16.611] Server  LOG     ✓ Compiled in 58.3s
+[23:21:57.370] Server  LOG     ✓ Compiled in 17.7s
+[23:22:15.436] Server  LOG     ✓ Compiled in 1862ms
+[23:23:09.174] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:23:37.250] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:23:49.493] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:29:32.283] Server  LOG     ✓ Compiled in 26.1s
+[23:39:17.389] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:40:10.948] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:41:47.607] Server  ERROR   ⨯ ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+
+
+[23:41:47.681] Server  LOG     ✓ Compiled in 10s
+[23:41:48.358] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:41:50.252] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:41:50.657] Server  LOG     ○ Compiling /_error ...
+[23:41:55.119] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:41:55.260] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:41:55.743] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:41:56.257] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:42:00.374] Browser ERROR   uncaughtError: Error: ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+
+
+[23:42:00.553] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:42:00.553] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:42:04.622] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:42:04.622] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:42:05.578] Browser ERROR   ./components/sections/Hero.tsx:122:5
+Parsing ecmascript source code failed
+  120 |       </div>
+  121 |     </section>
+> 122 |   );
+      |     ^
+  123 |
+  124 |
+
+Expected '}', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:42:19.477] Server  LOG     ✓ Compiled in 529ms
+[23:42:19.594] Browser ERROR   ./components/sections/Hero.tsx:121:15
+Parsing ecmascript source code failed
+  119 |         </div>
+  120 |       </div>
+> 121 |     </section>
+      |               ^
+  122 |
+
+Expected ',', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:42:20.366] Browser ERROR   ./components/sections/Hero.tsx:121:15
+Parsing ecmascript source code failed
+  119 |         </div>
+  120 |       </div>
+> 121 |     </section>
+      |               ^
+  122 |
+
+Expected ',', got '<eof>'
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:44:03.585] Server  LOG     ✓ Compiled in 2.8s
+[23:44:04.574] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[23:44:06.643] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

@@ -208,39 +208,43 @@ export default function Portfolio({ categories }: PortfolioProps) {
 
   return (
     <section className="portfolio-section bg-cream-light py-16 sm:py-20 section-desktop">
-      <motion.div {...fadeUpProps(0)} className="section-header">
-        <div className="section-title-row">
-          <div className="section-title-divider" aria-hidden="true" />
-          <h2 className="section-title">
-            Наши работы
-          </h2>
+      <motion.div {...fadeUpProps(0)}>
+        <div className="section-header">
+          <div className="section-title-row">
+            <div className="section-title-divider" aria-hidden="true" />
+            <h2 className="section-title">
+              Наши работы
+            </h2>
+          </div>
         </div>
-        <div className="mt-6 flex flex-wrap gap-3 lg:mt-8 lg:gap-4">
-          <button
-            type="button"
-            onClick={() => setActiveCategory("all")}
-            className={
-              activeCategory === "all"
-                ? "px-4 py-2 text-sm bg-graphite text-white rounded-none lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out shadow-elevated"
-                : "px-4 py-2 text-sm text-charcoal border border-steel rounded-none hover:border-graphite lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5"
-            }
-          >
-            Все
-          </button>
-          {categories.map((category) => (
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="mt-6 flex flex-wrap gap-3 lg:mt-8 lg:gap-4">
             <button
-              key={category.id}
               type="button"
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => setActiveCategory("all")}
               className={
-                activeCategory === category.id
+                activeCategory === "all"
                   ? "px-4 py-2 text-sm bg-graphite text-white rounded-none lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out shadow-elevated"
                   : "px-4 py-2 text-sm text-charcoal border border-steel rounded-none hover:border-graphite lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5"
               }
             >
-              {category.title}
+              Все
             </button>
-          ))}
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                type="button"
+                onClick={() => setActiveCategory(category.id)}
+                className={
+                  activeCategory === category.id
+                    ? "px-4 py-2 text-sm bg-graphite text-white rounded-none lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out shadow-elevated"
+                    : "px-4 py-2 text-sm text-charcoal border border-steel rounded-none hover:border-graphite lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5"
+                }
+              >
+                {category.title}
+              </button>
+            ))}
+          </div>
         </div>
       </motion.div>
 

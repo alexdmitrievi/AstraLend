@@ -17,6 +17,8 @@ export default function HomePage() {
     { name: "Pine Bar" },
     { name: "Апарт-отель Nova" },
     { name: "Расслабонoff" },
+    { name: "Парк «Вокруг света»" },
+    { name: "Ресторан «Base»" },
   ];
 
   const categories = [

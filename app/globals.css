@@ -356,6 +356,10 @@
   display: none;
 }
 
+.hero-product {
+  display: none;
+}
+
 @media (max-width: 1023px) {
   .portfolio-cta {
     display: flex;
@@ -367,6 +371,64 @@
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-root {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-split {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero-background,
+  .hero-overlay {
+    display: none;
+  }
+
+  .hero-content {
+    min-height: 60svh;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.25) 55%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.35) 0%,
+        rgba(0, 0, 0, 0) 60%
+      );
+  }
+
+  .hero-product {
+    min-height: 40svh;
+    min-height: max(40svh, 320px);
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-height: 700px) {
+  .hero-content {
+    min-height: 70svh;
+  }
+
+  .hero-product {
+    min-height: 30svh;
+    min-height: max(30svh, 320px);
   }
 }
 
