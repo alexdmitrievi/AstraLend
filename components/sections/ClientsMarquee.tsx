@@ -142,9 +142,10 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
           </h2>
         </div>
       </motion.div>
+      {/* Убрали lg:mx-auto lg:max-w-6xl lg:px-8 - теперь на всю ширину */}
       <motion.div
         {...fadeUpProps(0.1)}
-        className="mt-8 overflow-hidden lg:mx-auto lg:mt-10 lg:w-full lg:max-w-6xl lg:px-8"
+        className="mt-8 overflow-hidden lg:mt-10 lg:w-full"
       >
         <div className="md:hidden">
           <ul

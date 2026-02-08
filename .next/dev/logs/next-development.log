@@ -309,3 +309,61 @@ Import trace:
 [23:44:03.585] Server  LOG     ✓ Compiled in 2.8s
 [23:44:04.574] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
 [23:44:06.643] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:50:02.240] Server  LOG     ✓ Compiled in 7.6s
+[23:50:03.200] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:50:07.711] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[23:55:38.026] Server  LOG     ✓ Compiled in 2.5s
+[23:55:38.299] Browser ERROR   ./components/sections/Hero.tsx:1:6
+Parsing ecmascript source code failed
+> 1 | # FIX: Hero + Navbar Desktop Alignment
+    |      ^
+  2 |
+  3 | ## PROBLEMS TO FIX (Desktop only, don't touch mobile):
+  4 |
+
+Expected ';', '}' or <eof>
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:55:46.410] Browser ERROR   ./components/sections/Hero.tsx:1:6
+Parsing ecmascript source code failed
+> 1 | # FIX: Hero + Navbar Desktop Alignment
+    |      ^
+  2 |
+  3 | ## PROBLEMS TO FIX (Desktop only, don't touch mobile):
+  4 |
+
+Expected ';', '}' or <eof>
+
+Import trace:
+  Server Component:
+    ./components/sections/Hero.tsx
+    ./app/page.tsx
+[23:56:16.297] Server  LOG     ✓ Compiled in 309ms
+[23:56:22.245] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[24:02:45.393] Server  LOG     ✓ Compiled in 685ms
+[24:03:03.843] Server  LOG     ✓ Compiled in 779ms
+[24:07:53.666] Server  LOG     ✓ Compiled in 2.2s
+[24:08:24.428] Server  LOG     ✓ Compiled in 498ms
+[24:10:18.480] Server  LOG     ✓ Compiled in 2.5s
+[24:29:14.941] Server  LOG     ✓ Compiled in 4.8s
+[24:29:30.717] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[24:33:22.242] Server  LOG     ✓ Compiled in 4.9s
+[24:33:24.299] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[24:37:02.971] Server  LOG     ✓ Compiled in 1424ms
+[24:37:07.839] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[24:41:00.562] Server  LOG     ✓ Compiled in 5.5s
+[24:41:05.146] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[24:46:16.355] Server  LOG     ✓ Compiled in 5.3s
+[24:48:14.161] Server  LOG     ✓ Compiled in 1391ms
+[24:51:09.388] Server  LOG     ✓ Compiled in 5.7s
+[24:51:11.455] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[24:55:18.755] Server  LOG     ✓ Compiled in 2.8s
+[25:00:12.565] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[25:00:25.576] Server  LOG     ✓ Compiled in 4.6s
+[25:00:26.281] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[25:04:01.481] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[25:04:05.991] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[25:04:22.835] Server  LOG     ✓ Compiled in 693ms

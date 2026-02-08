@@ -12,13 +12,13 @@ export default function HomePage() {
       logoText: "Б",
       logoTextClassName: "text-[12px] leading-none tracking-normal",
     },
-    { name: "Точка кипения" },
-    { name: "Ресторан Шато" },
-    { name: "Pine Bar" },
-    { name: "Апарт-отель Nova" },
-    { name: "Расслабонoff" },
-    { name: "Парк «Вокруг света»" },
-    { name: "Ресторан «Base»" },
+    { name: "Точка кипения", logoText: "ТК" },
+    { name: "Ресторан Шато", logoText: "РШ" },
+    { name: "Pine Bar", logoText: "PB" },
+    { name: "Апарт-отель Nova", logoText: "AN" },
+    { name: "Расслабонoff", logoText: "Р" },
+    { name: "Парк «Вокруг света»", logoText: "ПВ" },
+    { name: "Ресторан «Base»", logoText: "РБ" },
   ];
 
   const categories = [

@@ -449,25 +449,32 @@ function HomePage() {
             logoTextClassName: "text-[12px] leading-none tracking-normal"
         },
         {
-            name: "Точка кипения"
+            name: "Точка кипения",
+            logoText: "ТК"
         },
         {
-            name: "Ресторан Шато"
+            name: "Ресторан Шато",
+            logoText: "РШ"
         },
         {
-            name: "Pine Bar"
+            name: "Pine Bar",
+            logoText: "PB"
         },
         {
-            name: "Апарт-отель Nova"
+            name: "Апарт-отель Nova",
+            logoText: "AN"
         },
         {
-            name: "Расслабонoff"
+            name: "Расслабонoff",
+            logoText: "Р"
         },
         {
-            name: "Парк «Вокруг света»"
+            name: "Парк «Вокруг света»",
+            logoText: "ПВ"
         },
         {
-            name: "Ресторан «Base»"
+            name: "Ресторан «Base»",
+            logoText: "РБ"
         }
     ];
     const categories = [

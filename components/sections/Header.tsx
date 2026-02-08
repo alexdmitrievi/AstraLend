@@ -49,23 +49,24 @@ export default function Header() {
           : ""
       }`}
     >
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4 py-3 lg:hidden">
+      {/* MOBILE & TABLET - без изменений */}
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:hidden">
+        <div className="flex items-center justify-between gap-4 py-3">
           <a
             href="#hero"
-            className="focus-ring font-heading text-lg font-semibold tracking-[0.2em] text-graphite lg:text-[1.375rem]"
+            className="focus-ring font-heading text-lg font-semibold tracking-[0.2em] text-graphite"
           >
             АСТРА
           </a>
 
           <nav
-            className="hidden items-center gap-3 text-sm text-charcoal/80 md:flex lg:gap-10 lg:text-[length:var(--font-nav)] xl:gap-12"
+            className="hidden items-center gap-3 text-sm text-charcoal/80 md:flex"
             aria-label="Основная навигация"
           >
             {navLinks.map((link) => (
               <a
                 key={link.href}
-                className="focus-ring rounded-full px-3 py-1 text-charcoal transition hover:text-graphite lg:px-4 lg:py-2 lg:text-[length:var(--font-nav)]"
+                className="focus-ring rounded-full px-3 py-1 text-charcoal transition hover:text-graphite"
                 href={link.href}
                 onClick={handleAnchorClick}
               >
@@ -77,7 +78,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <a
               href="#lead"
-              className="focus-ring hidden rounded-none bg-graphite px-5 py-2 text-sm font-semibold text-white transition hover:bg-charcoal md:inline-flex lg:px-8 lg:py-4 lg:text-[length:var(--font-nav)]"
+              className="focus-ring hidden rounded-none bg-graphite px-5 py-2 text-sm font-semibold text-white transition hover:bg-charcoal md:inline-flex"
               onClick={handleAnchorClick}
             >
               Рассчитать проект
@@ -101,35 +102,40 @@ export default function Header() {
             </button>
           </div>
         </div>
+      </div>
 
-        <div className="hidden lg:grid lg:grid-cols-12 lg:items-center lg:py-4">
+      {/* DESKTOP - светлый фон, тёмный текст, логотип слева */}
+      <div className="hidden lg:block w-full px-12 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo - LEFT, выровнен с текстом Hero */}
           <a
             href="#hero"
-            className="focus-ring font-heading text-lg font-semibold tracking-[0.2em] text-graphite lg:col-span-2 lg:col-start-2 lg:justify-self-start lg:text-[1.375rem]"
+            className="focus-ring font-heading text-[1.375rem] font-semibold tracking-[0.2em] text-graphite"
           >
             АСТРА
           </a>
 
-          <nav
-            className="flex items-center justify-center gap-10 text-sm text-charcoal/80 lg:col-span-6 lg:col-start-4 lg:text-[length:var(--font-nav)] xl:gap-12"
-            aria-label="Основная навигация"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                className="focus-ring rounded-full px-3 py-1 text-charcoal transition hover:text-graphite lg:px-4 lg:py-2 lg:text-[length:var(--font-nav)]"
-                href={link.href}
-                onClick={handleAnchorClick}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+          {/* Navigation + CTA - RIGHT */}
+          <div className="flex items-center gap-10">
+            <nav
+              className="flex items-center gap-8 text-[length:var(--font-nav)] text-charcoal/80 xl:gap-10"
+              aria-label="Основная навигация"
+            >
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  className="focus-ring rounded-full px-4 py-2 text-charcoal transition hover:text-graphite"
+                  href={link.href}
+                  onClick={handleAnchorClick}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
 
-          <div className="flex items-center justify-end gap-3 lg:col-span-3 lg:col-start-10">
             <a
               href="#lead"
-              className="focus-ring inline-flex rounded-none bg-graphite px-5 py-2 text-sm font-semibold text-white transition hover:bg-charcoal lg:px-8 lg:py-4 lg:text-[length:var(--font-nav)]"
+              className="focus-ring inline-flex rounded-none bg-graphite px-8 py-4 text-[length:var(--font-nav)] font-semibold text-white transition hover:bg-charcoal"
               onClick={handleAnchorClick}
             >
               Рассчитать проект
@@ -138,6 +144,7 @@ export default function Header() {
         </div>
       </div>
 
+      {/* Mobile menu */}
       <div
         className={`border-t border-steel/60 bg-stone/95 md:hidden ${
           isOpen ? "block" : "hidden"
