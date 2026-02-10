@@ -37,16 +37,19 @@ export default function Hero(props: HeroProps) {
           className="text-white [&_h1]:text-white"
           style={{ textShadow: "0 2px 24px rgba(0,0,0,0.8)" }}
         >
-          <h1 className="font-heading text-[1.5rem] font-semibold leading-tight sm:text-[2.25rem] lg:text-[3.5rem] lg:leading-[1.1] xl:text-[4rem]">
+          <h1 className="font-heading text-[1.5rem] font-semibold leading-[1.18] sm:text-[2.25rem] lg:text-[3.5rem] lg:leading-[1.1] xl:text-[4rem]">
             Мебель, которая становится наследием
           </h1>
           <span className="mt-2 block h-px w-12 bg-white/50 sm:mt-5 lg:mt-6 lg:w-24" />
         </div>
       </motion.div>
 
+      {/* ✅ FLEX-SPACER: выталкивает кнопки вниз ТОЛЬКО на мобилке */}
+      <div className="flex-1 sm:hidden" />
+
       <motion.div
         {...fadeUpProps(0.1)}
-        className="mt-3 flex w-full flex-col gap-2 sm:mt-6 sm:flex-row sm:w-auto sm:gap-4 lg:mt-8 lg:gap-5"
+        className="mt-0 flex w-full flex-col gap-2 sm:mt-6 sm:flex-row sm:w-auto sm:gap-4 lg:mt-8 lg:gap-5"
       >
         <a
           href="#lead"
@@ -72,7 +75,6 @@ export default function Hero(props: HeroProps) {
   return (
     <section id="hero" ref={sectionRef} className="relative w-full overflow-hidden">
       <div className="relative h-[100svh] min-h-[550px] sm:min-h-[650px] lg:min-h-[700px]">
-        
         {/* Background image */}
         <div className="absolute inset-0 z-0">
           {/* MOBILE: кресло в нижней половине экрана */}
@@ -91,7 +93,7 @@ export default function Hero(props: HeroProps) {
             fill
             priority
             sizes="100vw"
-            className="hidden sm:block object-cover object-bottom"
+            className="hidden sm:block object-cover object-[center_20%]"
           />
         </div>
 
@@ -99,20 +101,22 @@ export default function Hero(props: HeroProps) {
         <div className="pointer-events-none absolute inset-0 z-10">
           {/* MOBILE: сильный градиент сверху, текст в верхней трети */}
           <div className="sm:hidden absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 via-30% to-transparent to-55%" />
-          
+
           {/* DESKTOP */}
           <div className="hidden sm:block absolute inset-0 bg-gradient-to-br from-black/90 via-black/50 via-30% to-transparent to-50%" />
         </div>
 
         {/* Content */}
-        {/* MOBILE: pt-4 — контент сразу под хедером, компактно */}
-        <div className="relative z-20 flex h-full w-full flex-col justify-start
-                        px-4 pt-4 pb-8
-                        sm:px-8 sm:pt-10
-                        lg:px-12 lg:pt-12">
+        <div
+          className="relative z-20 flex h-full w-full flex-col
+                     px-5 pt-16 pb-8
+                     sm:px-8 sm:pt-10
+                     lg:px-12 lg:pt-12"
+        >
           {heroText}
         </div>
       </div>
     </section>
   );
 }
+

@@ -475,89 +475,115 @@ function HomePage() {
         {
             name: "Ресторан «Base»",
             logoText: "РБ"
+        },
+        {
+            name: "Ресторан-бар «Железный мост»",
+            logoText: "РЖМ"
         }
     ];
     const categories = [
         {
             id: "sofas",
             title: "Диваны",
-            description: "Прямые, угловые, модульные — любых размеров и конфигураций",
+            description: "Прямые, угловые и модульные диваны архитектурного и представительского уровня",
             items: [
                 {
-                    title: "Модульный диван",
-                    material: "Велюр, массив бука",
-                    image: "https://picsum.photos/600/800?random=11"
+                    title: "Модульный архитектурный диван",
+                    material: "Велюр, высокоэластичный ППУ",
+                    image: "https://i.postimg.cc/28YBLJs8/06864f01252556d06a45281bffd903ed-1770245125.png"
                 },
                 {
-                    title: "Угловой диван",
-                    material: "Рогожка, металл",
-                    image: "https://picsum.photos/600/800?random=12"
+                    title: "Современный Chesterfield-диван",
+                    material: "Натуральная кожа, металлическое основание",
+                    image: "https://i.postimg.cc/7L9TV6D1/a3ce72d274c2a75847a8fe18b32b1091-1770241389.png"
                 },
                 {
-                    title: "Диван для ресторана",
-                    material: "Экокожа, массив дуба",
-                    image: "https://picsum.photos/600/800?random=13"
+                    title: "Лаунж-диван с цилиндрическими валиками",
+                    material: "Бархат, массив дерева",
+                    image: "https://i.postimg.cc/J7YZvKvz/3ef51245ed72920024ee5f3b2298b565-1770245499.png"
+                },
+                {
+                    title: "Минималистичный диван для гостиной",
+                    material: "Ткань премиум-класса, металл",
+                    image: "https://i.postimg.cc/tRF7tkbW/771f0af22663800624a9fc8c4300639e-1770247764.png"
+                },
+                {
+                    title: "Угловой диван представительского класса",
+                    material: "Натуральная кожа, массив дерева",
+                    image: "https://i.postimg.cc/NjkK8DjX/f32a4982363e0bf8828c8673e940385c-1770246413.png"
                 }
             ]
         },
         {
             id: "armchairs",
             title: "Кресла",
-            description: "Для дома, офиса, ресторанов и общественных пространств",
+            description: "Акцентные кресла для интерьеров, кабинетов и общественных пространств",
             items: [
                 {
-                    title: "Кресло для переговорной",
-                    material: "Натуральная кожа, металл",
-                    image: "https://picsum.photos/600/800?random=14"
+                    title: "Резное кожаное кресло Heritage",
+                    material: "Натуральная кожа, массив дерева, латунные гвозди",
+                    image: "https://i.postimg.cc/ZnbB2vFd/17091dd7206c2c4550150e55426f61ad-1770240229.png"
                 },
                 {
-                    title: "Лаунж-кресло",
-                    material: "Бархат, латунь",
-                    image: "https://picsum.photos/600/800?random=15"
+                    title: "Кресло Heritage на колесной базе",
+                    material: "Натуральная кожа, массив дерева, металлическая крестовина",
+                    image: "https://i.postimg.cc/cJSQh23G/1c51eec6e84c002d0d9310cb10b26ec0-1770243052.png"
                 },
                 {
-                    title: "Кресло для коворкинга",
-                    material: "Рогожка, фанера",
-                    image: "https://picsum.photos/600/800?random=16"
+                    title: "Кресло Heritage Classic (кампейн / statement версия)",
+                    material: "Натуральная кожа, массив дерева, латунные гвозди",
+                    image: "https://i.postimg.cc/xdJWGkK1/1d9f4b66e6f2fe08bfc321f93cd1c9cd-1770645136.png"
                 }
             ]
         },
         {
             id: "beds",
             title: "Кровати",
-            description: "С мягким изголовьем, подъёмным механизмом, в любом размере",
+            description: "Кровати с мягким изголовьем и архитектурным характером",
             items: [
                 {
-                    title: "Кровать с изголовьем",
-                    material: "Шенилл, латунь",
-                    image: "https://picsum.photos/600/800?random=11"
+                    title: "Кровать с мягким архитектурным изголовьем",
+                    material: "Велюр, МДФ, металл",
+                    image: "https://i.postimg.cc/k41M1Y0N/720490c15029dad280131423b2d53b27-1770732955.png"
                 },
                 {
-                    title: "Кровать-подиум",
-                    material: "Велюр, массив",
-                    image: "https://picsum.photos/600/800?random=12"
+                    title: "Современная кровать с вертикальной простёжкой",
+                    material: "Текстиль, массив дерева",
+                    image: "https://i.postimg.cc/jjnFnLfH/15cf1e42e21d4141d4ec6a52abbedb2f-1770652377.png"
                 }
             ]
         },
         {
-            id: "other",
-            title: "Мебель для бизнеса",
-            description: "Пуфы, банкетки, изголовья, мягкие панели",
+            id: "benches",
+            title: "Банкетки и пуфы",
+            description: "Функциональные элементы для спален, холлов и общественных зон",
             items: [
                 {
-                    title: "Барные пуфы",
-                    material: "Бархат, нержавеющая сталь",
-                    image: "https://picsum.photos/600/800?random=13"
+                    title: "Банкетка на металлическом основании",
+                    material: "Ткань, массив дерева, хромированный металл",
+                    image: "https://i.postimg.cc/W1rKYd9w/0f154305120eb542bd0b0ce9e9d04798-1770247952.png"
                 },
                 {
-                    title: "Мягкие стеновые панели",
-                    material: "Экокожа, поролон",
-                    image: "https://picsum.photos/600/800?random=14"
+                    title: "Мягкий пуф для интерьера",
+                    material: "Ткань, ППУ",
+                    image: "https://i.postimg.cc/GpdMMqT4/eddeff193c92e25e89c1018110825040-1770247153.png"
+                }
+            ]
+        },
+        {
+            id: "business",
+            title: "Мебель для бизнеса",
+            description: "Решения для офисов, переговорных, лобби и частных кабинетов",
+            items: [
+                {
+                    title: "Диван для переговорной зоны",
+                    material: "Натуральная кожа, металл",
+                    image: "https://i.postimg.cc/k55tTbsm/d29350da0f0e5772c0e15acbc1dae661-1770245979.png"
                 },
                 {
-                    title: "Банкетка",
-                    material: "Велюр, массив ясеня",
-                    image: "https://picsum.photos/600/800?random=15"
+                    title: "Кресло для кабинета руководителя",
+                    material: "Натуральная кожа, массив дерева",
+                    image: "https://i.postimg.cc/cJSQh23G/1c51eec6e84c002d0d9310cb10b26ec0-1770243052.png"
                 }
             ]
         }
@@ -567,7 +593,7 @@ function HomePage() {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$sections$2f$Header$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 112,
+                lineNumber: 140,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -577,7 +603,7 @@ function HomePage() {
                         heroImageSrc: "/astra_main.png"
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 114,
+                        lineNumber: 142,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -588,12 +614,12 @@ function HomePage() {
                             clients: clients
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 116,
+                            lineNumber: 144,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 115,
+                        lineNumber: 143,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -604,12 +630,12 @@ function HomePage() {
                             categories: categories
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 119,
+                            lineNumber: 147,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 118,
+                        lineNumber: 146,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -618,29 +644,29 @@ function HomePage() {
                         className: "scroll-mt-24",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$sections$2f$LeadForm$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 122,
+                            lineNumber: 150,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 121,
+                        lineNumber: 149,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 113,
+                lineNumber: 141,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$sections$2f$Footer$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 125,
+                lineNumber: 153,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 111,
+        lineNumber: 139,
         columnNumber: 5
     }, this);
 }

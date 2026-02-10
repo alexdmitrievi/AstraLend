@@ -408,7 +408,7 @@ function Hero(props) {
                     },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                            className: "font-heading text-[1.5rem] font-semibold leading-tight sm:text-[2.25rem] lg:text-[3.5rem] lg:leading-[1.1] xl:text-[4rem]",
+                            className: "font-heading text-[1.5rem] font-semibold leading-[1.18] sm:text-[2.25rem] lg:text-[3.5rem] lg:leading-[1.1] xl:text-[4rem]",
                             children: "Мебель, которая становится наследием"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
@@ -433,32 +433,39 @@ function Hero(props) {
                 lineNumber: 32,
                 columnNumber: 7
             }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex-1 sm:hidden"
+            }, void 0, false, {
+                fileName: "[project]/components/sections/Hero.tsx",
+                lineNumber: 48,
+                columnNumber: 7
+            }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                 ...fadeUpProps(0.1),
-                className: "mt-3 flex w-full flex-col gap-2 sm:mt-6 sm:flex-row sm:w-auto sm:gap-4 lg:mt-8 lg:gap-5",
+                className: "mt-0 flex w-full flex-col gap-2 sm:mt-6 sm:flex-row sm:w-auto sm:gap-4 lg:mt-8 lg:gap-5",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                         href: "#lead",
-                        className: "focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none bg-white px-5 py-3 text-[13px] font-semibold leading-none text-graphite transition hover:bg-white/90 box-border sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm lg:h-[60px] lg:min-w-[200px] lg:px-10 lg:text-base",
+                        className: "focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none bg-white px-5 py-3 text-[13px] font-semibold leading-none text-graphite transition hover:bg-white/90 box-border   sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm   lg:h-[60px] lg:min-w-[200px] lg:px-10 lg:text-base",
                         children: "Рассчитать проект"
                     }, void 0, false, {
                         fileName: "[project]/components/sections/Hero.tsx",
-                        lineNumber: 51,
+                        lineNumber: 54,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                         href: "#portfolio",
-                        className: "focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none border border-white/50 px-5 py-3 text-[13px] font-normal leading-none text-white transition hover:bg-white/10 hover:border-white/70 box-border bg-black/20 backdrop-blur-sm sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm lg:h-[60px] lg:min-w-[200px] lg:px-10 lg:text-base",
+                        className: "focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none border border-white/50 px-5 py-3 text-[13px] font-normal leading-none text-white transition hover:bg-white/10 hover:border-white/70 box-border bg-black/20 backdrop-blur-sm   sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm   lg:h-[60px] lg:min-w-[200px] lg:px-10 lg:text-base",
                         children: "Смотреть работы"
                     }, void 0, false, {
                         fileName: "[project]/components/sections/Hero.tsx",
-                        lineNumber: 60,
+                        lineNumber: 63,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/sections/Hero.tsx",
-                lineNumber: 47,
+                lineNumber: 50,
                 columnNumber: 7
             }, this)
         ]
@@ -482,7 +489,7 @@ function Hero(props) {
                             className: "object-cover object-[center_65%] sm:hidden"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 79,
+                            lineNumber: 81,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -491,16 +498,16 @@ function Hero(props) {
                             fill: true,
                             priority: true,
                             sizes: "100vw",
-                            className: "hidden sm:block object-cover object-bottom"
+                            className: "hidden sm:block object-cover object-[center_20%]"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 88,
+                            lineNumber: 90,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/Hero.tsx",
-                    lineNumber: 77,
+                    lineNumber: 79,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -510,39 +517,39 @@ function Hero(props) {
                             className: "sm:hidden absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 via-30% to-transparent to-55%"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 101,
+                            lineNumber: 103,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "hidden sm:block absolute inset-0 bg-gradient-to-br from-black/90 via-black/50 via-30% to-transparent to-50%"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 104,
+                            lineNumber: 106,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/Hero.tsx",
-                    lineNumber: 99,
+                    lineNumber: 101,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "relative z-20 flex h-full w-full flex-col justify-start px-4 pt-4 pb-8 sm:px-8 sm:pt-10 lg:px-12 lg:pt-12",
+                    className: "relative z-20 flex h-full w-full flex-col   px-5 pt-16 pb-8   sm:px-8 sm:pt-10   lg:px-12 lg:pt-12",
                     children: heroText
                 }, void 0, false, {
                     fileName: "[project]/components/sections/Hero.tsx",
-                    lineNumber: 109,
+                    lineNumber: 110,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/sections/Hero.tsx",
-            lineNumber: 74,
+            lineNumber: 77,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/sections/Hero.tsx",
-        lineNumber: 73,
+        lineNumber: 76,
         columnNumber: 5
     }, this);
 }
