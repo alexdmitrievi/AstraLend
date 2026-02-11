@@ -445,40 +445,49 @@ function HomePage() {
     const clients = [
         {
             name: "Банк «ВТБ»",
+            logo: "/clients/vtb.svg",
             logoText: "Б",
             logoTextClassName: "text-[12px] leading-none tracking-normal"
         },
         {
             name: "Точка кипения",
+            logo: "/clients/tochka-kipeniya.svg",
             logoText: "ТК"
         },
         {
             name: "Ресторан Шато",
+            logo: "/clients/chateau.svg",
             logoText: "РШ"
         },
         {
             name: "Pine Bar",
+            logo: "/clients/pine-bar.svg",
             logoText: "PB"
         },
         {
             name: "Апарт-отель Nova",
+            logo: "/clients/nova.svg",
             logoText: "AN"
         },
         {
             name: "Расслабонoff",
+            logo: "/clients/rasslabonoff.svg",
             logoText: "Р"
         },
         {
-            name: "Парк «Вокруг света»",
-            logoText: "ПВ"
-        },
-        {
             name: "Ресторан «Base»",
+            logo: "/clients/base.svg",
             logoText: "РБ"
         },
         {
             name: "Ресторан-бар «Железный мост»",
+            logo: "/clients/iron-bridge.svg",
             logoText: "РЖМ"
+        },
+        {
+            name: "Барбершоп «WILLMADE»",
+            logo: "/clients/willmade.svg",
+            logoText: "WM"
         }
     ];
     const categories = [
@@ -500,7 +509,7 @@ function HomePage() {
                 {
                     title: "Лаунж-диван с цилиндрическими валиками",
                     material: "Бархат, массив дерева",
-                    image: "https://i.postimg.cc/J7YZvKvz/3ef51245ed72920024ee5f3b2298b565-1770245499.png"
+                    image: "https://i.postimg.cc/1XKmqyQy/196f01ad-e165-4ff4-83c9-eedd43b4d7d1.png"
                 },
                 {
                     title: "Минималистичный диван для гостиной",
@@ -510,7 +519,7 @@ function HomePage() {
                 {
                     title: "Угловой диван представительского класса",
                     material: "Натуральная кожа, массив дерева",
-                    image: "https://i.postimg.cc/NjkK8DjX/f32a4982363e0bf8828c8673e940385c-1770246413.png"
+                    image: "https://i.postimg.cc/jSDTsHLw/38246aa2-9ced-4ea6-9a5a-32de4b893e25.png"
                 }
             ]
         },
@@ -532,7 +541,7 @@ function HomePage() {
                 {
                     title: "Кресло Heritage Classic (кампейн / statement версия)",
                     material: "Натуральная кожа, массив дерева, латунные гвозди",
-                    image: "https://i.postimg.cc/xdJWGkK1/1d9f4b66e6f2fe08bfc321f93cd1c9cd-1770645136.png"
+                    image: "https://i.postimg.cc/pVc1Pg8Y/f3afe41222719546d8ddc7bbe24495b2-1770645461-(1).png"
                 }
             ]
         },
@@ -593,7 +602,7 @@ function HomePage() {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$sections$2f$Header$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 140,
+                lineNumber: 159,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -603,7 +612,7 @@ function HomePage() {
                         heroImageSrc: "/astra_main.png"
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 142,
+                        lineNumber: 161,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -614,12 +623,12 @@ function HomePage() {
                             clients: clients
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 144,
+                            lineNumber: 163,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 143,
+                        lineNumber: 162,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -630,12 +639,12 @@ function HomePage() {
                             categories: categories
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 147,
+                            lineNumber: 166,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 146,
+                        lineNumber: 165,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -644,29 +653,29 @@ function HomePage() {
                         className: "scroll-mt-24",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$sections$2f$LeadForm$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 150,
+                            lineNumber: 169,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 149,
+                        lineNumber: 168,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 141,
+                lineNumber: 160,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$sections$2f$Footer$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 153,
+                lineNumber: 172,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 139,
+        lineNumber: 158,
         columnNumber: 5
     }, this);
 }
