@@ -86,14 +86,14 @@ export default function Hero(props: HeroProps) {
             sizes="100vw"
             className="object-cover object-[center_65%] sm:hidden"
           />
-          {/* DESKTOP */}
+          {/* DESKTOP: опускаем кадр, чтобы низ кресла был виден */}
           <Image
             src={heroImageSource}
             alt="Кресло АСТРА"
             fill
             priority
             sizes="100vw"
-            className="hidden sm:block object-cover object-[center_20%]"
+            className="hidden sm:block object-cover object-[center_74%] lg:object-[center_72%] xl:object-[center_70%]"
           />
         </div>
 
@@ -119,4 +119,5 @@ export default function Hero(props: HeroProps) {
     </section>
   );
 }
+
 

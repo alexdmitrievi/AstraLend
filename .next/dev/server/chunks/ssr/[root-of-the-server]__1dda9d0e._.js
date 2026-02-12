@@ -467,7 +467,7 @@ function Hero(props) {
                             fill: true,
                             priority: true,
                             sizes: "100vw",
-                            className: "hidden sm:block object-cover object-[center_20%]"
+                            className: "hidden sm:block object-cover object-[center_74%] lg:object-[center_72%] xl:object-[center_70%]"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
                             lineNumber: 90,
@@ -540,12 +540,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$useDeskt
 ;
 ;
 const MOBILE_MEDIA_QUERY = "(max-width: 767px)";
-const SPEED_PX_PER_SEC = 50;
-// Desktop viewport: show up to 5 cards
+// Different speeds (desktop slightly slower feels more premium)
+const SPEED_PX_PER_SEC_MOBILE = 50;
+const SPEED_PX_PER_SEC_DESKTOP = 34;
+// Desktop viewport: show up to 5 cells
 const DESKTOP_VISIBLE_CARDS = 5;
-// Larger cells on desktop for premium brand presence
+// Bigger cells for stronger brand presence
 const DESKTOP_CARD_WIDTH_PX = 360;
-// lg:gap-10 ~= 40px
 const DESKTOP_GAP_PX = 40;
 const getInitials = (name)=>name.split(" ").filter(Boolean).slice(0, 2).map((part)=>part[0]?.toUpperCase()).join("");
 function ClientsMarquee({ clients }) {
@@ -610,9 +611,7 @@ function ClientsMarquee({ clients }) {
             resizeObserver.observe(trackElement);
         }
         const handleResize = ()=>{
-            if (resizeTimeoutRef.current) {
-                window.clearTimeout(resizeTimeoutRef.current);
-            }
+            if (resizeTimeoutRef.current) window.clearTimeout(resizeTimeoutRef.current);
             resizeTimeoutRef.current = window.setTimeout(updateSetWidth, 120);
         };
         window.addEventListener("resize", handleResize);
@@ -621,22 +620,23 @@ function ClientsMarquee({ clients }) {
             resizeObserver?.disconnect();
             window.removeEventListener("resize", handleResize);
             window.removeEventListener("orientationchange", handleResize);
-            if (resizeTimeoutRef.current) {
-                window.clearTimeout(resizeTimeoutRef.current);
-            }
+            if (resizeTimeoutRef.current) window.clearTimeout(resizeTimeoutRef.current);
         };
     }, [
         isMobile,
         updateSetWidth
     ]);
-    const durationSeconds = setWidthPx > 0 ? setWidthPx / SPEED_PX_PER_SEC : 0;
+    const speedPxPerSec = isMobile ? SPEED_PX_PER_SEC_MOBILE : SPEED_PX_PER_SEC_DESKTOP;
+    const durationSeconds = setWidthPx > 0 ? setWidthPx / speedPxPerSec : 0;
     const shouldAnimateMobile = isMobile && !prefersReducedMotion && setWidthPx > 0;
     const shouldAnimateDesktop = !isMobile && !prefersReducedMotion && setWidthPx > 0;
     const trackStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>{
         if (!setWidthPx) return undefined;
         return {
             "--marquee-set-width": String(setWidthPx),
-            "--marquee-mobile-duration": `${durationSeconds}s`
+            "--marquee-mobile-duration": `${durationSeconds}s`,
+            "--marquee-desktop-duration": `${durationSeconds}s`,
+            "--marquee-duration": `${durationSeconds}s`
         };
     }, [
         setWidthPx,
@@ -650,6 +650,42 @@ function ClientsMarquee({ clients }) {
             marginRight: "auto"
         };
     }, []);
+    // Shared “logo” sizing: bigger, consistent height, no borders
+    const Logo = ({ client, size })=>{
+        const isDesktop = size === "desktop";
+        // Fixed height gives consistent rhythm, width stays natural for each logo.
+        // (Most premium marquees standardize by height, not by box.)
+        const imgClass = isDesktop ? "h-20 sm:h-24 lg:h-[96px] w-auto max-w-[260px] object-contain" : "h-16 w-auto max-w-[180px] object-contain";
+        const fallbackBoxClass = isDesktop ? "h-14 sm:h-16 lg:h-[68px] w-[190px]" : "h-12 w-[140px]";
+        if (client.logo) {
+            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                src: client.logo,
+                alt: `${client.name} логотип`,
+                className: imgClass,
+                loading: "lazy",
+                draggable: false
+            }, void 0, false, {
+                fileName: "[project]/components/sections/ClientsMarquee.tsx",
+                lineNumber: 185,
+                columnNumber: 9
+            }, this);
+        }
+        // Fallback: clean monogram (no border)
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+            className: [
+                "flex items-center justify-center",
+                fallbackBoxClass,
+                "text-[11px] uppercase tracking-[0.18em] text-charcoal/85",
+                client.logoTextClassName ?? ""
+            ].join(" "),
+            "aria-hidden": "true",
+            children: (client.logoText ?? getInitials(client.name)) || "LG"
+        }, void 0, false, {
+            fileName: "[project]/components/sections/ClientsMarquee.tsx",
+            lineNumber: 197,
+            columnNumber: 7
+        }, this);
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         className: "section-desktop bg-cream-light py-16 sm:py-20",
         children: [
@@ -664,7 +700,7 @@ function ClientsMarquee({ clients }) {
                             "aria-hidden": "true"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                            lineNumber: 175,
+                            lineNumber: 215,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -672,18 +708,18 @@ function ClientsMarquee({ clients }) {
                             children: "Нам доверяют"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                            lineNumber: 176,
+                            lineNumber: 216,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                    lineNumber: 174,
+                    lineNumber: 214,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                lineNumber: 173,
+                lineNumber: 213,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -694,7 +730,10 @@ function ClientsMarquee({ clients }) {
                         className: "md:hidden",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                             ref: mobileTrackRef,
-                            className: `flex w-max items-center justify-center gap-6 sm:gap-8 flex-nowrap whitespace-nowrap box-border ${shouldAnimateMobile ? "marquee-mobile" : ""}`,
+                            className: [
+                                "flex w-max items-center gap-8 flex-nowrap whitespace-nowrap box-border",
+                                shouldAnimateMobile ? "marquee-mobile" : ""
+                            ].join(" "),
                             style: trackStyle,
                             "aria-label": "Список клиентов",
                             children: [
@@ -703,64 +742,42 @@ function ClientsMarquee({ clients }) {
                             ].map((setIndex)=>clients.map((client, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                         ref: setIndex === 0 && index === 0 ? mobileFirstItemRef : setIndex === 1 && index === 0 ? mobileSecondItemRef : undefined,
                                         "aria-hidden": setIndex === 1,
-                                        className: [
-                                            "relative flex min-w-max flex-shrink-0 items-center gap-4",
-                                            "rounded-none border border-steel text-charcoal box-border",
-                                            "px-7 py-4 text-[16px] leading-none"
-                                        ].join(" "),
                                         title: client.name,
+                                        className: [
+                                            "group relative flex min-w-max flex-shrink-0 flex-col items-center justify-center",
+                                            "py-2"
+                                        ].join(" "),
                                         children: [
-                                            client.logo ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                src: client.logo,
-                                                alt: "",
-                                                "aria-hidden": "true",
-                                                className: "h-14 w-auto max-w-[170px] shrink-0 object-contain",
-                                                loading: "lazy",
-                                                decoding: "async",
-                                                // optical baseline nudge (subtle, improves perceived alignment)
-                                                style: {
-                                                    transform: "translateY(1px)"
-                                                }
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Logo, {
+                                                client: client,
+                                                size: "mobile"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                                                lineNumber: 214,
-                                                columnNumber: 21
-                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: [
-                                                    "flex h-14 w-14 items-center justify-center shrink-0",
-                                                    "rounded-none border border-steel",
-                                                    "text-[10px] uppercase tracking-[0.2em] text-charcoal",
-                                                    client.logoTextClassName ?? ""
-                                                ].join(" "),
-                                                "aria-hidden": "true",
-                                                children: (client.logoText ?? getInitials(client.name)) || "LG"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                                                lineNumber: 225,
-                                                columnNumber: 21
+                                                lineNumber: 253,
+                                                columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "whitespace-nowrap",
+                                                className: "mt-2 text-[12px] leading-none text-charcoal/70",
                                                 children: client.name
                                             }, void 0, false, {
                                                 fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                                                lineNumber: 238,
+                                                lineNumber: 256,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, `${client.name}-mobile-${setIndex}-${index}`, true, {
                                         fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                                        lineNumber: 196,
+                                        lineNumber: 237,
                                         columnNumber: 17
                                     }, this)))
                         }, void 0, false, {
                             fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                            lineNumber: 186,
+                            lineNumber: 226,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                        lineNumber: 185,
+                        lineNumber: 225,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -770,7 +787,12 @@ function ClientsMarquee({ clients }) {
                             className: "overflow-hidden",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                                 ref: desktopTrackRef,
-                                className: `flex w-max items-center justify-start gap-6 sm:gap-8 lg:gap-10 flex-nowrap whitespace-nowrap ${shouldAnimateDesktop ? "marquee marquee-desktop" : ""} hover:[animation-play-state:paused]`,
+                                className: [
+                                    "flex w-max items-center justify-start",
+                                    "gap-10 flex-nowrap whitespace-nowrap",
+                                    shouldAnimateDesktop ? "marquee marquee-desktop" : "",
+                                    "hover:[animation-play-state:paused]"
+                                ].join(" "),
                                 style: trackStyle,
                                 "aria-label": "Список клиентов",
                                 children: [
@@ -780,88 +802,77 @@ function ClientsMarquee({ clients }) {
                                             ref: setIndex === 0 && index === 0 ? desktopFirstItemRef : setIndex === 1 && index === 0 ? desktopSecondItemRef : undefined,
                                             "aria-hidden": setIndex === 1,
                                             title: client.name,
-                                            style: {
-                                                width: DESKTOP_CARD_WIDTH_PX
-                                            },
                                             className: [
-                                                "relative flex flex-shrink-0 items-center gap-6",
-                                                "min-w-0 overflow-hidden",
-                                                "rounded-none border border-steel text-charcoal",
-                                                "px-9 py-6 text-[18px] tracking-[0.01em]",
-                                                // premium touch: subdued by default, fully crisp on hover
-                                                "transition-opacity duration-200 ease-out hover:opacity-100",
-                                                // keep overall look consistent; do not force opacity if you don't want it globally
-                                                "opacity-95",
-                                                "lg:after:absolute lg:after:right-2 lg:after:top-1/2 lg:after:h-7 lg:after:w-px lg:after:-translate-y-1/2 lg:after:bg-steel/60 lg:after:content-[''] lg:last:after:hidden"
+                                                "group relative flex w-[360px] flex-shrink-0 flex-col items-center justify-center",
+                                                "py-4",
+                                                "text-charcoal",
+                                                // subtle hover affordance without a box/border
+                                                "transition-transform duration-200 ease-out",
+                                                "hover:-translate-y-0.5",
+                                                "focus-within:-translate-y-0.5"
                                             ].join(" "),
                                             children: [
-                                                client.logo ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                    src: client.logo,
-                                                    alt: "",
-                                                    "aria-hidden": "true",
-                                                    className: "h-16 w-auto max-w-[240px] shrink-0 object-contain",
-                                                    loading: "lazy",
-                                                    decoding: "async",
-                                                    style: {
-                                                        transform: "translateY(1px)"
-                                                    }
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Logo, {
+                                                    client: client,
+                                                    size: "desktop"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                                                    lineNumber: 283,
-                                                    columnNumber: 23
-                                                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: [
-                                                        "flex h-16 w-16 items-center justify-center shrink-0",
-                                                        "rounded-none border border-steel",
-                                                        "text-[10px] uppercase tracking-[0.2em] text-charcoal",
-                                                        client.logoTextClassName ?? ""
-                                                    ].join(" "),
-                                                    "aria-hidden": "true",
-                                                    children: (client.logoText ?? getInitials(client.name)) || "LG"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                                                    lineNumber: 293,
-                                                    columnNumber: 23
+                                                    lineNumber: 302,
+                                                    columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "min-w-0 truncate",
+                                                    className: [
+                                                        "mt-3 text-sm text-charcoal/65",
+                                                        "opacity-0 transition-opacity duration-200",
+                                                        "group-hover:opacity-100 group-focus-within:opacity-100",
+                                                        "select-none"
+                                                    ].join(" "),
+                                                    "aria-hidden": "true",
                                                     children: client.name
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                                                    lineNumber: 306,
+                                                    lineNumber: 305,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    className: "sr-only",
+                                                    children: client.name
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/ClientsMarquee.tsx",
+                                                    lineNumber: 318,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, `${client.name}-desktop-${setIndex}-${index}`, true, {
                                             fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                                            lineNumber: 258,
+                                            lineNumber: 281,
                                             columnNumber: 19
                                         }, this)))
                             }, void 0, false, {
                                 fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                                lineNumber: 248,
+                                lineNumber: 268,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                            lineNumber: 247,
+                            lineNumber: 267,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                        lineNumber: 246,
+                        lineNumber: 266,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/sections/ClientsMarquee.tsx",
-                lineNumber: 180,
+                lineNumber: 220,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/sections/ClientsMarquee.tsx",
-        lineNumber: 172,
+        lineNumber: 212,
         columnNumber: 5
     }, this);
 }
@@ -892,21 +903,15 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$yet$2d$anoth
 ;
 ;
 const NARROW_MEDIA_QUERY = "(max-width: 1023px)"; // < lg
-const MOBILE_CARD_WIDTH_PX = 260; // must match card min width on mobile
-const MOBILE_CARD_HALF_PX = MOBILE_CARD_WIDTH_PX / 2;
 function Portfolio({ categories }) {
     const [activeCategory, setActiveCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("all");
     const sliderRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     const { isMounted, shouldAnimate } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$useDesktopMotion$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])();
-    // Narrow (mobile/tablet) center-snap UX
     const [isNarrow, setIsNarrow] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [hasInteracted, setHasInteracted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Lightbox
     const [isLightboxOpen, setIsLightboxOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [lightboxIndex, setLightboxIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
-    // Restore position after closing
     const lastViewRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    // Desktop scroll hints (arrows/edge fades)
     const [canScrollLeft, setCanScrollLeft] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [canScrollRight, setCanScrollRight] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const activeCategoryData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>categories.find((category)=>category.id === activeCategory), [
@@ -929,7 +934,6 @@ function Portfolio({ categories }) {
             })), [
         visibleItems
     ]);
-    // Motion helpers
     const fadeUp = (delay = 0)=>shouldAnimate ? {
             initial: {
                 opacity: 0,
@@ -952,7 +956,7 @@ function Portfolio({ categories }) {
             initial: false
         };
     const fadeUpProps = (delay = 0)=>isMounted ? fadeUp(delay) : {};
-    // Detect narrow viewport (< lg)
+    // Detect narrow viewport
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if ("TURBOPACK compile-time truthy", 1) return;
         //TURBOPACK unreachable
@@ -979,7 +983,7 @@ function Portfolio({ categories }) {
             behavior: "smooth"
         });
     }, []);
-    // Lightbox open/close + history
+    // Lightbox open
     const openLightbox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((index)=>{
         lastViewRef.current = {
             activeCategory,
@@ -992,6 +996,7 @@ function Portfolio({ categories }) {
     }, [
         activeCategory
     ]);
+    // Lightbox close
     const closeLightbox = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((opts)=>{
         setIsLightboxOpen(false);
         if (("TURBOPACK compile-time value", "undefined") !== "undefined" && !opts?.viaPopState) //TURBOPACK unreachable
@@ -1016,11 +1021,11 @@ function Portfolio({ categories }) {
         isLightboxOpen,
         closeLightbox
     ]);
-    // Track scroll + hint state + ResizeObserver for arrows/fades
+    // Track scroll + hint state
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const el = sliderRef.current;
         if (!el) return;
-        // Ensure desktop starts at left edge
+        // Desktop starts from the left
         if (!isNarrow && !isLightboxOpen && !lastViewRef.current) {
             el.scrollTo({
                 left: 0,
@@ -1047,7 +1052,7 @@ function Portfolio({ categories }) {
         isNarrow,
         isLightboxOpen
     ]);
-    // When switching category: desktop should start from the left
+    // When switching category: desktop start from left
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const el = sliderRef.current;
         if (!el) return;
@@ -1063,7 +1068,26 @@ function Portfolio({ categories }) {
         isNarrow,
         isLightboxOpen
     ]);
-    // Desktop drag only (NO wheel hijacking at all)
+    // ✅ MOBILE FIX: force initial position to LEFT on narrow screens
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        const el = sliderRef.current;
+        if (!el) return;
+        if (!isNarrow) return;
+        if (isLightboxOpen) return;
+        // On mobile the browser can auto-snap to center on first paint.
+        // We force left edge AFTER layout.
+        requestAnimationFrame(()=>{
+            el.scrollTo({
+                left: 0,
+                behavior: "auto"
+            });
+        });
+    }, [
+        isNarrow,
+        activeCategory,
+        isLightboxOpen
+    ]);
+    // Desktop drag only
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const slider = sliderRef.current;
         if ("TURBOPACK compile-time truthy", 1) return;
@@ -1087,141 +1111,128 @@ function Portfolio({ categories }) {
         const handleKeyDown = undefined;
         const handleDragStart = undefined;
     }, []);
-    // Mobile/tablet center-snap padding (ONLY on narrow screens)
-    const narrowCenterStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>{
-        const pad = `calc(50vw - ${MOBILE_CARD_HALF_PX}px)`;
-        return {
-            paddingLeft: pad,
-            paddingRight: pad,
-            scrollPaddingLeft: pad,
-            scrollPaddingRight: pad
-        };
-    }, []);
-    // Prevent “sticky” scroll behavior on the horizontal scroller
     const sliderBehaviorStyle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>{
         return {
             overscrollBehaviorX: "contain",
-            // allow smooth page vertical scrolling, don’t “trap” gestures
             WebkitOverflowScrolling: "touch",
-            // Reserve space for scrollbar when present (prevents layout jump)
             scrollbarGutter: "stable"
         };
     }, []);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-        className: "jsx-acde25127c178a6f" + " " + "portfolio-section bg-cream-light py-16 sm:py-20 section-desktop",
+        className: "jsx-9157403361f7b7f8" + " " + "portfolio-section bg-cream-light py-16 sm:py-20 section-desktop",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
                 ...fadeUpProps(0),
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-acde25127c178a6f" + " " + "section-header",
+                        className: "jsx-9157403361f7b7f8" + " " + "section-header",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "jsx-acde25127c178a6f" + " " + "section-title-row",
+                            className: "jsx-9157403361f7b7f8" + " " + "section-title-row",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     "aria-hidden": "true",
-                                    className: "jsx-acde25127c178a6f" + " " + "section-title-divider"
+                                    className: "jsx-9157403361f7b7f8" + " " + "section-title-divider"
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/Portfolio.tsx",
-                                    lineNumber: 357,
+                                    lineNumber: 344,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "jsx-acde25127c178a6f" + " " + "section-title",
+                                    className: "jsx-9157403361f7b7f8" + " " + "section-title",
                                     children: "Наши работы"
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/Portfolio.tsx",
-                                    lineNumber: 358,
+                                    lineNumber: 345,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/sections/Portfolio.tsx",
-                            lineNumber: 356,
+                            lineNumber: 343,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/sections/Portfolio.tsx",
-                        lineNumber: 355,
+                        lineNumber: 342,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-acde25127c178a6f" + " " + "mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8",
+                        className: "jsx-9157403361f7b7f8" + " " + "mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "jsx-acde25127c178a6f" + " " + "mt-6 flex flex-wrap gap-3 lg:mt-8 lg:gap-4",
+                            className: "jsx-9157403361f7b7f8" + " " + "mt-6 flex flex-wrap gap-3 lg:mt-8 lg:gap-4",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "button",
                                     onClick: ()=>setActiveCategory("all"),
-                                    className: "jsx-acde25127c178a6f" + " " + ((activeCategory === "all" ? "px-4 py-2 text-sm bg-graphite text-white rounded-none lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out shadow-elevated" : "px-4 py-2 text-sm text-charcoal border border-steel rounded-none hover:border-graphite lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5") || ""),
+                                    className: "jsx-9157403361f7b7f8" + " " + ((activeCategory === "all" ? "px-4 py-2 text-sm bg-graphite text-white rounded-none lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out shadow-elevated" : "px-4 py-2 text-sm text-charcoal border border-steel rounded-none hover:border-graphite lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5") || ""),
                                     children: "Все"
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/Portfolio.tsx",
-                                    lineNumber: 364,
+                                    lineNumber: 351,
                                     columnNumber: 13
                                 }, this),
                                 categories.map((category)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         type: "button",
                                         onClick: ()=>setActiveCategory(category.id),
-                                        className: "jsx-acde25127c178a6f" + " " + ((activeCategory === category.id ? "px-4 py-2 text-sm bg-graphite text-white rounded-none lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out shadow-elevated" : "px-4 py-2 text-sm text-charcoal border border-steel rounded-none hover:border-graphite lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5") || ""),
+                                        className: "jsx-9157403361f7b7f8" + " " + ((activeCategory === category.id ? "px-4 py-2 text-sm bg-graphite text-white rounded-none lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out shadow-elevated" : "px-4 py-2 text-sm text-charcoal border border-steel rounded-none hover:border-graphite lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5") || ""),
                                         children: category.title
                                     }, category.id, false, {
                                         fileName: "[project]/components/sections/Portfolio.tsx",
-                                        lineNumber: 377,
+                                        lineNumber: 364,
                                         columnNumber: 15
                                     }, this))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/sections/Portfolio.tsx",
-                            lineNumber: 363,
+                            lineNumber: 350,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/sections/Portfolio.tsx",
-                        lineNumber: 362,
+                        lineNumber: 349,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/sections/Portfolio.tsx",
-                lineNumber: 354,
+                lineNumber: 341,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
                 ...fadeUpProps(0.1),
                 className: "mt-10 pb-4 lg:mt-12 lg:pb-0 lg:w-full",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "jsx-acde25127c178a6f" + " " + "group relative",
+                    className: "jsx-9157403361f7b7f8" + " " + "group relative",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             "aria-hidden": "true",
-                            className: "jsx-acde25127c178a6f" + " " + ([
+                            className: "jsx-9157403361f7b7f8" + " " + ([
                                 "pointer-events-none absolute inset-y-0 left-0 z-10 w-14 transition-opacity duration-200 hidden lg:block",
                                 "bg-gradient-to-r from-cream-light to-transparent",
                                 canScrollLeft ? "opacity-100" : "opacity-0"
                             ].join(" ") || "")
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Portfolio.tsx",
-                            lineNumber: 401,
+                            lineNumber: 387,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             "aria-hidden": "true",
-                            className: "jsx-acde25127c178a6f" + " " + ([
+                            className: "jsx-9157403361f7b7f8" + " " + ([
                                 "pointer-events-none absolute inset-y-0 right-0 z-10 w-14 transition-opacity duration-200 hidden lg:block",
                                 "bg-gradient-to-l from-cream-light to-transparent",
                                 canScrollRight ? "opacity-100" : "opacity-0"
                             ].join(" ") || "")
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Portfolio.tsx",
-                            lineNumber: 409,
+                            lineNumber: 395,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             type: "button",
                             onClick: ()=>scrollByStep(-1),
                             "aria-label": "Прокрутить влево",
-                            className: "jsx-acde25127c178a6f" + " " + ([
+                            className: "jsx-9157403361f7b7f8" + " " + ([
                                 "hidden lg:flex items-center justify-center",
                                 "absolute left-2 top-1/2 -translate-y-1/2 z-20",
                                 "h-11 w-11 rounded-full",
@@ -1231,23 +1242,23 @@ function Portfolio({ categories }) {
                                 canScrollLeft ? "pointer-events-auto hover:bg-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-graphite/30" : "pointer-events-none"
                             ].join(" ") || ""),
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "jsx-acde25127c178a6f" + " " + "text-graphite text-xl leading-none",
+                                className: "jsx-9157403361f7b7f8" + " " + "text-graphite text-xl leading-none",
                                 children: "‹"
                             }, void 0, false, {
                                 fileName: "[project]/components/sections/Portfolio.tsx",
-                                lineNumber: 435,
+                                lineNumber: 421,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Portfolio.tsx",
-                            lineNumber: 419,
+                            lineNumber: 405,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             type: "button",
                             onClick: ()=>scrollByStep(1),
                             "aria-label": "Прокрутить вправо",
-                            className: "jsx-acde25127c178a6f" + " " + ([
+                            className: "jsx-9157403361f7b7f8" + " " + ([
                                 "hidden lg:flex items-center justify-center",
                                 "absolute right-2 top-1/2 -translate-y-1/2 z-20",
                                 "h-11 w-11 rounded-full",
@@ -1257,59 +1268,59 @@ function Portfolio({ categories }) {
                                 canScrollRight ? "pointer-events-auto hover:bg-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-graphite/30" : "pointer-events-none"
                             ].join(" ") || ""),
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "jsx-acde25127c178a6f" + " " + "text-graphite text-xl leading-none",
+                                className: "jsx-9157403361f7b7f8" + " " + "text-graphite text-xl leading-none",
                                 children: "›"
                             }, void 0, false, {
                                 fileName: "[project]/components/sections/Portfolio.tsx",
-                                lineNumber: 454,
+                                lineNumber: 440,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Portfolio.tsx",
-                            lineNumber: 438,
+                            lineNumber: 424,
                             columnNumber: 11
                         }, this),
                         isNarrow && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     "aria-hidden": "true",
-                                    className: "jsx-acde25127c178a6f" + " " + "pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-cream-light to-transparent"
+                                    className: "jsx-9157403361f7b7f8" + " " + "pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-cream-light to-transparent"
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/Portfolio.tsx",
-                                    lineNumber: 460,
+                                    lineNumber: 446,
                                     columnNumber: 15
                                 }, this),
                                 !hasInteracted && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     "aria-hidden": "true",
-                                    className: "jsx-acde25127c178a6f" + " " + "pointer-events-none absolute right-3 top-1/2 z-20 -translate-y-1/2",
+                                    className: "jsx-9157403361f7b7f8" + " " + "pointer-events-none absolute right-3 top-1/2 z-20 -translate-y-1/2",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-acde25127c178a6f" + " " + "flex items-center gap-1 text-ash/70 text-xs",
+                                        className: "jsx-9157403361f7b7f8" + " " + "flex items-center gap-1 text-ash/70 text-xs",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "jsx-acde25127c178a6f" + " " + "inline-block animate-pulse",
+                                                className: "jsx-9157403361f7b7f8" + " " + "inline-block animate-pulse",
                                                 children: "Свайп"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/sections/Portfolio.tsx",
-                                                lineNumber: 470,
+                                                lineNumber: 456,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "jsx-acde25127c178a6f" + " " + "inline-block animate-pulse",
+                                                className: "jsx-9157403361f7b7f8" + " " + "inline-block animate-pulse",
                                                 children: "→"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/sections/Portfolio.tsx",
-                                                lineNumber: 471,
+                                                lineNumber: 457,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/sections/Portfolio.tsx",
-                                        lineNumber: 469,
+                                        lineNumber: 455,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/Portfolio.tsx",
-                                    lineNumber: 465,
+                                    lineNumber: 451,
                                     columnNumber: 17
                                 }, this)
                             ]
@@ -1317,114 +1328,114 @@ function Portfolio({ categories }) {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             ref: sliderRef,
                             tabIndex: 0,
-                            style: {
-                                ...isNarrow ? narrowCenterStyle : undefined,
-                                ...sliderBehaviorStyle
-                            },
-                            className: "jsx-acde25127c178a6f" + " " + ([
+                            style: sliderBehaviorStyle,
+                            className: "jsx-9157403361f7b7f8" + " " + ([
                                 "portfolio-slider portfolio-cards-container flex gap-6 overflow-x-auto",
-                                "snap-x snap-mandatory scroll-smooth",
+                                "scroll-smooth",
+                                // padding for nice edges
+                                "px-4 scroll-px-4",
                                 "sm:px-6 sm:scroll-px-6",
                                 "lg:flex-nowrap lg:px-8 lg:scroll-px-8",
                                 "lg:cursor-grab",
                                 "lg:pb-4"
                             ].join(" ") || ""),
                             children: visibleItems.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("article", {
-                                    className: "jsx-acde25127c178a6f" + " " + ([
+                                    className: "jsx-9157403361f7b7f8" + " " + ([
                                         "portfolio-card group min-w-[260px] flex-1 overflow-hidden rounded-xl border border-steel/25 bg-warm/40 shadow-elevated hover-shadow card-desktop",
-                                        "snap-center lg:snap-start",
-                                        "lg:min-w-[320px] lg:flex-none lg:transition lg:duration-300 lg:ease-out lg:hover:-translate-y-1 lg:hover:scale-[1.01]"
+                                        "lg:min-w-[320px] lg:flex-none lg:transition lg:duration-300 lg:ease-out lg:hover:-translate-y-1 lg:hover:scale-[1.01]",
+                                        // snap class kept (but overridden on mobile via global style below)
+                                        "snap-start"
                                     ].join(" ") || ""),
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         type: "button",
                                         onClick: ()=>openLightbox(index),
                                         "aria-label": `Открыть фото: ${item.title}`,
-                                        className: "jsx-acde25127c178a6f" + " " + "block w-full text-left",
+                                        className: "jsx-9157403361f7b7f8" + " " + "block w-full text-left",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-acde25127c178a6f" + " " + "relative h-48 w-full overflow-hidden sm:h-56 lg:h-auto lg:aspect-[4/3]",
+                                                className: "jsx-9157403361f7b7f8" + " " + "relative h-48 w-full overflow-hidden sm:h-56 lg:h-auto lg:aspect-[4/3]",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                                     src: item.image,
                                                     alt: item.title,
                                                     loading: "lazy",
                                                     draggable: false,
-                                                    className: "jsx-acde25127c178a6f" + " " + "h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] lg:group-hover:scale-[1.06]"
+                                                    className: "jsx-9157403361f7b7f8" + " " + "h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] lg:group-hover:scale-[1.06]"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/Portfolio.tsx",
-                                                    lineNumber: 510,
+                                                    lineNumber: 496,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/sections/Portfolio.tsx",
-                                                lineNumber: 509,
+                                                lineNumber: 495,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-acde25127c178a6f" + " " + "space-y-4 p-6 lg:p-7",
+                                                className: "jsx-9157403361f7b7f8" + " " + "space-y-4 p-6 lg:p-7",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                        className: "jsx-acde25127c178a6f" + " " + "text-graphite font-medium lg:text-lg",
+                                                        className: "jsx-9157403361f7b7f8" + " " + "text-graphite font-medium lg:text-lg",
                                                         children: item.title
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/sections/Portfolio.tsx",
-                                                        lineNumber: 519,
+                                                        lineNumber: 505,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                        className: "jsx-acde25127c178a6f" + " " + "text-sm text-ash lg:text-base",
+                                                        className: "jsx-9157403361f7b7f8" + " " + "text-sm text-ash lg:text-base",
                                                         children: item.material
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/sections/Portfolio.tsx",
-                                                        lineNumber: 522,
+                                                        lineNumber: 508,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/sections/Portfolio.tsx",
-                                                lineNumber: 518,
+                                                lineNumber: 504,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/sections/Portfolio.tsx",
-                                        lineNumber: 503,
+                                        lineNumber: 489,
                                         columnNumber: 17
                                     }, this)
                                 }, `${item.title}-${item.material}`, false, {
                                     fileName: "[project]/components/sections/Portfolio.tsx",
-                                    lineNumber: 495,
+                                    lineNumber: 480,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Portfolio.tsx",
-                            lineNumber: 478,
+                            lineNumber: 464,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/Portfolio.tsx",
-                    lineNumber: 399,
+                    lineNumber: 385,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/sections/Portfolio.tsx",
-                lineNumber: 394,
+                lineNumber: 381,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-acde25127c178a6f" + " " + "section-header portfolio-cta mt-8",
+                className: "jsx-9157403361f7b7f8" + " " + "section-header portfolio-cta mt-8",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                     href: "#lead",
-                    className: "jsx-acde25127c178a6f" + " " + "focus-ring inline-flex rounded-none border border-graphite px-6 py-3 text-sm font-semibold text-graphite transition hover:bg-graphite hover:text-white lg:px-8 lg:py-4 lg:text-[length:var(--font-nav)]",
+                    className: "jsx-9157403361f7b7f8" + " " + "focus-ring inline-flex rounded-none border border-graphite px-6 py-3 text-sm font-semibold text-graphite transition hover:bg-graphite hover:text-white lg:px-8 lg:py-4 lg:text-[length:var(--font-nav)]",
                     children: "Хочу похожий проект"
                 }, void 0, false, {
                     fileName: "[project]/components/sections/Portfolio.tsx",
-                    lineNumber: 534,
+                    lineNumber: 520,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/sections/Portfolio.tsx",
-                lineNumber: 533,
+                lineNumber: 519,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$yet$2d$another$2d$react$2d$lightbox$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"], {
@@ -1453,17 +1464,17 @@ function Portfolio({ categories }) {
                 }
             }, void 0, false, {
                 fileName: "[project]/components/sections/Portfolio.tsx",
-                lineNumber: 542,
+                lineNumber: 528,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                id: "acde25127c178a6f",
-                children: "@media (width>=1024px){.portfolio-slider{scrollbar-gutter:stable!important;scrollbar-width:auto!important;scrollbar-color:#0000006b #00000014!important}.portfolio-slider::-webkit-scrollbar{height:12px!important;display:block!important}.portfolio-slider::-webkit-scrollbar-track{background:#0000000f!important;border-radius:9999px!important}.portfolio-slider::-webkit-scrollbar-thumb{background:#00000052!important;border:3px solid #0000000f!important;border-radius:9999px!important}.portfolio-slider::-webkit-scrollbar-thumb:hover{background:#0000007a!important}}"
+                id: "9157403361f7b7f8",
+                children: "@media (width<=1023px){.portfolio-slider{scroll-snap-type:x proximity!important;scroll-padding-left:1rem!important;scroll-padding-right:1rem!important}.portfolio-slider>.portfolio-card,.portfolio-slider>article.portfolio-card{scroll-snap-align:start!important}}@media (width>=1024px){.portfolio-slider{scroll-snap-type:x mandatory;scrollbar-gutter:stable!important;scrollbar-width:auto!important;scrollbar-color:#0000006b #00000014!important}.portfolio-slider::-webkit-scrollbar{height:12px!important;display:block!important}.portfolio-slider::-webkit-scrollbar-track{background:#0000000f!important;border-radius:9999px!important}.portfolio-slider::-webkit-scrollbar-thumb{background:#00000052!important;border:3px solid #0000000f!important;border-radius:9999px!important}.portfolio-slider::-webkit-scrollbar-thumb:hover{background:#0000007a!important}}"
             }, void 0, false, void 0, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/sections/Portfolio.tsx",
-        lineNumber: 353,
+        lineNumber: 340,
         columnNumber: 5
     }, this);
 }

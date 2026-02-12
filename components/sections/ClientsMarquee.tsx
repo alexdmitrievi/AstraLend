@@ -24,13 +24,16 @@ type ClientsMarqueeProps = {
 };
 
 const MOBILE_MEDIA_QUERY = "(max-width: 767px)";
-const SPEED_PX_PER_SEC = 50;
 
-// Desktop viewport: show up to 5 cards
+// Different speeds (desktop slightly slower feels more premium)
+const SPEED_PX_PER_SEC_MOBILE = 50;
+const SPEED_PX_PER_SEC_DESKTOP = 34;
+
+// Desktop viewport: show up to 5 cells
 const DESKTOP_VISIBLE_CARDS = 5;
-// Larger cells on desktop for premium brand presence
+
+// Bigger cells for stronger brand presence
 const DESKTOP_CARD_WIDTH_PX = 360;
-// lg:gap-10 ~= 40px
 const DESKTOP_GAP_PX = 40;
 
 const getInitials = (name: string) =>
@@ -101,7 +104,6 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
       return () => mediaQuery.removeEventListener("change", handleChange);
     }
 
-    // Safari fallback
     mediaQuery.addListener(handleChange);
     return () => mediaQuery.removeListener(handleChange);
   }, []);
@@ -121,9 +123,7 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
     }
 
     const handleResize = () => {
-      if (resizeTimeoutRef.current) {
-        window.clearTimeout(resizeTimeoutRef.current);
-      }
+      if (resizeTimeoutRef.current) window.clearTimeout(resizeTimeoutRef.current);
       resizeTimeoutRef.current = window.setTimeout(updateSetWidth, 120);
     };
 
@@ -134,25 +134,23 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
       resizeObserver?.disconnect();
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
-      if (resizeTimeoutRef.current) {
-        window.clearTimeout(resizeTimeoutRef.current);
-      }
+      if (resizeTimeoutRef.current) window.clearTimeout(resizeTimeoutRef.current);
     };
   }, [isMobile, updateSetWidth]);
 
-  const durationSeconds = setWidthPx > 0 ? setWidthPx / SPEED_PX_PER_SEC : 0;
+  const speedPxPerSec = isMobile ? SPEED_PX_PER_SEC_MOBILE : SPEED_PX_PER_SEC_DESKTOP;
+  const durationSeconds = setWidthPx > 0 ? setWidthPx / speedPxPerSec : 0;
 
-  const shouldAnimateMobile =
-    isMobile && !prefersReducedMotion && setWidthPx > 0;
-
-  const shouldAnimateDesktop =
-    !isMobile && !prefersReducedMotion && setWidthPx > 0;
+  const shouldAnimateMobile = isMobile && !prefersReducedMotion && setWidthPx > 0;
+  const shouldAnimateDesktop = !isMobile && !prefersReducedMotion && setWidthPx > 0;
 
   const trackStyle = useMemo(() => {
     if (!setWidthPx) return undefined;
     return {
       "--marquee-set-width": String(setWidthPx),
       "--marquee-mobile-duration": `${durationSeconds}s`,
+      "--marquee-desktop-duration": `${durationSeconds}s`,
+      "--marquee-duration": `${durationSeconds}s`,
     } as CSSProperties;
   }, [setWidthPx, durationSeconds]);
 
@@ -168,6 +166,48 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
     } as CSSProperties;
   }, []);
 
+  // Shared “logo” sizing: bigger, consistent height, no borders
+  const Logo = ({ client, size }: { client: Client; size: "mobile" | "desktop" }) => {
+    const isDesktop = size === "desktop";
+
+    // Fixed height gives consistent rhythm, width stays natural for each logo.
+    // (Most premium marquees standardize by height, not by box.)
+    const imgClass = isDesktop
+      ? "h-20 sm:h-24 lg:h-[96px] w-auto max-w-[260px] object-contain"
+      : "h-16 w-auto max-w-[180px] object-contain";
+
+    const fallbackBoxClass = isDesktop
+      ? "h-14 sm:h-16 lg:h-[68px] w-[190px]"
+      : "h-12 w-[140px]";
+
+    if (client.logo) {
+      return (
+        <img
+          src={client.logo}
+          alt={`${client.name} логотип`}
+          className={imgClass}
+          loading="lazy"
+          draggable={false}
+        />
+      );
+    }
+
+    // Fallback: clean monogram (no border)
+    return (
+      <span
+        className={[
+          "flex items-center justify-center",
+          fallbackBoxClass,
+          "text-[11px] uppercase tracking-[0.18em] text-charcoal/85",
+          client.logoTextClassName ?? "",
+        ].join(" ")}
+        aria-hidden="true"
+      >
+        {(client.logoText ?? getInitials(client.name)) || "LG"}
+      </span>
+    );
+  };
+
   return (
     <section className="section-desktop bg-cream-light py-16 sm:py-20">
       <motion.div {...fadeUpProps(0)} className="section-header">
@@ -181,13 +221,14 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
         {...fadeUpProps(0.1)}
         className="mt-8 overflow-hidden lg:mt-10 lg:w-full"
       >
-        {/* MOBILE */}
+        {/* MOBILE / TABLET */}
         <div className="md:hidden">
           <ul
             ref={mobileTrackRef}
-            className={`flex w-max items-center justify-center gap-6 sm:gap-8 flex-nowrap whitespace-nowrap box-border ${
-              shouldAnimateMobile ? "marquee-mobile" : ""
-            }`}
+            className={[
+              "flex w-max items-center gap-8 flex-nowrap whitespace-nowrap box-border",
+              shouldAnimateMobile ? "marquee-mobile" : "",
+            ].join(" ")}
             style={trackStyle}
             aria-label="Список клиентов"
           >
@@ -203,39 +244,18 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
                       : undefined
                   }
                   aria-hidden={setIndex === 1}
-                  className={[
-                    "relative flex min-w-max flex-shrink-0 items-center gap-4",
-                    "rounded-none border border-steel text-charcoal box-border",
-                    "px-7 py-4 text-[16px] leading-none",
-                  ].join(" ")}
                   title={client.name}
+                  className={[
+                    "group relative flex min-w-max flex-shrink-0 flex-col items-center justify-center",
+                    "py-2", // no border; keep breathing room
+                  ].join(" ")}
                 >
-                  {client.logo ? (
-                    <img
-                      src={client.logo}
-                      alt=""
-                      aria-hidden="true"
-                      className="h-14 w-auto max-w-[170px] shrink-0 object-contain"
-                      loading="lazy"
-                      decoding="async"
-                      // optical baseline nudge (subtle, improves perceived alignment)
-                      style={{ transform: "translateY(1px)" }}
-                    />
-                  ) : (
-                    <span
-                      className={[
-                        "flex h-14 w-14 items-center justify-center shrink-0",
-                        "rounded-none border border-steel",
-                        "text-[10px] uppercase tracking-[0.2em] text-charcoal",
-                        client.logoTextClassName ?? "",
-                      ].join(" ")}
-                      aria-hidden="true"
-                    >
-                      {(client.logoText ?? getInitials(client.name)) || "LG"}
-                    </span>
-                  )}
+                  <Logo client={client} size="mobile" />
 
-                  <span className="whitespace-nowrap">{client.name}</span>
+                  {/* Mobile: name under logo (no hover available, keeps clarity for lesser-known brands) */}
+                  <span className="mt-2 text-[12px] leading-none text-charcoal/70">
+                    {client.name}
+                  </span>
                 </li>
               ))
             )}
@@ -247,9 +267,12 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
           <div style={desktopViewportStyle} className="overflow-hidden">
             <ul
               ref={desktopTrackRef}
-              className={`flex w-max items-center justify-start gap-6 sm:gap-8 lg:gap-10 flex-nowrap whitespace-nowrap ${
-                shouldAnimateDesktop ? "marquee marquee-desktop" : ""
-              } hover:[animation-play-state:paused]`}
+              className={[
+                "flex w-max items-center justify-start",
+                "gap-10 flex-nowrap whitespace-nowrap",
+                shouldAnimateDesktop ? "marquee marquee-desktop" : "",
+                "hover:[animation-play-state:paused]",
+              ].join(" ")}
               style={trackStyle}
               aria-label="Список клиентов"
             >
@@ -266,44 +289,33 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
                     }
                     aria-hidden={setIndex === 1}
                     title={client.name}
-                    style={{ width: DESKTOP_CARD_WIDTH_PX }}
                     className={[
-                      "relative flex flex-shrink-0 items-center gap-6",
-                      "min-w-0 overflow-hidden",
-                      "rounded-none border border-steel text-charcoal",
-                      "px-9 py-6 text-[18px] tracking-[0.01em]",
-                      // premium touch: subdued by default, fully crisp on hover
-                      "transition-opacity duration-200 ease-out hover:opacity-100",
-                      // keep overall look consistent; do not force opacity if you don't want it globally
-                      "opacity-95",
-                      "lg:after:absolute lg:after:right-2 lg:after:top-1/2 lg:after:h-7 lg:after:w-px lg:after:-translate-y-1/2 lg:after:bg-steel/60 lg:after:content-[''] lg:last:after:hidden",
+                      "group relative flex w-[360px] flex-shrink-0 flex-col items-center justify-center",
+                      "py-4",
+                      "text-charcoal",
+                      // subtle hover affordance without a box/border
+                      "transition-transform duration-200 ease-out",
+                      "hover:-translate-y-0.5",
+                      "focus-within:-translate-y-0.5",
                     ].join(" ")}
                   >
-                    {client.logo ? (
-                      <img
-                        src={client.logo}
-                        alt=""
-                        aria-hidden="true"
-                        className="h-16 w-auto max-w-[240px] shrink-0 object-contain"
-                        loading="lazy"
-                        decoding="async"
-                        style={{ transform: "translateY(1px)" }}
-                      />
-                    ) : (
-                      <span
-                        className={[
-                          "flex h-16 w-16 items-center justify-center shrink-0",
-                          "rounded-none border border-steel",
-                          "text-[10px] uppercase tracking-[0.2em] text-charcoal",
-                          client.logoTextClassName ?? "",
-                        ].join(" ")}
-                        aria-hidden="true"
-                      >
-                        {(client.logoText ?? getInitials(client.name)) || "LG"}
-                      </span>
-                    )}
+                    <Logo client={client} size="desktop" />
 
-                    <span className="min-w-0 truncate">{client.name}</span>
+                    {/* Desktop: minimalism by default. Name appears on hover/focus. */}
+                    <span
+                      className={[
+                        "mt-3 text-sm text-charcoal/65",
+                        "opacity-0 transition-opacity duration-200",
+                        "group-hover:opacity-100 group-focus-within:opacity-100",
+                        "select-none",
+                      ].join(" ")}
+                      aria-hidden="true"
+                    >
+                      {client.name}
+                    </span>
+
+                    {/* A11y: always present for screen readers */}
+                    <span className="sr-only">{client.name}</span>
                   </li>
                 ))
               )}
@@ -314,5 +326,6 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
     </section>
   );
 }
+
 
 

@@ -10328,3 +10328,9 @@ the name `default` is exported multiple times
 [29:04:18.261] Server  LOG     ✓ Compiled in 408ms
 [29:11:34.016] Server  LOG     ✓ Compiled in 14.5s
 [29:19:11.819] Server  LOG     ✓ Compiled in 428ms
+[29:30:02.913] Server  LOG     ✓ Compiled in 2.4s
+[39:17:25.294] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[39:25:46.163] Server  LOG     ✓ Compiled in 17.5s
+[39:30:34.306] Server  LOG     ✓ Compiled in 1366ms
+[39:44:35.771] Server  LOG     ✓ Compiled in 2.8s
+[40:01:43.153] Server  LOG     ✓ Compiled in 3.1s

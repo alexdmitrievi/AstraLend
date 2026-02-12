@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  CSSProperties,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import useDesktopMotion from "../ui/useDesktopMotion";
 
@@ -42,29 +35,23 @@ type Slide = {
 };
 
 const NARROW_MEDIA_QUERY = "(max-width: 1023px)"; // < lg
-const MOBILE_CARD_WIDTH_PX = 260; // must match card min width on mobile
-const MOBILE_CARD_HALF_PX = MOBILE_CARD_WIDTH_PX / 2;
 
 export default function Portfolio({ categories }: PortfolioProps) {
   const [activeCategory, setActiveCategory] = useState("all");
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const { isMounted, shouldAnimate } = useDesktopMotion();
 
-  // Narrow (mobile/tablet) center-snap UX
   const [isNarrow, setIsNarrow] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
 
-  // Lightbox
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
-  // Restore position after closing
   const lastViewRef = useRef<{
     activeCategory: string;
     scrollLeft: number;
   } | null>(null);
 
-  // Desktop scroll hints (arrows/edge fades)
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
@@ -89,7 +76,6 @@ export default function Portfolio({ categories }: PortfolioProps) {
     [visibleItems]
   );
 
-  // Motion helpers
   const fadeUp = (delay = 0) =>
     shouldAnimate
       ? {
@@ -102,7 +88,7 @@ export default function Portfolio({ categories }: PortfolioProps) {
 
   const fadeUpProps = (delay = 0) => (isMounted ? fadeUp(delay) : {});
 
-  // Detect narrow viewport (< lg)
+  // Detect narrow viewport
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -140,7 +126,7 @@ export default function Portfolio({ categories }: PortfolioProps) {
     el.scrollBy({ left: direction * step, behavior: "smooth" });
   }, []);
 
-  // Lightbox open/close + history
+  // Lightbox open
   const openLightbox = useCallback(
     (index: number) => {
       lastViewRef.current = {
@@ -158,6 +144,7 @@ export default function Portfolio({ categories }: PortfolioProps) {
     [activeCategory]
   );
 
+  // Lightbox close
   const closeLightbox = useCallback((opts?: { viaPopState?: boolean }) => {
     setIsLightboxOpen(false);
 
@@ -189,12 +176,12 @@ export default function Portfolio({ categories }: PortfolioProps) {
     return () => window.removeEventListener("popstate", onPopState);
   }, [isLightboxOpen, closeLightbox]);
 
-  // Track scroll + hint state + ResizeObserver for arrows/fades
+  // Track scroll + hint state
   useEffect(() => {
     const el = sliderRef.current;
     if (!el) return;
 
-    // Ensure desktop starts at left edge
+    // Desktop starts from the left
     if (!isNarrow && !isLightboxOpen && !lastViewRef.current) {
       el.scrollTo({ left: 0, behavior: "auto" });
     }
@@ -216,7 +203,7 @@ export default function Portfolio({ categories }: PortfolioProps) {
     };
   }, [updateDesktopScrollHints, hasInteracted, isNarrow, isLightboxOpen]);
 
-  // When switching category: desktop should start from the left
+  // When switching category: desktop start from left
   useEffect(() => {
     const el = sliderRef.current;
     if (!el) return;
@@ -226,7 +213,21 @@ export default function Portfolio({ categories }: PortfolioProps) {
     }
   }, [activeCategory, isNarrow, isLightboxOpen]);
 
-  // Desktop drag only (NO wheel hijacking at all)
+  // ✅ MOBILE FIX: force initial position to LEFT on narrow screens
+  useEffect(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+    if (!isNarrow) return;
+    if (isLightboxOpen) return;
+
+    // On mobile the browser can auto-snap to center on first paint.
+    // We force left edge AFTER layout.
+    requestAnimationFrame(() => {
+      el.scrollTo({ left: 0, behavior: "auto" });
+    });
+  }, [isNarrow, activeCategory, isLightboxOpen]);
+
+  // Desktop drag only
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider || typeof window === "undefined") return;
@@ -327,26 +328,12 @@ export default function Portfolio({ categories }: PortfolioProps) {
     };
   }, []);
 
-  // Mobile/tablet center-snap padding (ONLY on narrow screens)
-  const narrowCenterStyle = useMemo(() => {
-    const pad = `calc(50vw - ${MOBILE_CARD_HALF_PX}px)`;
-    return {
-      paddingLeft: pad,
-      paddingRight: pad,
-      scrollPaddingLeft: pad,
-      scrollPaddingRight: pad,
-    } as CSSProperties;
-  }, []);
-
-  // Prevent “sticky” scroll behavior on the horizontal scroller
   const sliderBehaviorStyle = useMemo(() => {
     return {
-      overscrollBehaviorX: "contain",
-      // allow smooth page vertical scrolling, don’t “trap” gestures
-      WebkitOverflowScrolling: "touch",
-      // Reserve space for scrollbar when present (prevents layout jump)
-      scrollbarGutter: "stable",
-    } as CSSProperties;
+      overscrollBehaviorX: "contain" as const,
+      WebkitOverflowScrolling: "touch" as const,
+      scrollbarGutter: "stable" as const,
+    };
   }, []);
 
   return (
@@ -395,9 +382,8 @@ export default function Portfolio({ categories }: PortfolioProps) {
         {...fadeUpProps(0.1)}
         className="mt-10 pb-4 lg:mt-12 lg:pb-0 lg:w-full"
       >
-        {/* group => arrows appear only on hover (premium pattern) */}
         <div className="group relative">
-          {/* Desktop edge fades (signal more content) */}
+          {/* Desktop edge fades */}
           <div
             aria-hidden="true"
             className={[
@@ -415,7 +401,7 @@ export default function Portfolio({ categories }: PortfolioProps) {
             ].join(" ")}
           />
 
-          {/* Desktop arrows: show on hover only (world-class pattern) */}
+          {/* Desktop arrows */}
           <button
             type="button"
             onClick={() => scrollByStep(-1)}
@@ -454,7 +440,7 @@ export default function Portfolio({ categories }: PortfolioProps) {
             <span className="text-graphite text-xl leading-none">›</span>
           </button>
 
-          {/* Narrow “there is more” hint (premium fade; hides after first interaction) */}
+          {/* Narrow hint */}
           {isNarrow && (
             <>
               <div
@@ -478,13 +464,12 @@ export default function Portfolio({ categories }: PortfolioProps) {
           <div
             ref={sliderRef}
             tabIndex={0}
-            style={{
-              ...(isNarrow ? narrowCenterStyle : undefined),
-              ...sliderBehaviorStyle,
-            }}
+            style={sliderBehaviorStyle}
             className={[
               "portfolio-slider portfolio-cards-container flex gap-6 overflow-x-auto",
-              "snap-x snap-mandatory scroll-smooth",
+              "scroll-smooth",
+              // padding for nice edges
+              "px-4 scroll-px-4",
               "sm:px-6 sm:scroll-px-6",
               "lg:flex-nowrap lg:px-8 lg:scroll-px-8",
               "lg:cursor-grab",
@@ -496,8 +481,9 @@ export default function Portfolio({ categories }: PortfolioProps) {
                 key={`${item.title}-${item.material}`}
                 className={[
                   "portfolio-card group min-w-[260px] flex-1 overflow-hidden rounded-xl border border-steel/25 bg-warm/40 shadow-elevated hover-shadow card-desktop",
-                  "snap-center lg:snap-start",
                   "lg:min-w-[320px] lg:flex-none lg:transition lg:duration-300 lg:ease-out lg:hover:-translate-y-1 lg:hover:scale-[1.01]",
+                  // snap class kept (but overridden on mobile via global style below)
+                  "snap-start",
                 ].join(" ")}
               >
                 <button
@@ -545,13 +531,8 @@ export default function Portfolio({ categories }: PortfolioProps) {
         index={lightboxIndex}
         slides={slides}
         plugins={[Fullscreen, Zoom]}
-        carousel={{
-          finite: false,
-        }}
-        controller={{
-          closeOnPullDown: true,
-          closeOnBackdropClick: true,
-        }}
+        carousel={{ finite: false }}
+        controller={{ closeOnPullDown: true, closeOnBackdropClick: true }}
         zoom={{
           maxZoomPixelRatio: 4,
           zoomInMultiplier: 1.8,
@@ -562,10 +543,24 @@ export default function Portfolio({ categories }: PortfolioProps) {
         }}
       />
 
-      {/* Force visible horizontal scrollbar on desktop (overrides global "hide scrollbar" rules) */}
       <style jsx global>{`
+        /* ✅ MOBILE/TABLET: hard override center-snap rules that may exist globally */
+        @media (max-width: 1023px) {
+          .portfolio-slider {
+            scroll-snap-type: x proximity !important;
+            scroll-padding-left: 1rem !important;
+            scroll-padding-right: 1rem !important;
+          }
+          .portfolio-slider > .portfolio-card,
+          .portfolio-slider > article.portfolio-card {
+            scroll-snap-align: start !important;
+          }
+        }
+
+        /* ✅ DESKTOP: keep visible horizontal scrollbar */
         @media (min-width: 1024px) {
           .portfolio-slider {
+            scroll-snap-type: x mandatory;
             scrollbar-gutter: stable !important;
             scrollbar-width: auto !important; /* Firefox */
             scrollbar-color: rgba(0, 0, 0, 0.42) rgba(0, 0, 0, 0.08) !important;
@@ -595,6 +590,9 @@ export default function Portfolio({ categories }: PortfolioProps) {
     </section>
   );
 }
+
+
+
 
 
 

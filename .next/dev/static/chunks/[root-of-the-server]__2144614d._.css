@@ -1072,6 +1072,10 @@
     margin-top: calc(var(--spacing) * 2);
   }
 
+  .mt-3 {
+    margin-top: calc(var(--spacing) * 3);
+  }
+
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
@@ -1152,6 +1156,10 @@
     height: calc(var(--spacing) * 16);
   }
 
+  .h-20 {
+    height: calc(var(--spacing) * 20);
+  }
+
   .h-48 {
     height: calc(var(--spacing) * 48);
   }
@@ -1220,12 +1228,24 @@
     width: calc(var(--spacing) * 16);
   }
 
+  .w-\[140px\] {
+    width: 140px;
+  }
+
+  .w-\[190px\] {
+    width: 190px;
+  }
+
   .w-\[240px\] {
     width: 240px;
   }
 
   .w-\[260px\] {
     width: 260px;
+  }
+
+  .w-\[360px\] {
+    width: 360px;
   }
 
   .w-auto {
@@ -1256,12 +1276,24 @@
     max-width: 170px;
   }
 
+  .max-w-\[180px\] {
+    max-width: 180px;
+  }
+
+  .max-w-\[190px\] {
+    max-width: 190px;
+  }
+
   .max-w-\[200px\] {
     max-width: 200px;
   }
 
   .max-w-\[240px\] {
     max-width: 240px;
+  }
+
+  .max-w-\[260px\] {
+    max-width: 260px;
   }
 
   .max-w-\[280px\] {
@@ -1808,6 +1840,10 @@
     object-position: center 65%;
   }
 
+  .object-\[center_74\%\] {
+    object-position: center 74%;
+  }
+
   .p-6 {
     padding: calc(var(--spacing) * 6);
   }
@@ -2021,6 +2057,11 @@
     letter-spacing: .14em;
   }
 
+  .tracking-\[0\.18em\] {
+    --tw-tracking: .18em;
+    letter-spacing: .18em;
+  }
+
   .tracking-normal {
     --tw-tracking: var(--tracking-normal);
     letter-spacing: var(--tracking-normal);
@@ -2048,6 +2089,26 @@
     color: var(--color-charcoal);
   }
 
+  .text-charcoal\/65 {
+    color: #4a4a4aa6;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-charcoal\/65 {
+      color: color-mix(in oklab, var(--color-charcoal) 65%, transparent);
+    }
+  }
+
+  .text-charcoal\/70 {
+    color: #4a4a4ab3;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-charcoal\/70 {
+      color: color-mix(in oklab, var(--color-charcoal) 70%, transparent);
+    }
+  }
+
   .text-charcoal\/80 {
     color: #4a4a4acc;
   }
@@ -2055,6 +2116,16 @@
   @supports (color: color-mix(in lab, red, red)) {
     .text-charcoal\/80 {
       color: color-mix(in oklab, var(--color-charcoal) 80%, transparent);
+    }
+  }
+
+  .text-charcoal\/85 {
+    color: #4a4a4ad9;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-charcoal\/85 {
+      color: color-mix(in oklab, var(--color-charcoal) 85%, transparent);
     }
   }
 
@@ -2197,6 +2268,15 @@
     transition-timing-function: var(--ease-out);
   }
 
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .group-focus-within\:opacity-100:is(:where(.group):focus-within *) {
+    opacity: 1;
+  }
+
   @media (hover: hover) {
     .group-hover\:scale-\[1\.04\]:is(:where(.group):hover *) {
       scale: 1.04;
@@ -2211,6 +2291,18 @@
 
   .placeholder\:text-ash::placeholder {
     color: var(--color-ash);
+  }
+
+  .focus-within\:-translate-y-0\.5:focus-within {
+    --tw-translate-y: calc(var(--spacing) * -.5);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+
+  @media (hover: hover) {
+    .hover\:-translate-y-0\.5:hover {
+      --tw-translate-y: calc(var(--spacing) * -.5);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
   }
 
   @media (hover: hover) {
@@ -2438,6 +2530,18 @@
   }
 
   @media (min-width: 40rem) {
+    .sm\:h-16 {
+      height: calc(var(--spacing) * 16);
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:h-24 {
+      height: calc(var(--spacing) * 24);
+    }
+  }
+
+  @media (min-width: 40rem) {
     .sm\:h-56 {
       height: calc(var(--spacing) * 56);
     }
@@ -2649,6 +2753,18 @@
   }
 
   @media (min-width: 64rem) {
+    .lg\:h-\[68px\] {
+      height: 68px;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .lg\:h-\[96px\] {
+      height: 96px;
+    }
+  }
+
+  @media (min-width: 64rem) {
     .lg\:h-auto {
       height: auto;
     }
@@ -2813,6 +2929,12 @@
       .lg\:bg-cream\/90 {
         background-color: color-mix(in oklab, var(--color-cream) 90%, transparent);
       }
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .lg\:object-\[center_72\%\] {
+      object-position: center 72%;
     }
   }
 
@@ -3207,6 +3329,12 @@
   @media (min-width: 80rem) {
     .xl\:gap-10 {
       gap: calc(var(--spacing) * 10);
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .xl\:object-\[center_70\%\] {
+      object-position: center 70%;
     }
   }
 
