@@ -9,7 +9,9 @@ export default function useDesktopMotion() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    const mountFrame = window.requestAnimationFrame(() => {
+      setIsMounted(true);
+    });
 
     const checkDesktop = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -18,13 +20,18 @@ export default function useDesktopMotion() {
     checkDesktop();
     window.addEventListener("resize", checkDesktop);
 
-    return () => window.removeEventListener("resize", checkDesktop);
+    return () => {
+      window.cancelAnimationFrame(mountFrame);
+      window.removeEventListener("resize", checkDesktop);
+    };
   }, []);
 
   return {
-    shouldAnimate: isMounted && isDesktop && !prefersReducedMotion,
+    shouldAnimate: isMounted && !prefersReducedMotion,
     isDesktop,
     isMounted,
     prefersReducedMotion,
   };
 }
+
+

@@ -376,7 +376,11 @@ function useDesktopMotion() {
     const [isMounted, setIsMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "useDesktopMotion.useEffect": ()=>{
-            setIsMounted(true);
+            const mountFrame = window.requestAnimationFrame({
+                "useDesktopMotion.useEffect.mountFrame": ()=>{
+                    setIsMounted(true);
+                }
+            }["useDesktopMotion.useEffect.mountFrame"]);
             const checkDesktop = {
                 "useDesktopMotion.useEffect.checkDesktop": ()=>{
                     setIsDesktop(window.innerWidth >= 1024);
@@ -385,12 +389,15 @@ function useDesktopMotion() {
             checkDesktop();
             window.addEventListener("resize", checkDesktop);
             return ({
-                "useDesktopMotion.useEffect": ()=>window.removeEventListener("resize", checkDesktop)
+                "useDesktopMotion.useEffect": ()=>{
+                    window.cancelAnimationFrame(mountFrame);
+                    window.removeEventListener("resize", checkDesktop);
+                }
             })["useDesktopMotion.useEffect"];
         }
     }["useDesktopMotion.useEffect"], []);
     return {
-        shouldAnimate: isMounted && isDesktop && !prefersReducedMotion,
+        shouldAnimate: isMounted && !prefersReducedMotion,
         isDesktop,
         isMounted,
         prefersReducedMotion
@@ -429,12 +436,26 @@ function Hero(props) {
     const sectionRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const { isMounted, shouldAnimate } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$useDesktopMotion$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])();
     const heroImageSource = props.heroImageSrc ?? "/astra_main.png";
+    const shouldUseMotion = isMounted && shouldAnimate;
+    const motionPhaseKey = shouldUseMotion ? "motion-on" : "motion-off";
+    const premiumEase = [
+        0.16,
+        1,
+        0.3,
+        1
+    ];
+    const softEase = [
+        0.22,
+        1,
+        0.36,
+        1
+    ];
     const fadeUp = (delay = 0)=>shouldAnimate ? {
             initial: {
                 opacity: 0,
                 y: 24
             },
-            whileInView: {
+            animate: {
                 opacity: 1,
                 y: 0
             },
@@ -442,15 +463,93 @@ function Hero(props) {
                 duration: 0.8,
                 ease: "easeOut",
                 delay
-            },
-            viewport: {
-                once: true,
-                amount: 0.7
             }
         } : {
             initial: false
         };
     const fadeUpProps = (delay = 0)=>isMounted ? fadeUp(delay) : {};
+    const headingAnimationProps = shouldUseMotion ? {
+        initial: {
+            opacity: 0,
+            y: 30,
+            filter: "blur(8px)",
+            clipPath: "inset(0 0 100% 0)"
+        },
+        animate: {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            clipPath: "inset(0 0 0% 0)"
+        },
+        transition: {
+            duration: 0.95,
+            delay: 0.1,
+            ease: premiumEase
+        }
+    } : {
+        initial: false,
+        animate: {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            clipPath: "inset(0 0 0% 0)"
+        }
+    };
+    const dividerAnimationProps = shouldUseMotion ? {
+        initial: {
+            opacity: 0,
+            scaleX: 0.3,
+            transformOrigin: "left center"
+        },
+        animate: {
+            opacity: 1,
+            scaleX: 1
+        },
+        transition: {
+            duration: 0.75,
+            delay: 0.45,
+            ease: softEase
+        }
+    } : {
+        initial: false,
+        animate: {
+            opacity: 1,
+            scaleX: 1
+        }
+    };
+    const buttonAnimationProps = (delay = 0)=>shouldUseMotion ? {
+            initial: {
+                opacity: 0,
+                y: 14,
+                scale: 0.985
+            },
+            animate: {
+                opacity: 1,
+                y: 0,
+                scale: 1
+            },
+            transition: {
+                delay,
+                duration: 0.75,
+                ease: premiumEase
+            },
+            whileHover: {
+                y: -2,
+                transition: {
+                    duration: 0.22,
+                    ease: softEase
+                }
+            },
+            whileTap: {
+                y: 0,
+                scale: 0.992,
+                transition: {
+                    duration: 0.16
+                }
+            }
+        } : {
+            initial: false
+        };
     const heroText = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -462,65 +561,69 @@ function Hero(props) {
                         textShadow: "0 2px 24px rgba(0,0,0,0.82)"
                     },
                     children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].h1, {
+                            ...headingAnimationProps,
                             className: "font-heading text-[1.5rem] font-semibold leading-[1.18] sm:text-[2.25rem] lg:text-[3.05rem] lg:leading-[1.06] xl:text-[3.3rem]",
                             children: "Мебель, которая становится наследием"
-                        }, void 0, false, {
+                        }, `hero-title-${motionPhaseKey}`, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 41,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].span, {
+                            ...dividerAnimationProps,
                             className: "mt-2 block h-px w-12 bg-white/50 sm:mt-3 lg:mt-5 lg:w-24"
-                        }, void 0, false, {
+                        }, `hero-divider-${motionPhaseKey}`, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 45,
+                            lineNumber: 99,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/Hero.tsx",
-                    lineNumber: 36,
+                    lineNumber: 87,
                     columnNumber: 9
                 }, this)
-            }, void 0, false, {
+            }, `hero-title-wrap-${motionPhaseKey}`, false, {
                 fileName: "[project]/components/sections/Hero.tsx",
-                lineNumber: 32,
+                lineNumber: 82,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex-1 sm:hidden"
             }, void 0, false, {
                 fileName: "[project]/components/sections/Hero.tsx",
-                lineNumber: 50,
+                lineNumber: 107,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                ...fadeUpProps(0.1),
+                ...fadeUpProps(0.08),
                 className: "mt-0 flex w-full flex-col gap-2 sm:mt-6 sm:flex-row sm:w-auto sm:gap-4 lg:mt-7 lg:gap-4",
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].a, {
+                        ...buttonAnimationProps(0.24),
                         href: "#lead",
                         className: "focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none bg-white px-5 py-3 text-[13px] font-semibold leading-none text-graphite transition hover:bg-white/90 box-border   sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm   lg:h-[52px] lg:min-w-[180px] lg:px-8 lg:text-[15px]",
                         children: "Рассчитать проект"
-                    }, void 0, false, {
+                    }, `hero-cta-primary-${motionPhaseKey}`, false, {
                         fileName: "[project]/components/sections/Hero.tsx",
-                        lineNumber: 56,
+                        lineNumber: 114,
                         columnNumber: 9
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].a, {
+                        ...buttonAnimationProps(0.34),
                         href: "#portfolio",
                         className: "focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none border border-white/50 px-5 py-3 text-[13px] font-normal leading-none text-white transition hover:bg-white/10 hover:border-white/70 box-border bg-black/20 backdrop-blur-sm   sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm   lg:h-[52px] lg:min-w-[180px] lg:px-8 lg:text-[15px]",
                         children: "Смотреть работы"
-                    }, void 0, false, {
+                    }, `hero-cta-secondary-${motionPhaseKey}`, false, {
                         fileName: "[project]/components/sections/Hero.tsx",
-                        lineNumber: 65,
+                        lineNumber: 125,
                         columnNumber: 9
                     }, this)
                 ]
-            }, void 0, true, {
+            }, `hero-cta-wrap-${motionPhaseKey}`, true, {
                 fileName: "[project]/components/sections/Hero.tsx",
-                lineNumber: 52,
+                lineNumber: 109,
                 columnNumber: 7
             }, this)
         ]
@@ -544,7 +647,7 @@ function Hero(props) {
                             className: "object-cover object-[center_65%] sm:hidden"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 87,
+                            lineNumber: 147,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -556,13 +659,13 @@ function Hero(props) {
                             className: "hidden sm:block object-cover object-[center_74%] lg:object-[center_72%] xl:object-[center_70%]"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 97,
+                            lineNumber: 156,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/Hero.tsx",
-                    lineNumber: 85,
+                    lineNumber: 146,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -572,20 +675,20 @@ function Hero(props) {
                             className: "sm:hidden absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 via-30% to-transparent to-55%"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 110,
+                            lineNumber: 167,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "hidden sm:block absolute inset-0 bg-gradient-to-br from-black/90 via-black/50 via-30% to-transparent to-50%"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Hero.tsx",
-                            lineNumber: 113,
+                            lineNumber: 169,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/Hero.tsx",
-                    lineNumber: 108,
+                    lineNumber: 166,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -593,18 +696,18 @@ function Hero(props) {
                     children: heroText
                 }, void 0, false, {
                     fileName: "[project]/components/sections/Hero.tsx",
-                    lineNumber: 117,
+                    lineNumber: 172,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/sections/Hero.tsx",
-            lineNumber: 83,
+            lineNumber: 145,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/sections/Hero.tsx",
-        lineNumber: 78,
+        lineNumber: 140,
         columnNumber: 5
     }, this);
 }
@@ -1648,7 +1751,7 @@ function LeadForm() {
     const { isMounted, shouldAnimate } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$useDesktopMotion$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])();
     // ✅ Configure once
     const TELEGRAM_USERNAME = "R2D2_55";
-    const leadEndpoint = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_LEAD_ENDPOINT;
+    const leadEndpoint = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_LEAD_ENDPOINT ?? "https://formsubmit.co/ajax/mebel@a-stra.ru";
     const { register, handleSubmit, reset, formState: { errors } } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
         resolver: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$hookform$2f$resolvers$2f$zod$2f$dist$2f$zod$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["zodResolver"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$validators$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["leadSchema"]),
         defaultValues: {
@@ -1750,17 +1853,22 @@ function LeadForm() {
             reset();
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$track$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["track"])("lead_fallback");
         };
-        if (!leadEndpoint) {
-            openTelegramFallback();
-            return;
-        }
         try {
             const response = await fetch(leadEndpoint, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
                 },
-                body: JSON.stringify(values)
+                body: JSON.stringify({
+                    name: values.name,
+                    contact: values.contact,
+                    furnitureType: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$validators$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["furnitureTypeLabels"][values.furnitureType],
+                    comment: values.comment || "—",
+                    _subject: "Новая заявка с лендинга AstraLend",
+                    _template: "table",
+                    _captcha: "false"
+                })
             });
             if (!response.ok) throw new Error("Request failed");
             setStatus("success");
@@ -1809,7 +1917,7 @@ function LeadForm() {
                             "aria-hidden": "true"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/LeadForm.tsx",
-                            lineNumber: 177,
+                            lineNumber: 185,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1817,18 +1925,18 @@ function LeadForm() {
                             children: "Обсудим ваш проект"
                         }, void 0, false, {
                             fileName: "[project]/components/sections/LeadForm.tsx",
-                            lineNumber: 178,
+                            lineNumber: 186,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/LeadForm.tsx",
-                    lineNumber: 176,
+                    lineNumber: 184,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/sections/LeadForm.tsx",
-                lineNumber: 175,
+                lineNumber: 183,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -1843,7 +1951,7 @@ function LeadForm() {
                                 children: "Ответим с вариантами материалов и стоимостью. Обычно — в течение рабочего дня."
                             }, void 0, false, {
                                 fileName: "[project]/components/sections/LeadForm.tsx",
-                                lineNumber: 187,
+                                lineNumber: 195,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1857,18 +1965,18 @@ function LeadForm() {
                                         children: item
                                     }, item, false, {
                                         fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 193,
+                                        lineNumber: 201,
                                         columnNumber: 15
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/components/sections/LeadForm.tsx",
-                                lineNumber: 191,
+                                lineNumber: 199,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/sections/LeadForm.tsx",
-                        lineNumber: 186,
+                        lineNumber: 194,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1889,30 +1997,30 @@ function LeadForm() {
                                         d: "M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
                                     }, void 0, false, {
                                         fileName: "[project]/components/sections/LeadForm.tsx",
-                                        lineNumber: 217,
+                                        lineNumber: 225,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                    lineNumber: 210,
+                                    lineNumber: 218,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     children: "Написать в Telegram"
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                    lineNumber: 219,
+                                    lineNumber: 227,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/sections/LeadForm.tsx",
-                            lineNumber: 204,
+                            lineNumber: 212,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/sections/LeadForm.tsx",
-                        lineNumber: 203,
+                        lineNumber: 211,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1933,7 +2041,7 @@ function LeadForm() {
                                                     children: "Имя"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 231,
+                                                    lineNumber: 239,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1946,7 +2054,7 @@ function LeadForm() {
                                                     "aria-describedby": errors.name ? "name-error" : undefined
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 234,
+                                                    lineNumber: 242,
                                                     columnNumber: 17
                                                 }, this),
                                                 errors.name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1955,13 +2063,13 @@ function LeadForm() {
                                                     children: errors.name.message
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 244,
+                                                    lineNumber: 252,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 230,
+                                            lineNumber: 238,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1972,7 +2080,7 @@ function LeadForm() {
                                                     children: "Телефон или мессенджер"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 251,
+                                                    lineNumber: 259,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1985,7 +2093,7 @@ function LeadForm() {
                                                     "aria-describedby": errors.contact ? "contact-error" : undefined
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 254,
+                                                    lineNumber: 262,
                                                     columnNumber: 17
                                                 }, this),
                                                 errors.contact && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1994,13 +2102,13 @@ function LeadForm() {
                                                     children: errors.contact.message
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 264,
+                                                    lineNumber: 272,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 250,
+                                            lineNumber: 258,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2011,7 +2119,7 @@ function LeadForm() {
                                                     children: "Тип изделия"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 271,
+                                                    lineNumber: 279,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2025,12 +2133,12 @@ function LeadForm() {
                                                             children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$validators$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["furnitureTypeLabels"][type]
                                                         }, type, false, {
                                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                                            lineNumber: 284,
+                                                            lineNumber: 292,
                                                             columnNumber: 21
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 274,
+                                                    lineNumber: 282,
                                                     columnNumber: 17
                                                 }, this),
                                                 errors.furnitureType && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2039,13 +2147,13 @@ function LeadForm() {
                                                     children: errors.furnitureType.message
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 290,
+                                                    lineNumber: 298,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 270,
+                                            lineNumber: 278,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2056,7 +2164,7 @@ function LeadForm() {
                                                     children: "Комментарий (необязательно)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 300,
+                                                    lineNumber: 308,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2069,7 +2177,7 @@ function LeadForm() {
                                                     "aria-describedby": errors.comment ? "comment-error" : undefined
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 303,
+                                                    lineNumber: 311,
                                                     columnNumber: 17
                                                 }, this),
                                                 errors.comment && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2078,13 +2186,13 @@ function LeadForm() {
                                                     children: errors.comment.message
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 313,
+                                                    lineNumber: 321,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 299,
+                                            lineNumber: 307,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2099,7 +2207,7 @@ function LeadForm() {
                                                     "aria-describedby": errors.consent ? "consent-error" : undefined
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 320,
+                                                    lineNumber: 328,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2108,13 +2216,13 @@ function LeadForm() {
                                                     children: "Я согласен(а) с политикой обработки персональных данных"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 328,
+                                                    lineNumber: 336,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 319,
+                                            lineNumber: 327,
                                             columnNumber: 15
                                         }, this),
                                         errors.consent && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2123,7 +2231,7 @@ function LeadForm() {
                                             children: errors.consent.message
                                         }, void 0, false, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 333,
+                                            lineNumber: 341,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2135,13 +2243,13 @@ function LeadForm() {
                                             ...register("honeypot")
                                         }, void 0, false, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 338,
+                                            lineNumber: 346,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                    lineNumber: 229,
+                                    lineNumber: 237,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2157,7 +2265,7 @@ function LeadForm() {
                                                     children: status === "loading" ? "Отправляем..." : "Обсудить проект"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 350,
+                                                    lineNumber: 358,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2176,31 +2284,31 @@ function LeadForm() {
                                                                 d: "M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.460-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/sections/LeadForm.tsx",
-                                                                lineNumber: 371,
+                                                                lineNumber: 379,
                                                                 columnNumber: 21
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                                            lineNumber: 364,
+                                                            lineNumber: 372,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             children: "Написать в Telegram"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                                            lineNumber: 373,
+                                                            lineNumber: 381,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                                    lineNumber: 358,
+                                                    lineNumber: 366,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 349,
+                                            lineNumber: 357,
                                             columnNumber: 15
                                         }, this),
                                         status === "success" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2208,7 +2316,7 @@ function LeadForm() {
                                             children: usedTelegramFallback ? "Открыли Telegram с вашим сообщением. Если окно не появилось, напишите нам вручную." : "Спасибо. Мы свяжемся с вами в ближайшее время."
                                         }, void 0, false, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 378,
+                                            lineNumber: 386,
                                             columnNumber: 17
                                         }, this),
                                         status === "error" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2216,36 +2324,36 @@ function LeadForm() {
                                             children: "Не удалось отправить. Попробуйте ещё раз или напишите в мессенджер."
                                         }, void 0, false, {
                                             fileName: "[project]/components/sections/LeadForm.tsx",
-                                            lineNumber: 386,
+                                            lineNumber: 394,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/sections/LeadForm.tsx",
-                                    lineNumber: 348,
+                                    lineNumber: 356,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/sections/LeadForm.tsx",
-                            lineNumber: 224,
+                            lineNumber: 232,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/sections/LeadForm.tsx",
-                        lineNumber: 223,
+                        lineNumber: 231,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/sections/LeadForm.tsx",
-                lineNumber: 182,
+                lineNumber: 190,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/sections/LeadForm.tsx",
-        lineNumber: 174,
+        lineNumber: 182,
         columnNumber: 5
     }, this);
 }

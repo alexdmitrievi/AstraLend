@@ -26,15 +26,10 @@ Telegram (optional):
 - `TELEGRAM_BOT_TOKEN`
 - `TELEGRAM_CHAT_ID`
 
-SMTP email (optional):
-- `SMTP_HOST`
-- `SMTP_PORT`
-- `SMTP_USER`
-- `SMTP_PASS`
-- `SMTP_FROM`
-- `SMTP_TO`
+Public lead endpoint (optional):
+- `NEXT_PUBLIC_LEAD_ENDPOINT` (defaults to `https://formsubmit.co/ajax/mebel@a-stra.ru`)
 
-If neither Telegram nor SMTP are configured, the API will accept leads but won't send them anywhere.
+This project is static-first and sends form submissions from the browser. By default, leads are posted to FormSubmit and delivered to `mebel@a-stra.ru`.
 
 ## Deployment
 1. Build: `npm run build`

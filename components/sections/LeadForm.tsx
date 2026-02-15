@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +23,9 @@ export default function LeadForm() {
   // ✅ Configure once
   const TELEGRAM_USERNAME = "R2D2_55";
 
-  const leadEndpoint = process.env.NEXT_PUBLIC_LEAD_ENDPOINT;
+  const leadEndpoint =
+    process.env.NEXT_PUBLIC_LEAD_ENDPOINT ??
+    "https://formsubmit.co/ajax/mebel@a-stra.ru";
 
   const {
     register,
@@ -135,16 +137,22 @@ export default function LeadForm() {
       track("lead_fallback");
     };
 
-    if (!leadEndpoint) {
-      openTelegramFallback();
-      return;
-    }
-
     try {
       const response = await fetch(leadEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: values.name,
+          contact: values.contact,
+          furnitureType: furnitureTypeLabels[values.furnitureType],
+          comment: values.comment || "—",
+          _subject: "Новая заявка с лендинга AstraLend",
+          _template: "table",
+          _captcha: "false",
+        }),
       });
 
       if (!response.ok) throw new Error("Request failed");
@@ -394,4 +402,5 @@ export default function LeadForm() {
     </section>
   );
 }
+
 
