@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import useDesktopMotion from "../ui/useDesktopMotion";
 
 import Lightbox from "yet-another-react-lightbox";
@@ -10,6 +10,7 @@ import "yet-another-react-lightbox/styles.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
+/* ─── Types (unchanged) ─── */
 type CategoryItem = {
   title: string;
   material: string;
@@ -34,35 +35,77 @@ type Slide = {
   description?: string;
 };
 
-const NARROW_MEDIA_QUERY = "(max-width: 1023px)"; // < lg
+/* ──────────────────────────────────────────────────────────────────────
+   Art-directed display order for "Все" tab.
+   CSS columns fills top→bottom, then next column, so:
+   Items 1-7 → LEFT column, Items 8-13 → RIGHT column.
 
+   LEFT:                              RIGHT:
+   1  Кресло Heritage колесная        8  Heritage Classic RED
+   2  Резное кресло Heritage          9  Кровать розовая
+   3  Модульный зелёный              10  Кровать серая
+   4  Chesterfield                   11  Банкетка
+   5  Лаунж синий                    12  Пуф
+   6  Минималистичный диван          13  Диван переговорной
+   7  Угловой диван (cream)
+   ────────────────────────────────────────────────────────────────────── */
+const ALL_DISPLAY_ORDER: string[] = [
+  /* LEFT 1  */ "https://i.postimg.cc/cJSQh23G/1c51eec6e84c002d0d9310cb10b26ec0-1770243052.png",
+  /* LEFT 2  */ "https://i.postimg.cc/ZnbB2vFd/17091dd7206c2c4550150e55426f61ad-1770240229.png",
+  /* LEFT 3  */ "https://i.postimg.cc/28YBLJs8/06864f01252556d06a45281bffd903ed-1770245125.png",
+  /* LEFT 4  */ "https://i.postimg.cc/7L9TV6D1/a3ce72d274c2a75847a8fe18b32b1091-1770241389.png",
+  /* LEFT 5  */ "https://i.postimg.cc/1XKmqyQy/196f01ad-e165-4ff4-83c9-eedd43b4d7d1.png",
+  /* LEFT 6  */ "https://i.postimg.cc/tRF7tkbW/771f0af22663800624a9fc8c4300639e-1770247764.png",
+  /* LEFT 7  */ "https://i.postimg.cc/jSDTsHLw/38246aa2-9ced-4ea6-9a5a-32de4b893e25.png",
+  /* RIGHT 1 */ "https://i.postimg.cc/KzvGxWVV/photo-2026-02-09-00-33-28.jpg",
+  /* RIGHT 2 */ "https://i.postimg.cc/k41M1Y0N/720490c15029dad280131423b2d53b27-1770732955.png",
+  /* RIGHT 3 */ "https://i.postimg.cc/jjnFnLfH/15cf1e42e21d4141d4ec6a52abbedb2f-1770652377.png",
+  /* RIGHT 4 */ "https://i.postimg.cc/W1rKYd9w/0f154305120eb542bd0b0ce9e9d04798-1770247952.png",
+  /* RIGHT 5 */ "https://i.postimg.cc/GpdMMqT4/eddeff193c92e25e89c1018110825040-1770247153.png",
+  /* RIGHT 6 */ "https://i.postimg.cc/k55tTbsm/d29350da0f0e5772c0e15acbc1dae661-1770245979.png",
+];
+
+/* ─── Component ─── */
 export default function Portfolio({ categories }: PortfolioProps) {
   const [activeCategory, setActiveCategory] = useState("all");
-  const sliderRef = useRef<HTMLDivElement | null>(null);
   const { isMounted, shouldAnimate } = useDesktopMotion();
-
-  const [isNarrow, setIsNarrow] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
-  const lastViewRef = useRef<{
-    activeCategory: string;
-    scrollLeft: number;
-  } | null>(null);
-
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
+  /* ─── Derived data ─── */
   const activeCategoryData = useMemo(
-    () => categories.find((category) => category.id === activeCategory),
+    () => categories.find((c) => c.id === activeCategory),
     [activeCategory, categories]
   );
 
   const visibleItems = useMemo(() => {
-    if (activeCategory === "all") return categories.flatMap((c) => c.items);
-    return activeCategoryData?.items ?? [];
+    const raw =
+      activeCategory === "all"
+        ? categories.flatMap((c) => c.items)
+        : activeCategoryData?.items ?? [];
+
+    // Deduplicate by image URL
+    const seen = new Set<string>();
+    const deduped = raw.filter((item) => {
+      if (seen.has(item.image)) return false;
+      seen.add(item.image);
+      return true;
+    });
+
+    // Apply curated display order for "Все" tab
+    if (activeCategory === "all") {
+      const orderMap = new Map(
+        ALL_DISPLAY_ORDER.map((url, i) => [url, i])
+      );
+      return [...deduped].sort((a, b) => {
+        const ia = orderMap.get(a.image) ?? 999;
+        const ib = orderMap.get(b.image) ?? 999;
+        return ia - ib;
+      });
+    }
+
+    return deduped;
   }, [activeCategory, activeCategoryData, categories]);
 
   const slides: Slide[] = useMemo(
@@ -76,78 +119,44 @@ export default function Portfolio({ categories }: PortfolioProps) {
     [visibleItems]
   );
 
+  /* ─── Animation helpers ─── */
   const fadeUp = (delay = 0) =>
     shouldAnimate
       ? {
           initial: { opacity: 0, y: 20 },
           whileInView: { opacity: 1, y: 0 },
-          transition: { duration: 0.6, ease: "easeOut", delay },
+          transition: { duration: 0.6, ease: "easeOut" as const, delay },
           viewport: { once: true, amount: 0.3 },
         }
       : { initial: false };
 
   const fadeUpProps = (delay = 0) => (isMounted ? fadeUp(delay) : {});
 
-  // Detect narrow viewport
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+  const tileVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.05,
+        duration: 0.5,
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+      },
+    }),
+    exit: { opacity: 0, y: 12, transition: { duration: 0.25 } },
+  };
 
-    const mq = window.matchMedia(NARROW_MEDIA_QUERY);
-    const onChange = () => setIsNarrow(mq.matches);
-
-    onChange();
-
-    if (mq.addEventListener) {
-      mq.addEventListener("change", onChange);
-      return () => mq.removeEventListener("change", onChange);
+  /* ─── Lightbox open / close + popstate ─── */
+  const openLightbox = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setIsLightboxOpen(true);
+    if (typeof window !== "undefined") {
+      window.history.pushState({ portfolioLightbox: true }, "");
     }
-    mq.addListener(onChange);
-    return () => mq.removeListener(onChange);
   }, []);
 
-  // Desktop scroll hints
-  const updateDesktopScrollHints = useCallback(() => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    const max = Math.max(0, el.scrollWidth - el.clientWidth);
-    const left = el.scrollLeft;
-    const eps = 8;
-
-    setCanScrollLeft(left > eps);
-    setCanScrollRight(left < max - eps);
-  }, []);
-
-  const scrollByStep = useCallback((direction: -1 | 1) => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    const step = Math.round(el.clientWidth * 0.85);
-    el.scrollBy({ left: direction * step, behavior: "smooth" });
-  }, []);
-
-  // Lightbox open
-  const openLightbox = useCallback(
-    (index: number) => {
-      lastViewRef.current = {
-        activeCategory,
-        scrollLeft: sliderRef.current?.scrollLeft ?? 0,
-      };
-
-      setLightboxIndex(index);
-      setIsLightboxOpen(true);
-
-      if (typeof window !== "undefined") {
-        window.history.pushState({ portfolioLightbox: true }, "");
-      }
-    },
-    [activeCategory]
-  );
-
-  // Lightbox close
   const closeLightbox = useCallback((opts?: { viaPopState?: boolean }) => {
     setIsLightboxOpen(false);
-
     if (typeof window !== "undefined" && !opts?.viaPopState) {
       try {
         if (window.history.state?.portfolioLightbox) window.history.back();
@@ -155,189 +164,23 @@ export default function Portfolio({ categories }: PortfolioProps) {
         // ignore
       }
     }
-
-    const snap = lastViewRef.current;
-    if (snap) {
-      setActiveCategory(snap.activeCategory);
-      requestAnimationFrame(() => {
-        sliderRef.current?.scrollTo({ left: snap.scrollLeft, behavior: "auto" });
-      });
-    }
   }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-
     const onPopState = () => {
       if (isLightboxOpen) closeLightbox({ viaPopState: true });
     };
-
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
   }, [isLightboxOpen, closeLightbox]);
 
-  // Track scroll + hint state
-  useEffect(() => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    // Desktop starts from the left
-    if (!isNarrow && !isLightboxOpen && !lastViewRef.current) {
-      el.scrollTo({ left: 0, behavior: "auto" });
-    }
-
-    updateDesktopScrollHints();
-
-    const onScroll = () => {
-      updateDesktopScrollHints();
-      if (!hasInteracted) setHasInteracted(true);
-    };
-
-    el.addEventListener("scroll", onScroll, { passive: true });
-    const ro = new ResizeObserver(() => updateDesktopScrollHints());
-    ro.observe(el);
-
-    return () => {
-      el.removeEventListener("scroll", onScroll);
-      ro.disconnect();
-    };
-  }, [updateDesktopScrollHints, hasInteracted, isNarrow, isLightboxOpen]);
-
-  // When switching category: desktop start from left
-  useEffect(() => {
-    const el = sliderRef.current;
-    if (!el) return;
-    if (!isNarrow && !isLightboxOpen) {
-      el.scrollTo({ left: 0, behavior: "auto" });
-      lastViewRef.current = null;
-    }
-  }, [activeCategory, isNarrow, isLightboxOpen]);
-
-  // ✅ MOBILE FIX: force initial position to LEFT on narrow screens
-  useEffect(() => {
-    const el = sliderRef.current;
-    if (!el) return;
-    if (!isNarrow) return;
-    if (isLightboxOpen) return;
-
-    // On mobile the browser can auto-snap to center on first paint.
-    // We force left edge AFTER layout.
-    requestAnimationFrame(() => {
-      el.scrollTo({ left: 0, behavior: "auto" });
-    });
-  }, [isNarrow, activeCategory, isLightboxOpen]);
-
-  // Desktop drag only
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider || typeof window === "undefined") return;
-
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
-    const dragThreshold = 6;
-    const keyScrollStep = 280;
-
-    let isPointerDown = false;
-    let isDragging = false;
-    let startX = 0;
-    let startScrollLeft = 0;
-    let cancelClick = false;
-
-    const getMaxScrollLeft = () =>
-      Math.max(0, slider.scrollWidth - slider.clientWidth);
-
-    const clampScrollLeft = (nextValue: number) =>
-      Math.max(0, Math.min(getMaxScrollLeft(), nextValue));
-
-    const canScrollInDirection = (delta: number) => {
-      if (delta > 0) return slider.scrollLeft < getMaxScrollLeft() - 1;
-      if (delta < 0) return slider.scrollLeft > 1;
-      return false;
-    };
-
-    const handleMouseDown = (event: MouseEvent) => {
-      if (!mediaQuery.matches || event.button !== 0) return;
-      isPointerDown = true;
-      isDragging = false;
-      cancelClick = false;
-      startX = event.pageX;
-      startScrollLeft = slider.scrollLeft;
-    };
-
-    const handleMouseMove = (event: MouseEvent) => {
-      if (!mediaQuery.matches || !isPointerDown) return;
-      const delta = event.pageX - startX;
-
-      if (!isDragging && Math.abs(delta) > dragThreshold) {
-        isDragging = true;
-        slider.classList.add("is-dragging");
-      }
-      if (!isDragging) return;
-
-      event.preventDefault();
-      slider.scrollLeft = clampScrollLeft(startScrollLeft - delta);
-    };
-
-    const endDrag = () => {
-      if (!mediaQuery.matches) return;
-      if (isDragging) cancelClick = true;
-
-      isPointerDown = false;
-      isDragging = false;
-      slider.classList.remove("is-dragging");
-    };
-
-    const handleClickCapture = (event: MouseEvent) => {
-      if (!mediaQuery.matches) return;
-      if (cancelClick) {
-        event.preventDefault();
-        event.stopPropagation();
-        cancelClick = false;
-      }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (!mediaQuery.matches) return;
-      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-
-      const direction = event.key === "ArrowRight" ? 1 : -1;
-      const delta = direction * keyScrollStep;
-      if (!canScrollInDirection(delta)) return;
-
-      event.preventDefault();
-      slider.scrollLeft = clampScrollLeft(slider.scrollLeft + delta);
-    };
-
-    const handleDragStart = (event: DragEvent) => event.preventDefault();
-
-    slider.addEventListener("mousedown", handleMouseDown);
-    slider.addEventListener("mousemove", handleMouseMove);
-    slider.addEventListener("mouseleave", endDrag);
-    slider.addEventListener("mouseup", endDrag);
-    slider.addEventListener("click", handleClickCapture, true);
-    slider.addEventListener("keydown", handleKeyDown);
-    slider.addEventListener("dragstart", handleDragStart);
-
-    return () => {
-      slider.removeEventListener("mousedown", handleMouseDown);
-      slider.removeEventListener("mousemove", handleMouseMove);
-      slider.removeEventListener("mouseleave", endDrag);
-      slider.removeEventListener("mouseup", endDrag);
-      slider.removeEventListener("click", handleClickCapture, true);
-      slider.removeEventListener("keydown", handleKeyDown);
-      slider.removeEventListener("dragstart", handleDragStart);
-    };
-  }, []);
-
-  const sliderBehaviorStyle = useMemo(() => {
-    return {
-      overscrollBehaviorX: "contain" as const,
-      WebkitOverflowScrolling: "touch" as const,
-      scrollbarGutter: "stable" as const,
-    };
-  }, []);
-
   return (
-    <section className="portfolio-section bg-cream-light py-16 sm:py-20 section-desktop">
+    <section
+      data-component="portfolio-masonry"
+      className="portfolio-section bg-cream-light py-16 sm:py-20 section-desktop"
+    >
+      {/* ─── Header ─── */}
       <motion.div {...fadeUpProps(0)}>
         <div className="section-header">
           <div className="section-title-row">
@@ -346,6 +189,7 @@ export default function Portfolio({ categories }: PortfolioProps) {
           </div>
         </div>
 
+        {/* ─── Category filters ─── */}
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mt-6 flex flex-wrap gap-3 lg:mt-8 lg:gap-4">
             <button
@@ -378,145 +222,84 @@ export default function Portfolio({ categories }: PortfolioProps) {
         </div>
       </motion.div>
 
+      {/* ─── Masonry grid (columns) ─── */}
       <motion.div
         {...fadeUpProps(0.1)}
-        className="mt-10 pb-4 lg:mt-12 lg:pb-0 lg:w-full"
+        className="mx-auto mt-10 w-full max-w-6xl px-4 sm:px-6 lg:mt-12 lg:px-8"
       >
-        <div className="group relative">
-          {/* Desktop edge fades */}
-          <div
-            aria-hidden="true"
-            className={[
-              "pointer-events-none absolute inset-y-0 left-0 z-10 w-14 transition-opacity duration-200 hidden lg:block",
-              "bg-gradient-to-r from-cream-light to-transparent",
-              canScrollLeft ? "opacity-100" : "opacity-0",
-            ].join(" ")}
-          />
-          <div
-            aria-hidden="true"
-            className={[
-              "pointer-events-none absolute inset-y-0 right-0 z-10 w-14 transition-opacity duration-200 hidden lg:block",
-              "bg-gradient-to-l from-cream-light to-transparent",
-              canScrollRight ? "opacity-100" : "opacity-0",
-            ].join(" ")}
-          />
-
-          {/* Desktop arrows */}
-          <button
-            type="button"
-            onClick={() => scrollByStep(-1)}
-            aria-label="Прокрутить влево"
-            className={[
-              "hidden lg:flex items-center justify-center",
-              "absolute left-2 top-1/2 -translate-y-1/2 z-20",
-              "h-11 w-11 rounded-full",
-              "border border-white/30 bg-white/35 backdrop-blur-md",
-              "shadow-elevated transition",
-              "opacity-0 group-hover:opacity-100",
-              canScrollLeft
-                ? "pointer-events-auto hover:bg-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-graphite/30"
-                : "pointer-events-none",
-            ].join(" ")}
-          >
-            <span className="text-graphite text-xl leading-none">‹</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => scrollByStep(1)}
-            aria-label="Прокрутить вправо"
-            className={[
-              "hidden lg:flex items-center justify-center",
-              "absolute right-2 top-1/2 -translate-y-1/2 z-20",
-              "h-11 w-11 rounded-full",
-              "border border-white/30 bg-white/35 backdrop-blur-md",
-              "shadow-elevated transition",
-              "opacity-0 group-hover:opacity-100",
-              canScrollRight
-                ? "pointer-events-auto hover:bg-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-graphite/30"
-                : "pointer-events-none",
-            ].join(" ")}
-          >
-            <span className="text-graphite text-xl leading-none">›</span>
-          </button>
-
-          {/* Narrow hint */}
-          {isNarrow && (
-            <>
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-cream-light to-transparent"
-              />
-              {!hasInteracted && (
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-3 top-1/2 z-20 -translate-y-1/2"
-                >
-                  <div className="flex items-center gap-1 text-ash/70 text-xs">
-                    <span className="inline-block animate-pulse">Свайп</span>
-                    <span className="inline-block animate-pulse">→</span>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-
-          <div
-            ref={sliderRef}
-            tabIndex={0}
-            style={sliderBehaviorStyle}
-            className={[
-              "portfolio-slider portfolio-cards-container flex gap-6 overflow-x-auto",
-              "scroll-smooth",
-              // padding for nice edges
-              "px-4 scroll-px-4",
-              "sm:px-6 sm:scroll-px-6",
-              "lg:flex-nowrap lg:px-8 lg:scroll-px-8",
-              "lg:cursor-grab",
-              "lg:pb-4",
-            ].join(" ")}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="columns-2 lg:columns-3 gap-3 lg:gap-4"
           >
             {visibleItems.map((item, index) => (
-              <article
-                key={`${item.title}-${item.material}`}
-                className={[
-                  "portfolio-card group min-w-[260px] flex-1 overflow-hidden rounded-xl border border-steel/25 bg-warm/40 shadow-elevated hover-shadow card-desktop",
-                  "lg:min-w-[320px] lg:flex-none lg:transition lg:duration-300 lg:ease-out lg:hover:-translate-y-1 lg:hover:scale-[1.01]",
-                  // snap class kept (but overridden on mobile via global style below)
-                  "snap-start",
-                ].join(" ")}
+              <motion.article
+                key={`${item.image}-${index}`}
+                custom={index}
+                variants={shouldAnimate ? tileVariants : undefined}
+                initial={shouldAnimate ? "hidden" : false}
+                animate={shouldAnimate ? "visible" : undefined}
+                exit={shouldAnimate ? "exit" : undefined}
+                className="mb-3 lg:mb-4 break-inside-avoid"
               >
                 <button
                   type="button"
                   onClick={() => openLightbox(index)}
-                  className="block w-full text-left"
                   aria-label={`Открыть фото: ${item.title}`}
+                  className="group relative block w-full text-left overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-graphite/40 focus-visible:ring-offset-2"
                 >
-                  <div className="relative h-48 w-full overflow-hidden sm:h-56 lg:h-auto lg:aspect-[4/3]">
+                  {/* ── Image wrapper ── */}
+                  <div className="relative overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] lg:group-hover:scale-[1.06]"
+                      className="block w-full h-auto object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                       loading="lazy"
                       draggable={false}
                     />
+
+                    {/* Desktop ONLY: hover veil + text overlay */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 hidden lg:block"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hidden lg:block pointer-events-none">
+                      <p className="text-white text-sm lg:text-base font-medium leading-tight">
+                        {item.title}
+                      </p>
+                      <p className="text-white/70 text-xs lg:text-sm mt-1">
+                        {item.material}
+                      </p>
+                    </div>
                   </div>
-                  <div className="space-y-4 p-6 lg:p-7">
-                    <h3 className="text-graphite font-medium lg:text-lg">
+
+                  {/* ── Mobile ONLY: text BELOW the image ── */}
+                  <div className="pt-2.5 pb-1 lg:hidden">
+                    <p className="text-graphite text-[13px] font-medium leading-snug line-clamp-2">
                       {item.title}
-                    </h3>
-                    <p className="text-sm text-ash lg:text-base">
+                    </p>
+                    <p className="text-ash text-[11px] leading-snug mt-0.5 line-clamp-1">
                       {item.material}
                     </p>
                   </div>
+
+                  {/* sr-only */}
+                  <span className="sr-only">
+                    {item.title} — {item.material}
+                  </span>
                 </button>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
 
-      <div className="section-header portfolio-cta mt-8">
+      {/* ─── CTA ─── */}
+      <div className="section-header portfolio-cta mt-10 lg:mt-14">
         <a
           href="#lead"
           className="focus-ring inline-flex rounded-none border border-graphite px-6 py-3 text-sm font-semibold text-graphite transition hover:bg-graphite hover:text-white lg:px-8 lg:py-4 lg:text-[length:var(--font-nav)]"
@@ -525,6 +308,7 @@ export default function Portfolio({ categories }: PortfolioProps) {
         </a>
       </div>
 
+      {/* ─── Lightbox ─── */}
       <Lightbox
         open={isLightboxOpen}
         close={() => closeLightbox()}
@@ -542,55 +326,9 @@ export default function Portfolio({ categories }: PortfolioProps) {
           pinchZoomDistanceFactor: 140,
         }}
       />
-
-      <style jsx global>{`
-        /* ✅ MOBILE/TABLET: hard override center-snap rules that may exist globally */
-        @media (max-width: 1023px) {
-          .portfolio-slider {
-            scroll-snap-type: x proximity !important;
-            scroll-padding-left: 1rem !important;
-            scroll-padding-right: 1rem !important;
-          }
-          .portfolio-slider > .portfolio-card,
-          .portfolio-slider > article.portfolio-card {
-            scroll-snap-align: start !important;
-          }
-        }
-
-        /* ✅ DESKTOP: keep visible horizontal scrollbar */
-        @media (min-width: 1024px) {
-          .portfolio-slider {
-            scroll-snap-type: x mandatory;
-            scrollbar-gutter: stable !important;
-            scrollbar-width: auto !important; /* Firefox */
-            scrollbar-color: rgba(0, 0, 0, 0.42) rgba(0, 0, 0, 0.08) !important;
-          }
-
-          .portfolio-slider::-webkit-scrollbar {
-            height: 12px !important;
-            display: block !important;
-          }
-
-          .portfolio-slider::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.06) !important;
-            border-radius: 9999px !important;
-          }
-
-          .portfolio-slider::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, 0.32) !important;
-            border-radius: 9999px !important;
-            border: 3px solid rgba(0, 0, 0, 0.06) !important;
-          }
-
-          .portfolio-slider::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 0, 0, 0.48) !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }
-
 
 
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,8 +19,12 @@ export default function LeadForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [usedTelegramFallback, setUsedTelegramFallback] = useState(false);
   const { isMounted, shouldAnimate } = useDesktopMotion();
-  const telegramLink = "https://t.me/USERNAME";
+
+  // ✅ Configure once
+  const TELEGRAM_USERNAME = "R2D2_55";
+
   const leadEndpoint = process.env.NEXT_PUBLIC_LEAD_ENDPOINT;
+
   const {
     register,
     handleSubmit,
@@ -38,22 +42,93 @@ export default function LeadForm() {
     },
   });
 
-  const onSubmit = async (values: LeadFormValues) => {
-    setStatus("loading");
-    setUsedTelegramFallback(false);
-    track("lead_submit", { furnitureType: values.furnitureType });
-
-    const telegramMessage = [
+  const telegramMessageBuilder = useCallback((values: LeadFormValues) => {
+    return [
       "Новая заявка с лендинга",
       `Имя: ${values.name}`,
       `Контакт: ${values.contact}`,
       `Тип изделия: ${furnitureTypeLabels[values.furnitureType]}`,
       `Комментарий: ${values.comment || "—"}`,
     ].join("\n");
+  }, []);
+
+  const buildTelegramWebUrl = useCallback(
+    (message?: string) => {
+      const base = `https://t.me/${TELEGRAM_USERNAME}`;
+      if (!message) return base;
+      return `${base}?text=${encodeURIComponent(message)}`;
+    },
+    [TELEGRAM_USERNAME]
+  );
+
+  // ✅ “World-class” UX: try app deep-link first on mobile; always fallback to web
+  const openTelegram = useCallback(
+    (message?: string) => {
+      const webUrl = buildTelegramWebUrl(message);
+      const ua =
+        typeof navigator !== "undefined" ? navigator.userAgent : "";
+      const isMobile =
+        /Android|iPhone|iPad|iPod/i.test(ua) ||
+        (typeof navigator !== "undefined" &&
+          (navigator?.maxTouchPoints ?? 0) > 1 &&
+          /Macintosh/i.test(ua));
+
+      // Desktop: go straight to web (no “blocked deep-link” weirdness)
+      if (!isMobile) {
+        window.open(webUrl, "_blank", "noopener,noreferrer");
+        return;
+      }
+
+      // Mobile: attempt to open Telegram app, then fallback to web
+      const encodedText = message ? encodeURIComponent(message) : "";
+      const appUrl = message
+        ? `tg://resolve?domain=${TELEGRAM_USERNAME}&text=${encodedText}`
+        : `tg://resolve?domain=${TELEGRAM_USERNAME}`;
+
+      let fallbackTimer: number | null = null;
+
+      const cleanup = () => {
+        if (fallbackTimer) window.clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+        window.removeEventListener("pagehide", onPageHide);
+        document.removeEventListener("visibilitychange", onVisibilityChange);
+      };
+
+      const onPageHide = () => cleanup();
+
+      const onVisibilityChange = () => {
+        // If app opened, page becomes hidden — cancel web fallback
+        if (document.hidden) cleanup();
+      };
+
+      window.addEventListener("pagehide", onPageHide, { once: true });
+      document.addEventListener("visibilitychange", onVisibilityChange);
+
+      // Start fallback only after trying deep-link
+      fallbackTimer = window.setTimeout(() => {
+        cleanup();
+        window.open(webUrl, "_blank", "noopener,noreferrer");
+      }, 900);
+
+      // Use location for better deep-link success rate on iOS
+      window.location.href = appUrl;
+    },
+    [TELEGRAM_USERNAME, buildTelegramWebUrl]
+  );
+
+  const telegramLink = useMemo(() => buildTelegramWebUrl(), [buildTelegramWebUrl]);
+
+  const onSubmit = async (values: LeadFormValues) => {
+    setStatus("loading");
+    setUsedTelegramFallback(false);
+    track("lead_submit", { furnitureType: values.furnitureType });
+
+    const telegramMessage = telegramMessageBuilder(values);
 
     const openTelegramFallback = () => {
-      const shareUrl = `https://t.me/share/url?text=${encodeURIComponent(telegramMessage)}`;
-      window.open(shareUrl, "_blank", "noopener,noreferrer");
+      // ✅ Direct chat (not share sheet), with text prefilled
+      openTelegram(telegramMessage);
+
       setUsedTelegramFallback(true);
       setStatus("success");
       reset();
@@ -72,9 +147,7 @@ export default function LeadForm() {
         body: JSON.stringify(values),
       });
 
-      if (!response.ok) {
-        throw new Error("Request failed");
-      }
+      if (!response.ok) throw new Error("Request failed");
 
       setStatus("success");
       track("lead_success");
@@ -102,9 +175,7 @@ export default function LeadForm() {
       <motion.div {...fadeUpProps(0)} className="section-header">
         <div className="section-title-row">
           <div className="section-title-divider" aria-hidden="true" />
-          <h2 className="section-title">
-            Обсудим ваш проект
-          </h2>
+          <h2 className="section-title">Обсудим ваш проект</h2>
         </div>
       </motion.div>
 
@@ -118,11 +189,7 @@ export default function LeadForm() {
             дня.
           </p>
           <div className="flex flex-wrap gap-3">
-            {[
-              "Договор",
-              "Гарантия",
-              "Собственное производство",
-            ].map((item) => (
+            {["Договор", "Гарантия", "Собственное производство"].map((item) => (
               <span
                 key={item}
                 className="rounded-full border border-steel/70 bg-warm/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-charcoal"
@@ -220,7 +287,10 @@ export default function LeadForm() {
                   ))}
                 </select>
                 {errors.furnitureType && (
-                  <p id="furniture-type-error" className="mt-2 text-sm text-rose-600">
+                  <p
+                    id="furniture-type-error"
+                    className="mt-2 text-sm text-rose-600"
+                  >
                     {errors.furnitureType.message}
                   </p>
                 )}
@@ -274,6 +344,7 @@ export default function LeadForm() {
                 {...register("honeypot")}
               />
             </div>
+
             <div className="mt-6 space-y-6">
               <div className="space-y-3">
                 <button
@@ -297,7 +368,7 @@ export default function LeadForm() {
                     width="20"
                     height="20"
                   >
-                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.460-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
                   </svg>
                   <span>Написать в Telegram</span>
                 </a>
@@ -323,3 +394,4 @@ export default function LeadForm() {
     </section>
   );
 }
+
