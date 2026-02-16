@@ -17,15 +17,13 @@ type FormStatus = "idle" | "loading" | "success" | "error";
 
 export default function LeadForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
-  const [usedTelegramFallback, setUsedTelegramFallback] = useState(false);
   const { isMounted, shouldAnimate } = useDesktopMotion();
 
-  // ✅ Configure once
   const TELEGRAM_USERNAME = "R2D2_55";
 
   const leadEndpoint =
     process.env.NEXT_PUBLIC_LEAD_ENDPOINT ??
-    "https://formsubmit.co/ajax/mebel@a-stra.ru";
+    "https://formsubmit.co/ajax/4e68de28843824cca972a99dd03c9caf";
 
   const {
     register,
@@ -44,16 +42,6 @@ export default function LeadForm() {
     },
   });
 
-  const telegramMessageBuilder = useCallback((values: LeadFormValues) => {
-    return [
-      "Новая заявка с лендинга",
-      `Имя: ${values.name}`,
-      `Контакт: ${values.contact}`,
-      `Тип изделия: ${furnitureTypeLabels[values.furnitureType]}`,
-      `Комментарий: ${values.comment || "—"}`,
-    ].join("\n");
-  }, []);
-
   const buildTelegramWebUrl = useCallback(
     (message?: string) => {
       const base = `https://t.me/${TELEGRAM_USERNAME}`;
@@ -63,79 +51,11 @@ export default function LeadForm() {
     [TELEGRAM_USERNAME]
   );
 
-  // ✅ “World-class” UX: try app deep-link first on mobile; always fallback to web
-  const openTelegram = useCallback(
-    (message?: string) => {
-      const webUrl = buildTelegramWebUrl(message);
-      const ua =
-        typeof navigator !== "undefined" ? navigator.userAgent : "";
-      const isMobile =
-        /Android|iPhone|iPad|iPod/i.test(ua) ||
-        (typeof navigator !== "undefined" &&
-          (navigator?.maxTouchPoints ?? 0) > 1 &&
-          /Macintosh/i.test(ua));
-
-      // Desktop: go straight to web (no “blocked deep-link” weirdness)
-      if (!isMobile) {
-        window.open(webUrl, "_blank", "noopener,noreferrer");
-        return;
-      }
-
-      // Mobile: attempt to open Telegram app, then fallback to web
-      const encodedText = message ? encodeURIComponent(message) : "";
-      const appUrl = message
-        ? `tg://resolve?domain=${TELEGRAM_USERNAME}&text=${encodedText}`
-        : `tg://resolve?domain=${TELEGRAM_USERNAME}`;
-
-      let fallbackTimer: number | null = null;
-
-      const cleanup = () => {
-        if (fallbackTimer) window.clearTimeout(fallbackTimer);
-        fallbackTimer = null;
-        window.removeEventListener("pagehide", onPageHide);
-        document.removeEventListener("visibilitychange", onVisibilityChange);
-      };
-
-      const onPageHide = () => cleanup();
-
-      const onVisibilityChange = () => {
-        // If app opened, page becomes hidden — cancel web fallback
-        if (document.hidden) cleanup();
-      };
-
-      window.addEventListener("pagehide", onPageHide, { once: true });
-      document.addEventListener("visibilitychange", onVisibilityChange);
-
-      // Start fallback only after trying deep-link
-      fallbackTimer = window.setTimeout(() => {
-        cleanup();
-        window.open(webUrl, "_blank", "noopener,noreferrer");
-      }, 900);
-
-      // Use location for better deep-link success rate on iOS
-      window.location.href = appUrl;
-    },
-    [TELEGRAM_USERNAME, buildTelegramWebUrl]
-  );
-
   const telegramLink = useMemo(() => buildTelegramWebUrl(), [buildTelegramWebUrl]);
 
   const onSubmit = async (values: LeadFormValues) => {
     setStatus("loading");
-    setUsedTelegramFallback(false);
     track("lead_submit", { furnitureType: values.furnitureType });
-
-    const telegramMessage = telegramMessageBuilder(values);
-
-    const openTelegramFallback = () => {
-      // ✅ Direct chat (not share sheet), with text prefilled
-      openTelegram(telegramMessage);
-
-      setUsedTelegramFallback(true);
-      setStatus("success");
-      reset();
-      track("lead_fallback");
-    };
 
     try {
       const response = await fetch(leadEndpoint, {
@@ -163,7 +83,7 @@ export default function LeadForm() {
     } catch (error) {
       console.error(error);
       track("lead_error");
-      openTelegramFallback();
+      setStatus("error");
     }
   };
 
@@ -176,6 +96,7 @@ export default function LeadForm() {
           viewport: { once: true, amount: 0.3 },
         }
       : { initial: false };
+
   const fadeUpProps = (delay = 0) => (isMounted ? fadeUp(delay) : {});
 
   return (
@@ -311,7 +232,7 @@ export default function LeadForm() {
                 <textarea
                   id="comment"
                   rows={4}
-                  placeholder="Кратко опишите задачу или пожелания"
+                  placeholder="Кратко опишите задачу или пожлания"
                   className="focus-ring mt-2 w-full resize-none rounded-none border border-steel bg-warm px-4 py-2.5 text-base text-graphite placeholder:text-ash focus-visible:border-graphite focus-visible:ring-0 lg:rounded-lg lg:py-3"
                   {...register("comment")}
                   aria-invalid={Boolean(errors.comment)}
@@ -384,9 +305,7 @@ export default function LeadForm() {
 
               {status === "success" && (
                 <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
-                  {usedTelegramFallback
-                    ? "Открыли Telegram с вашим сообщением. Если окно не появилось, напишите нам вручную."
-                    : "Спасибо. Мы свяжемся с вами в ближайшее время."}
+                  Спасибо. Мы свяжемся с вами в ближайшее время.
                 </div>
               )}
 
@@ -402,5 +321,6 @@ export default function LeadForm() {
     </section>
   );
 }
+
 
 
