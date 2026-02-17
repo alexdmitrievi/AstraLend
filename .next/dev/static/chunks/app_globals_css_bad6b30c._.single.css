@@ -745,6 +745,11 @@
     flex-shrink: 0;
   }
 
+  .-translate-y-\[0\.08em\] {
+    --tw-translate-y: calc(.08em * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+
   .translate-y-2 {
     --tw-translate-y: calc(var(--spacing) * 2);
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -1235,6 +1240,10 @@
     padding-inline: calc(var(--spacing) * 12);
   }
 
+  .px-\[0\.08em\] {
+    padding-inline: .08em;
+  }
+
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
   }
@@ -1327,6 +1336,10 @@
     font-size: 1.5rem;
   }
 
+  .text-\[1\.15em\] {
+    font-size: 1.15em;
+  }
+
   .text-\[1\.375rem\] {
     font-size: 1.375rem;
   }
@@ -1394,6 +1407,11 @@
   .tracking-\[0\.2em\] {
     --tw-tracking: .2em;
     letter-spacing: .2em;
+  }
+
+  .tracking-\[0\.08em\] {
+    --tw-tracking: .08em;
+    letter-spacing: .08em;
   }
 
   .tracking-\[0\.14em\] {

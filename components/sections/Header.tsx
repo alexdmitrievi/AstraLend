@@ -17,6 +17,14 @@ const navLinks = [
   { href: "#contacts", label: "Контакты" },
 ];
 
+function BrandWordmark() {
+  return (
+    <span className="font-heading text-[1.15em] font-semibold tracking-[0.08em]">
+      А<span className="inline-block -translate-y-[0.08em] px-[0.08em]">·</span>СТРА
+    </span>
+  );
+}
+
 export default function Header() {
   const headerRef = useRef<HTMLElement | null>(null);
   const desktopLogoRef = useRef<HTMLAnchorElement | null>(null);
@@ -51,7 +59,6 @@ export default function Header() {
     []
   );
 
-  // ✅ CSS vars for pixel-perfect alignment (desktop hero under brand)
   const writeHeroVars = useCallback(() => {
     if (typeof window === "undefined") return;
     const logo = desktopLogoRef.current;
@@ -66,7 +73,6 @@ export default function Header() {
   }, []);
 
   useLayoutEffect(() => {
-    // layout-first measure to avoid visible jump on first paint (client-only header)
     writeHeroVars();
   }, [writeHeroVars]);
 
@@ -101,14 +107,10 @@ export default function Header() {
           : ""
       }`}
     >
-      {/* MOBILE & TABLET */}
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:hidden">
         <div className="flex items-center justify-between gap-4 py-3">
-          <a
-            href="#hero"
-            className="focus-ring font-heading text-lg font-semibold tracking-[0.2em] text-graphite"
-          >
-            АСТРА
+          <a href="#hero" className="focus-ring text-lg text-graphite">
+            <BrandWordmark />
           </a>
 
           <nav
@@ -156,15 +158,14 @@ export default function Header() {
         </div>
       </div>
 
-      {/* DESKTOP */}
-      <div className="hidden lg:block w-full px-12 py-4">
+      <div className="hidden w-full px-12 py-4 lg:block">
         <div className="flex items-center justify-between">
           <a
             ref={desktopLogoRef}
             href="#hero"
-            className="focus-ring font-heading text-[1.375rem] font-semibold tracking-[0.2em] text-graphite"
+            className="focus-ring text-[1.375rem] text-graphite"
           >
-            АСТРА
+            <BrandWordmark />
           </a>
 
           <div className="flex items-center gap-10">
@@ -195,7 +196,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <div
         className={`border-t border-steel/60 bg-stone/95 md:hidden ${
           isOpen ? "block" : "hidden"
@@ -228,3 +228,4 @@ export default function Header() {
     </header>
   );
 }
+

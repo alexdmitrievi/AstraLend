@@ -5,14 +5,22 @@ const PHONE_TEL = "+79136263444";
 const EMAIL = "mebel@a-stra.ru";
 const INN = "550516401202";
 
+function BrandWordmark() {
+  return (
+    <span className="font-heading text-[1.15em] font-semibold tracking-[0.08em]">
+      А<span className="inline-block -translate-y-[0.08em] px-[0.08em]">·</span>СТРА
+    </span>
+  );
+}
+
 export default function Footer() {
   return (
     <footer id="contacts" tabIndex={-1} className="scroll-mt-24 bg-graphite">
       <div className="border-t border-steel/40">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 text-sm text-stone sm:px-6 md:grid-cols-[1.2fr_1fr_1fr] lg:px-8 lg:pt-20 lg:pb-10 lg:text-base">
           <div className="space-y-3">
-            <p className="font-heading text-lg font-semibold lg:text-[1.625rem]">
-              АСТРА
+            <p className="text-lg lg:text-[1.625rem]">
+              <BrandWordmark />
             </p>
             <p className="text-ash lg:text-base">
               Мастерская корпусной мебели. Проект, производство, монтаж.
@@ -20,9 +28,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-3">
-            <p className="font-semibold text-stone lg:text-[1.125rem]">
-              Контакты
-            </p>
+            <p className="font-semibold text-stone lg:text-[1.125rem]">Контакты</p>
             <ul className="space-y-2 text-ash lg:text-base">
               <li>
                 <a

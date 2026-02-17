@@ -31,6 +31,28 @@ const navLinks = [
         label: "Контакты"
     }
 ];
+function BrandWordmark() {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+        className: "font-heading text-[1.15em] font-semibold tracking-[0.08em]",
+        children: [
+            "А",
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                className: "inline-block -translate-y-[0.08em] px-[0.08em]",
+                children: "·"
+            }, void 0, false, {
+                fileName: "[project]/components/sections/Header.tsx",
+                lineNumber: 23,
+                columnNumber: 8
+            }, this),
+            "СТРА"
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/sections/Header.tsx",
+        lineNumber: 22,
+        columnNumber: 5
+    }, this);
+}
+_c = BrandWordmark;
 function Header() {
     _s();
     const headerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
@@ -70,7 +92,6 @@ function Header() {
             }
         }
     }["Header.useCallback[handleAnchorClick]"], []);
-    // ✅ CSS vars for pixel-perfect alignment (desktop hero under brand)
     const writeHeroVars = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "Header.useCallback[writeHeroVars]": ()=>{
             if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
@@ -86,7 +107,6 @@ function Header() {
     }["Header.useCallback[writeHeroVars]"], []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
         "Header.useLayoutEffect": ()=>{
-            // layout-first measure to avoid visible jump on first paint (client-only header)
             writeHeroVars();
         }
     }["Header.useLayoutEffect"], [
@@ -133,11 +153,15 @@ function Header() {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                             href: "#hero",
-                            className: "focus-ring font-heading text-lg font-semibold tracking-[0.2em] text-graphite",
-                            children: "АСТРА"
+                            className: "focus-ring text-lg text-graphite",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(BrandWordmark, {}, void 0, false, {
+                                fileName: "[project]/components/sections/Header.tsx",
+                                lineNumber: 113,
+                                columnNumber: 13
+                            }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Header.tsx",
-                            lineNumber: 107,
+                            lineNumber: 112,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -150,12 +174,12 @@ function Header() {
                                     children: link.label
                                 }, link.href, false, {
                                     fileName: "[project]/components/sections/Header.tsx",
-                                    lineNumber: 119,
+                                    lineNumber: 121,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Header.tsx",
-                            lineNumber: 114,
+                            lineNumber: 116,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -168,7 +192,7 @@ function Header() {
                                     children: "Рассчитать проект"
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/Header.tsx",
-                                    lineNumber: 131,
+                                    lineNumber: 133,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -184,7 +208,7 @@ function Header() {
                                             children: isOpen ? "Закрыть меню" : "Открыть меню"
                                         }, void 0, false, {
                                             fileName: "[project]/components/sections/Header.tsx",
-                                            lineNumber: 146,
+                                            lineNumber: 148,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -194,65 +218,69 @@ function Header() {
                                                     className: "block h-0.5 w-5 bg-graphite"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/sections/Header.tsx",
-                                                    lineNumber: 150,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "block h-0.5 w-5 bg-graphite"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/sections/Header.tsx",
-                                                    lineNumber: 151,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "block h-0.5 w-5 bg-graphite"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/sections/Header.tsx",
                                                     lineNumber: 152,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    className: "block h-0.5 w-5 bg-graphite"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/Header.tsx",
+                                                    lineNumber: 153,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    className: "block h-0.5 w-5 bg-graphite"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/sections/Header.tsx",
+                                                    lineNumber: 154,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/sections/Header.tsx",
-                                            lineNumber: 149,
+                                            lineNumber: 151,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/sections/Header.tsx",
-                                    lineNumber: 138,
+                                    lineNumber: 140,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/sections/Header.tsx",
-                            lineNumber: 130,
+                            lineNumber: 132,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/Header.tsx",
-                    lineNumber: 106,
+                    lineNumber: 111,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/sections/Header.tsx",
-                lineNumber: 105,
+                lineNumber: 110,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "hidden lg:block w-full px-12 py-4",
+                className: "hidden w-full px-12 py-4 lg:block",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex items-center justify-between",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                             ref: desktopLogoRef,
                             href: "#hero",
-                            className: "focus-ring font-heading text-[1.375rem] font-semibold tracking-[0.2em] text-graphite",
-                            children: "АСТРА"
+                            className: "focus-ring text-[1.375rem] text-graphite",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(BrandWordmark, {}, void 0, false, {
+                                fileName: "[project]/components/sections/Header.tsx",
+                                lineNumber: 168,
+                                columnNumber: 13
+                            }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/sections/Header.tsx",
-                            lineNumber: 162,
+                            lineNumber: 163,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -268,12 +296,12 @@ function Header() {
                                             children: link.label
                                         }, link.href, false, {
                                             fileName: "[project]/components/sections/Header.tsx",
-                                            lineNumber: 176,
+                                            lineNumber: 177,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/Header.tsx",
-                                    lineNumber: 171,
+                                    lineNumber: 172,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -283,24 +311,24 @@ function Header() {
                                     children: "Рассчитать проект"
                                 }, void 0, false, {
                                     fileName: "[project]/components/sections/Header.tsx",
-                                    lineNumber: 187,
+                                    lineNumber: 188,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/sections/Header.tsx",
-                            lineNumber: 170,
+                            lineNumber: 171,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sections/Header.tsx",
-                    lineNumber: 161,
+                    lineNumber: 162,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/sections/Header.tsx",
-                lineNumber: 160,
+                lineNumber: 161,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -344,14 +372,15 @@ function Header() {
         ]
     }, void 0, true, {
         fileName: "[project]/components/sections/Header.tsx",
-        lineNumber: 96,
+        lineNumber: 102,
         columnNumber: 5
     }, this);
 }
 _s(Header, "6Fzr8x7w7Hibaxx3/AhBgbdowxc=");
-_c = Header;
-var _c;
-__turbopack_context__.k.register(_c, "Header");
+_c1 = Header;
+var _c, _c1;
+__turbopack_context__.k.register(_c, "BrandWordmark");
+__turbopack_context__.k.register(_c1, "Header");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
