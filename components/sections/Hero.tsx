@@ -164,16 +164,7 @@ export default function Hero(props: HeroProps) {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_65%] sm:hidden"
-          />
-
-          <Image
-            src={heroImageSource}
-            alt="Кресло АСТРА"
-            fill
-            priority
-            sizes="100vw"
-            className="hidden sm:block object-cover object-[center_74%] lg:object-[center_72%] xl:object-[center_70%]"
+            className="object-cover object-[center_65%] sm:object-[center_74%] lg:object-[center_72%] xl:object-[center_70%]"
           />
         </div>
 
