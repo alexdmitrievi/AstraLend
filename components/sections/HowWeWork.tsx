@@ -80,12 +80,12 @@ function StepCard({
       className="relative flex flex-col gap-5 lg:items-center lg:text-center"
     >
       {/* Icon circle */}
-      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-graphite text-gold shadow-md lg:mx-auto">
+      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-graphite text-stone shadow-md lg:mx-auto">
         {step.icon}
       </div>
 
       {/* Number badge */}
-      <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-gold font-body text-[11px] font-bold text-graphite lg:right-auto lg:-top-2 lg:left-1/2 lg:-translate-x-1/2">
+      <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-walnut font-body text-[11px] font-bold text-stone lg:right-auto lg:-top-2 lg:left-1/2 lg:-translate-x-1/2">
         {step.number}
       </span>
 
@@ -114,7 +114,7 @@ export default function HowWeWork() {
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-14 text-center lg:mb-20">
-          <p className="mb-3 font-body text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+          <p className="mb-3 font-body text-xs font-semibold uppercase tracking-[0.2em] text-ash">
             Процесс
           </p>
           <h2 className="font-heading text-3xl font-semibold text-graphite lg:text-4xl">

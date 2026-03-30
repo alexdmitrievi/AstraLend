@@ -79,7 +79,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="mb-4 font-heading text-xl font-semibold text-graphite">
               2. Оператор персональных данных
             </h2>
-            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-gold">
+            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-walnut">
               <li>
                 <strong className="text-graphite">Наименование:</strong>{" "}
                 Индивидуальный предприниматель, мастерская мягкой мебели «АСТРА»
@@ -114,7 +114,7 @@ export default function PrivacyPolicyPage() {
               3. Категории обрабатываемых данных
             </h2>
             <p>Оператор может обрабатывать следующие персональные данные:</p>
-            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-gold">
+            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-walnut">
               <li>Номер телефона (обязательное поле формы заявки);</li>
               <li>Имя и фамилия (при указании субъектом);</li>
               <li>Содержание переписки в мессенджерах;</li>
@@ -134,7 +134,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="mb-4 font-heading text-xl font-semibold text-graphite">
               4. Цели обработки персональных данных
             </h2>
-            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-gold">
+            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-walnut">
               <li>
                 Обработка заявки и консультирование по вопросам изготовления
                 мебели;
@@ -154,7 +154,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="mb-4 font-heading text-xl font-semibold text-graphite">
               5. Правовые основания обработки
             </h2>
-            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-gold">
+            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-walnut">
               <li>
                 Согласие субъекта персональных данных (ст. 6, ч. 1, п. 1
                 152-ФЗ);
@@ -179,7 +179,7 @@ export default function PrivacyPolicyPage() {
               Персональные данные хранятся не дольше, чем этого требуют цели
               обработки:
             </p>
-            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-gold">
+            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-walnut">
               <li>
                 Данные из форм заявок — до окончания работ и гарантийного
                 периода (не более 3 лет);
@@ -205,7 +205,7 @@ export default function PrivacyPolicyPage() {
               7. Права субъектов персональных данных
             </h2>
             <p>Вы вправе:</p>
-            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-gold">
+            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-walnut">
               <li>Получить информацию об обработке ваших данных;</li>
               <li>Потребовать уточнения, блокировки или уничтожения данных;</li>
               <li>Отозвать согласие на обработку в любой момент;</li>
@@ -234,7 +234,7 @@ export default function PrivacyPolicyPage() {
               Персональные данные не передаются третьим лицам в коммерческих
               целях. Передача возможна только:
             </p>
-            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-gold">
+            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-walnut">
               <li>По требованию уполномоченных государственных органов;</li>
               <li>
                 Сервисам-обработчикам (платёжные системы, сервисы аналитики) —
@@ -256,7 +256,7 @@ export default function PrivacyPolicyPage() {
               несанкционированного доступа, изменения, раскрытия или
               уничтожения, в том числе:
             </p>
-            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-gold">
+            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-walnut">
               <li>Передача данных по защищённому протоколу HTTPS;</li>
               <li>Ограниченный доступ к данным только для уполномоченных лиц;</li>
               <li>Регулярный контроль мер обеспечения безопасности.</li>
@@ -303,7 +303,7 @@ export default function PrivacyPolicyPage() {
               По вопросам, связанным с обработкой персональных данных,
               обращайтесь:
             </p>
-            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-gold">
+            <ul className="mt-3 space-y-1.5 pl-5 list-disc marker:text-walnut">
               <li>
                 E-mail:{" "}
                 <a

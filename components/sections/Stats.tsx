@@ -76,7 +76,7 @@ function StarRating({ count }: { count: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
-          className={`h-4 w-4 ${i < count ? "text-gold" : "text-steel"}`}
+          className={`h-4 w-4 ${i < count ? "text-walnut" : "text-steel"}`}
           viewBox="0 0 20 20"
           fill="currentColor"
           aria-hidden="true"
@@ -158,7 +158,7 @@ export default function Stats() {
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="mb-12 text-center lg:mb-16">
-          <p className="mb-3 font-body text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+          <p className="mb-3 font-body text-xs font-semibold uppercase tracking-[0.2em] text-ash">
             В цифрах
           </p>
           <h2 className="font-heading text-3xl font-semibold text-graphite lg:text-4xl">
