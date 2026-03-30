@@ -162,7 +162,7 @@ export default function Stats() {
             В цифрах
           </p>
           <h2 className="font-heading text-3xl font-semibold text-graphite lg:text-4xl">
-            Мастерская АСТРА
+            Мастерская А<span className="inline-block -translate-y-[0.08em] px-[0.08em]">·</span>СТРА
           </h2>
         </div>
 
