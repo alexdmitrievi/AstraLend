@@ -1,6 +1,8 @@
 import Header from "../components/sections/Header";
 import Hero from "../components/sections/Hero";
 import ClientsMarquee from "../components/sections/ClientsMarquee";
+import Stats from "../components/sections/Stats";
+import HowWeWork from "../components/sections/HowWeWork";
 import Portfolio from "../components/sections/Portfolio";
 import LeadForm from "../components/sections/LeadForm";
 import Footer from "../components/sections/Footer";
@@ -163,6 +165,8 @@ export default function HomePage() {
         <div id="clients" tabIndex={-1} className="scroll-mt-24">
           <ClientsMarquee clients={clients} />
         </div>
+        <Stats />
+        <HowWeWork />
         <div id="portfolio" tabIndex={-1} className="scroll-mt-24">
           <Portfolio categories={categories} />
         </div>

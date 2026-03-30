@@ -5,9 +5,19 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.postimg.cc",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "postimg.cc",
+        pathname: "/**",
+      },
+    ],
   },
-  // If you have basePath, add it here
-  // basePath: "",
 };
 
 export default nextConfig;
