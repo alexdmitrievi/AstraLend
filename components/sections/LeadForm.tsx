@@ -128,8 +128,8 @@ export default function LeadForm() {
           {/* LEFT: value proposition */}
           <div>
             <motion.div {...fadeUpProps(0)} className="section-title-row mb-6">
-              <div className="h-px w-10 bg-gold/70" aria-hidden="true" />
-              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+              <div className="h-px w-10 bg-stone/40" aria-hidden="true" />
+              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-stone/60">
                 Бесплатный расчёт
               </span>
             </motion.div>
@@ -139,7 +139,7 @@ export default function LeadForm() {
               className="font-heading text-3xl font-semibold leading-[1.12] text-white sm:text-4xl lg:text-[2.6rem] xl:text-[3rem]"
             >
               Получите каталог<br />
-              <span className="text-gold">со скидкой 10%</span><br />
+              <span className="text-stone">со скидкой 10%</span><br />
               и расчёт сметы за 1 час
             </motion.h2>
 
@@ -153,7 +153,7 @@ export default function LeadForm() {
             <motion.ul {...fadeUpProps(0.24)} className="mt-8 space-y-3">
               {benefits.map((b) => (
                 <li key={b} className="flex items-center gap-3 text-stone/80">
-                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
+                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-stone/20 text-stone/80">
                     <CheckIcon />
                   </span>
                   <span className="text-sm font-medium lg:text-base">{b}</span>
@@ -188,8 +188,8 @@ export default function LeadForm() {
           {/* RIGHT: form card */}
           <motion.div {...fadeUpProps(0.1)}>
             <div className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-[0_32px_80px_rgba(0,0,0,0.4)] sm:p-8 lg:p-10">
-              {/* decorative gold line */}
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent" />
+              {/* decorative line */}
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-walnut/50 to-transparent" />
 
               <AnimatePresence mode="wait">
                 {status === "success" ? (
