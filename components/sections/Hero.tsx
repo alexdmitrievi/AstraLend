@@ -43,9 +43,25 @@ export default function Hero(props: HeroProps) {
     },
   };
 
+  const subtitleAnimProps = shouldUseMotion
+    ? {
+        initial: { opacity: 0, y: 10 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.9, delay: 0.82, ease: softEase },
+      }
+    : {};
+
+  const ctaAnimProps = shouldUseMotion
+    ? {
+        initial: { opacity: 0, y: 10 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.9, delay: 1.0, ease: softEase },
+      }
+    : {};
+
   const heroText = (
     <>
-      <div className="max-w-[280px] sm:max-w-[400px] lg:max-w-[520px]">
+      <div className="max-w-[300px] sm:max-w-[440px] lg:max-w-[540px]">
         <div
           className="text-white [&_h1]:text-white"
           style={{ textShadow: "0 2px 24px rgba(0,0,0,0.82)" }}
@@ -54,22 +70,32 @@ export default function Hero(props: HeroProps) {
             <>
               <motion.h1
                 {...headingAnimationProps}
-                className="font-heading text-[1.5rem] font-semibold leading-[1.18] sm:text-[2.25rem] lg:text-[3.05rem] lg:leading-[1.06] xl:text-[3.3rem]"
+                className="font-heading text-[1.6rem] font-semibold leading-[1.16] sm:text-[2.4rem] lg:text-[3.1rem] lg:leading-[1.06] xl:text-[3.4rem]"
               >
-                Мебель, которая становится наследием
+                Мебель, которая<br className="hidden sm:block" /> становится наследием
               </motion.h1>
 
               <motion.span
                 {...dividerAnimationProps}
-                className="mt-2 block h-px w-12 bg-white/50 sm:mt-3 lg:mt-5 lg:w-24"
+                className="mt-3 block h-px w-12 bg-white/40 sm:mt-4 lg:mt-5 lg:w-20"
               />
+
+              <motion.p
+                {...subtitleAnimProps}
+                className="mt-3 text-[13px] font-normal leading-relaxed text-white/75 sm:text-sm lg:mt-4 lg:text-base"
+              >
+                Собственное производство. Договор и гарантия.
+              </motion.p>
             </>
           ) : (
             <>
-              <h1 className="font-heading text-[1.5rem] font-semibold leading-[1.18] sm:text-[2.25rem] lg:text-[3.05rem] lg:leading-[1.06] xl:text-[3.3rem]">
-                Мебель, которая становится наследием
+              <h1 className="font-heading text-[1.6rem] font-semibold leading-[1.16] sm:text-[2.4rem] lg:text-[3.1rem] lg:leading-[1.06] xl:text-[3.4rem]">
+                Мебель, которая<br className="hidden sm:block" /> становится наследием
               </h1>
-              <span className="mt-2 block h-px w-12 bg-white/50 sm:mt-3 lg:mt-5 lg:w-24" />
+              <span className="mt-3 block h-px w-12 bg-white/40 sm:mt-4 lg:mt-5 lg:w-20" />
+              <p className="mt-3 text-[13px] font-normal leading-relaxed text-white/75 sm:text-sm lg:mt-4 lg:text-base">
+                Собственное производство. Договор и гарантия.
+              </p>
             </>
           )}
         </div>
@@ -77,25 +103,50 @@ export default function Hero(props: HeroProps) {
 
       <div className="flex-1 sm:hidden" />
 
-      <div className="mt-0 flex w-full flex-col gap-2 sm:mt-6 sm:flex-row sm:w-auto sm:gap-4 lg:mt-7 lg:gap-4">
-        <a
-          href="#lead"
-          className="focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none bg-white px-5 py-3 text-[13px] font-semibold leading-none text-graphite transition hover:bg-white/90 box-border
-                     sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm
-                     lg:h-[52px] lg:min-w-[180px] lg:px-8 lg:text-[15px]"
+      {shouldUseMotion ? (
+        <motion.div
+          {...ctaAnimProps}
+          className="mt-0 flex w-full flex-col gap-2.5 sm:mt-6 sm:w-auto sm:flex-row sm:gap-4 lg:mt-7 lg:gap-4"
         >
-          Рассчитать проект
-        </a>
+          <a
+            href="#lead"
+            className="focus-ring font-body inline-flex h-[44px] w-full cursor-pointer items-center justify-center rounded-lg bg-white px-5 text-[13px] font-semibold text-graphite transition-all duration-200 hover:bg-white/95 hover:shadow-lg box-border
+                       sm:h-[52px] sm:w-auto sm:min-w-[172px] sm:px-6 sm:text-sm
+                       lg:h-[54px] lg:min-w-[192px] lg:px-8 lg:text-[15px]"
+          >
+            Рассчитать проект
+          </a>
 
-        <a
-          href="#portfolio"
-          className="focus-ring font-body inline-flex h-[40px] w-full items-center justify-center rounded-none border border-white/50 px-5 py-3 text-[13px] font-normal leading-none text-white transition hover:bg-white/10 hover:border-white/70 box-border bg-black/20 backdrop-blur-sm
-                     sm:w-auto sm:h-[52px] sm:min-w-[160px] sm:px-6 sm:text-sm
-                     lg:h-[52px] lg:min-w-[180px] lg:px-8 lg:text-[15px]"
-        >
-          Смотреть работы
-        </a>
-      </div>
+          <a
+            href="#portfolio"
+            className="focus-ring font-body inline-flex h-[44px] w-full cursor-pointer items-center justify-center rounded-lg border border-white/50 px-5 text-[13px] font-normal text-white transition-all duration-200 hover:bg-white/10 hover:border-white/80 box-border bg-black/15 backdrop-blur-sm
+                       sm:h-[52px] sm:w-auto sm:min-w-[172px] sm:px-6 sm:text-sm
+                       lg:h-[54px] lg:min-w-[192px] lg:px-8 lg:text-[15px]"
+          >
+            Смотреть работы
+          </a>
+        </motion.div>
+      ) : (
+        <div className="mt-0 flex w-full flex-col gap-2.5 sm:mt-6 sm:w-auto sm:flex-row sm:gap-4 lg:mt-7 lg:gap-4">
+          <a
+            href="#lead"
+            className="focus-ring font-body inline-flex h-[44px] w-full cursor-pointer items-center justify-center rounded-lg bg-white px-5 text-[13px] font-semibold text-graphite transition-all duration-200 hover:bg-white/95 hover:shadow-lg box-border
+                       sm:h-[52px] sm:w-auto sm:min-w-[172px] sm:px-6 sm:text-sm
+                       lg:h-[54px] lg:min-w-[192px] lg:px-8 lg:text-[15px]"
+          >
+            Рассчитать проект
+          </a>
+
+          <a
+            href="#portfolio"
+            className="focus-ring font-body inline-flex h-[44px] w-full cursor-pointer items-center justify-center rounded-lg border border-white/50 px-5 text-[13px] font-normal text-white transition-all duration-200 hover:bg-white/10 hover:border-white/80 box-border bg-black/15 backdrop-blur-sm
+                       sm:h-[52px] sm:w-auto sm:min-w-[172px] sm:px-6 sm:text-sm
+                       lg:h-[54px] lg:min-w-[192px] lg:px-8 lg:text-[15px]"
+          >
+            Смотреть работы
+          </a>
+        </div>
+      )}
     </>
   );
 

@@ -11,30 +11,15 @@ export const furnitureTypeLabels: Record<(typeof furnitureTypes)[number], string
 };
 
 export const leadSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, "Укажите имя")
-    .max(80, "Имя слишком длинное"),
-
   contact: z
     .string()
     .trim()
-    .min(5, "Укажите телефон или мессенджер")
-    .max(120, "Слишком длинное значение"),
-
-  furnitureType: z.enum(furnitureTypes).pipe(z.enum(furnitureTypes, "Выберите тип мебели")),
-
-  comment: z
-    .string()
-    .trim()
-    .max(800, "Комментарий слишком длинный")
-    .optional()
-    .or(z.literal("")),
+    .min(7, "Укажите номер телефона")
+    .max(20, "Некорректный номер"),
 
   consent: z
     .boolean()
-    .refine((value) => value === true, { message: "Нужно согласие на обработку данных" }),
+    .refine((value) => value === true, { message: "Необходимо согласие на обработку данных" }),
 
   honeypot: z.string().optional(),
 });

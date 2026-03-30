@@ -133,17 +133,18 @@ export default function Portfolio({ categories }: PortfolioProps) {
   const fadeUpProps = (delay = 0) => (isMounted ? fadeUp(delay) : {});
 
   const tileVariants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 28, scale: 0.98 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
-        delay: i * 0.05,
-        duration: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+        delay: Math.min(i * 0.045, 0.4),
+        duration: 0.55,
+        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
       },
     }),
-    exit: { opacity: 0, y: 12, transition: { duration: 0.25 } },
+    exit: { opacity: 0, y: 8, scale: 0.98, transition: { duration: 0.2 } },
   };
 
   /* ─── Lightbox open / close + popstate ─── */
@@ -197,8 +198,8 @@ export default function Portfolio({ categories }: PortfolioProps) {
               onClick={() => setActiveCategory("all")}
               className={
                 activeCategory === "all"
-                  ? "px-4 py-2 text-sm bg-graphite text-white rounded-none lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out shadow-elevated"
-                  : "px-4 py-2 text-sm text-charcoal border border-steel rounded-none hover:border-graphite lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5"
+                  ? "cursor-pointer px-4 py-2 text-sm bg-graphite text-white rounded-lg transition-all duration-200 lg:px-6 lg:py-2.5 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] shadow-[0_4px_12px_rgba(44,44,44,0.25)]"
+                  : "cursor-pointer px-4 py-2 text-sm text-charcoal border border-steel rounded-lg hover:border-graphite/60 hover:bg-stone/60 transition-all duration-200 lg:px-6 lg:py-2.5 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:hover:-translate-y-0.5"
               }
             >
               Все
@@ -211,8 +212,8 @@ export default function Portfolio({ categories }: PortfolioProps) {
                 onClick={() => setActiveCategory(category.id)}
                 className={
                   activeCategory === category.id
-                    ? "px-4 py-2 text-sm bg-graphite text-white rounded-none lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out shadow-elevated"
-                    : "px-4 py-2 text-sm text-charcoal border border-steel rounded-none hover:border-graphite lg:px-6 lg:py-3 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:transition lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5"
+                    ? "cursor-pointer px-4 py-2 text-sm bg-graphite text-white rounded-lg transition-all duration-200 lg:px-6 lg:py-2.5 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] shadow-[0_4px_12px_rgba(44,44,44,0.25)]"
+                    : "cursor-pointer px-4 py-2 text-sm text-charcoal border border-steel rounded-lg hover:border-graphite/60 hover:bg-stone/60 transition-all duration-200 lg:px-6 lg:py-2.5 lg:text-[length:var(--font-nav)] lg:uppercase lg:tracking-[0.12em] lg:hover:-translate-y-0.5"
                 }
               >
                 {category.title}
@@ -302,9 +303,12 @@ export default function Portfolio({ categories }: PortfolioProps) {
       <div className="section-header portfolio-cta mt-10 lg:mt-14">
         <a
           href="#lead"
-          className="focus-ring inline-flex rounded-none border border-graphite px-6 py-3 text-sm font-semibold text-graphite transition hover:bg-graphite hover:text-white lg:px-8 lg:py-4 lg:text-[length:var(--font-nav)]"
+          className="focus-ring inline-flex cursor-pointer items-center gap-2 rounded-lg border border-graphite px-6 py-3 text-sm font-semibold text-graphite transition-all duration-200 hover:bg-graphite hover:text-white hover:shadow-md lg:px-8 lg:py-4 lg:text-[length:var(--font-nav)]"
         >
           Хочу похожий проект
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </a>
       </div>
 

@@ -101,9 +101,9 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`sticky top-0 z-50 border-b border-steel/60 bg-stone/95 backdrop-blur-sm lg:bg-cream/90 lg:backdrop-blur-xl lg:transition lg:duration-300 ${
+      className={`sticky top-0 z-50 border-b border-steel/60 bg-stone/95 backdrop-blur-sm transition-shadow duration-300 lg:bg-cream/90 lg:backdrop-blur-xl ${
         isScrolled
-          ? "lg:bg-cream/80 lg:backdrop-blur-xl lg:shadow-[0_10px_30px_rgba(44,44,44,0.08)]"
+          ? "shadow-[0_2px_16px_rgba(44,44,44,0.07)] lg:shadow-[0_10px_30px_rgba(44,44,44,0.08)]"
           : ""
       }`}
     >
@@ -120,7 +120,7 @@ export default function Header() {
             {navLinks.map((link) => (
               <a
                 key={link.href}
-                className="focus-ring rounded-full px-3 py-1 text-charcoal transition hover:text-graphite"
+                className="focus-ring rounded-full px-3 py-1 text-charcoal transition-all duration-200 hover:text-graphite hover:bg-stone/60"
                 href={link.href}
                 onClick={handleAnchorClick}
               >
@@ -132,7 +132,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <a
               href="#lead"
-              className="focus-ring hidden rounded-none bg-graphite px-5 py-2 text-sm font-semibold text-white transition hover:bg-charcoal md:inline-flex"
+              className="focus-ring hidden cursor-pointer rounded-lg bg-graphite px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#1a1a1a] hover:shadow-md md:inline-flex"
               onClick={handleAnchorClick}
             >
               Рассчитать проект
@@ -176,7 +176,7 @@ export default function Header() {
               {navLinks.map((link) => (
                 <a
                   key={link.href}
-                  className="focus-ring rounded-full px-4 py-2 text-charcoal transition hover:text-graphite"
+                  className="focus-ring rounded-full px-4 py-2 text-charcoal transition-all duration-200 hover:text-graphite hover:bg-stone/60"
                   href={link.href}
                   onClick={handleAnchorClick}
                 >
@@ -187,7 +187,7 @@ export default function Header() {
 
             <a
               href="#lead"
-              className="focus-ring inline-flex rounded-none bg-graphite px-8 py-4 text-[length:var(--font-nav)] font-semibold text-white transition hover:bg-charcoal"
+              className="focus-ring inline-flex cursor-pointer items-center rounded-lg bg-graphite px-8 py-3.5 text-[length:var(--font-nav)] font-semibold text-white transition-all duration-200 hover:bg-[#1a1a1a] hover:shadow-lg"
               onClick={handleAnchorClick}
             >
               Рассчитать проект
@@ -218,7 +218,7 @@ export default function Header() {
           ))}
           <a
             href="#lead"
-            className="focus-ring mt-2 rounded-none bg-graphite px-5 py-2 text-center text-sm font-semibold text-white transition hover:bg-charcoal"
+            className="focus-ring mt-2 cursor-pointer rounded-lg bg-graphite px-5 py-3 text-center text-sm font-semibold text-white transition-all duration-200 hover:bg-[#1a1a1a]"
             onClick={handleAnchorClick}
           >
             Рассчитать проект

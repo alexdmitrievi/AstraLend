@@ -32,13 +32,18 @@
   --color-cream-light: #fafaf8;
 }
 
-* {
+html {
   scroll-behavior: smooth;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html {
     scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -47,6 +52,8 @@
     font-family: var(--font-body);
     color: var(--color-graphite);
     background-color: var(--color-stone);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -56,58 +63,12 @@
   }
 }
 
-.glass {
-  @apply bg-warm/10 backdrop-blur-md;
-}
-
-.marquee {
-  animation: marquee var(--marquee-duration, 18s) linear infinite;
-  will-change: transform;
-}
-
-.marquee-mobile {
-  animation: marquee-mobile var(--marquee-mobile-duration, 18s) linear infinite;
-  will-change: transform;
-}
-
-.marquee:hover {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0px);
-  }
-
-  to {
-    transform: translateX(calc(-1px * var(--marquee-set-width)));
-  }
-}
-
-@keyframes marquee-mobile {
-  from {
-    transform: translateX(0px);
-  }
-
-  to {
-    transform: translateX(calc(-1px * var(--marquee-set-width)));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    animation: none;
-  }
-
-  .marquee-mobile {
-    animation: none;
-  }
-}
-
+/* ─── Focus ring ──────────────────────────────────────────────── */
 .focus-ring {
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite/70 focus-visible:ring-offset-2 focus-visible:ring-offset-stone;
 }
 
+/* ─── Layout helpers ──────────────────────────────────────────── */
 .section-header {
   @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
 }
@@ -124,23 +85,44 @@
   @apply font-heading text-3xl font-semibold leading-tight sm:text-4xl lg:text-[length:var(--font-h2)] lg:leading-tight lg:tracking-[0.01em];
 }
 
-.hero-texture {
-  pointer-events: none;
-  opacity: 0.5;
-  background-image: radial-gradient(
-      120% 100% at 50% 45%,
-      #2b2d2f00 58%,
-      #2b2d2f29 100%
-    ),
-    repeating-radial-gradient(
-      circle at 20% 30%,
-      #2b2d2f14 0 1px,
-      #2b2d2f00 1px 3px
-    );
-  background-repeat: no-repeat, repeat;
-  background-size: 100% 100%, 3px 3px;
+/* ─── Glass effect ────────────────────────────────────────────── */
+.glass {
+  @apply bg-warm/10 backdrop-blur-md;
 }
 
+/* ─── Marquee animations ──────────────────────────────────────── */
+.marquee {
+  animation: marquee var(--marquee-duration, 18s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-mobile {
+  animation: marquee-mobile var(--marquee-mobile-duration, 18s) linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0px); }
+  to   { transform: translateX(calc(-1px * var(--marquee-set-width))); }
+}
+
+@keyframes marquee-mobile {
+  from { transform: translateX(0px); }
+  to   { transform: translateX(calc(-1px * var(--marquee-set-width))); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .marquee-mobile {
+    animation: none;
+  }
+}
+
+/* ─── Portfolio ───────────────────────────────────────────────── */
 .portfolio-slider {
   overflow-x: auto;
   cursor: grab;
@@ -171,17 +153,20 @@
   -webkit-user-select: none;
 }
 
+/* ─── Telegram button ─────────────────────────────────────────── */
 .telegram-button {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 28px;
-  border: 1px solid #1a1a1a;
+  gap: 10px;
+  padding: 12px 24px;
+  border: 1.5px solid #1a1a1a;
   border-radius: 8px;
   color: #1a1a1a;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 500;
   text-decoration: none;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .telegram-button:hover {
@@ -189,30 +174,61 @@
   color: #fff;
 }
 
-@media (min-width: 1024px) {
-  .telegram-button {
-    width: 100%;
-    max-width: 100%;
-    padding: 18px 32px;
-    font-size: 16px;
-    font-weight: 500;
+/* ─── Hero texture ────────────────────────────────────────────── */
+.hero-texture {
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: radial-gradient(
+      120% 100% at 50% 45%,
+      #2b2d2f00 58%,
+      #2b2d2f29 100%
+    ),
+    repeating-radial-gradient(
+      circle at 20% 30%,
+      #2b2d2f14 0 1px,
+      #2b2d2f00 1px 3px
+    );
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 100%, 3px 3px;
+}
+
+/* ─── Utility: hidden items ───────────────────────────────────── */
+.section::before,
+.section::after,
+.section-divider,
+.section-separator,
+.hero-product {
+  display: none;
+}
+
+/* ─── Mobile hero layout ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-root {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+  }
+
+  .hero-split {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero-background,
+  .hero-overlay {
+    display: none;
+  }
+
+  .hero-content {
+    min-height: 60svh;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 12px;
-    border: 2px solid #1a1a1a;
-    border-radius: 8px;
-    background: transparent;
-    color: #1a1a1a;
-    transition: all 0.2s ease;
-    margin-top: auto;
   }
+}
 
-  .telegram-button:hover {
-    background: #1a1a1a;
-    color: #fff;
-  }
-
+/* ─── Desktop overrides ───────────────────────────────────────── */
+@media (min-width: 1024px) {
   :root {
     --section-padding-desktop: 120px;
     --section-padding-desktop-lg: 140px;
@@ -296,7 +312,6 @@
     margin-right: 0 !important;
   }
 
-
   .portfolio-card:first-child {
     margin-left: 0;
   }
@@ -305,8 +320,31 @@
     animation-duration: var(--marquee-duration);
   }
 
+  .telegram-button {
+    width: 100%;
+    max-width: 100%;
+    padding: 18px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 2px solid #1a1a1a;
+    border-radius: 8px;
+    background: transparent;
+    color: #1a1a1a;
+    transition: all 0.2s ease;
+    margin-top: auto;
+  }
+
+  .telegram-button:hover {
+    background: #1a1a1a;
+    color: #fff;
+  }
 }
 
+/* ─── Contact layout ──────────────────────────────────────────── */
 @media (min-width: 1024px) {
   .contact-left {
     display: flex;
@@ -346,20 +384,6 @@
   }
 }
 
-.section::before,
-.section::after {
-  display: none;
-}
-
-.section-divider,
-.section-separator {
-  display: none;
-}
-
-.hero-product {
-  display: none;
-}
-
 @media (max-width: 1023px) {
   .portfolio-cta {
     display: flex;
@@ -374,61 +398,58 @@
   }
 }
 
-@media (max-width: 768px) {
-  .hero-root {
-    display: flex;
-    flex-direction: column;
+/* ─── Premium entrance animations ────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-
-  .hero-split {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .hero-background,
-  .hero-overlay {
-    display: none;
-  }
-
-  .hero-content {
-    min-height: 60svh;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.6) 0%,
-        rgba(0, 0, 0, 0.25) 55%,
-        rgba(0, 0, 0, 0) 100%
-      ),
-      linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.35) 0%,
-        rgba(0, 0, 0, 0) 60%
-      );
-  }
-
-  .hero-product {
-    min-height: 40svh;
-    min-height: max(40svh, 320px);
-    position: relative;
-    overflow: hidden;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (max-height: 700px) {
-  .hero-content {
-    min-height: 70svh;
-  }
-
-  .hero-product {
-    min-height: 30svh;
-    min-height: max(30svh, 320px);
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Gold shimmer on form card top border */
+.form-card-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #c9a961 40%,
+    #e8d49a 50%,
+    #c9a961 60%,
+    transparent 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Subtle float animation for decorative elements */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+.float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+/* Pulse glow for CTA button */
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 169, 97, 0); }
+  50%       { box-shadow: 0 0 0 8px rgba(201, 169, 97, 0.12); }
+}
+
+.cta-glow {
+  animation: ctaGlow 2.5s ease-in-out infinite;
+}
