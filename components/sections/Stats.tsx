@@ -43,7 +43,7 @@ function useCountUp(target: number, duration = 1400) {
 /* ─── Data ────────────────────────────────────────────────── */
 const metrics = [
   { target: 120, suffix: "+", label: "проектов выполнено" },
-  { target: 8, suffix: " лет", label: "на рынке мягкой мебели" },
+  { target: 20, suffix: "+ лет", label: "на рынке мягкой мебели" },
   { target: 47, suffix: "", label: "городов России" },
   { target: 100, suffix: "%", label: "гарантия качества" },
 ];
