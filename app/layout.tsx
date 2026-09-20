@@ -5,14 +5,14 @@ import WhatsAppFloat from "../components/ui/WhatsAppFloat";
 
 const montserrat = Montserrat({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-montserrat",
   display: "swap",
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
   variable: "--font-playfair",
   display: "swap",
 });
@@ -84,11 +84,11 @@ export default function RootLayout({
         <link rel="canonical" href={BASE_URL} />
       </head>
       <body
-        className={`${montserrat.variable} ${playfair.variable} min-h-screen bg-stone text-graphite font-body antialiased`}
+        className={`${montserrat.variable} ${playfair.variable} min-h-screen bg-cream text-charcoal font-body antialiased`}
       >
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 rounded-full border border-steel/60 bg-stone px-4 py-2 text-sm font-semibold text-graphite"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] border border-steel bg-cream-light px-4 py-2 text-[13px] uppercase tracking-[0.1em] text-ink"
         >
           Перейти к содержимому
         </a>

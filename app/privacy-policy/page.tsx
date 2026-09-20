@@ -44,7 +44,7 @@ export default function PrivacyPolicyPage() {
       <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         {/* Title */}
         <div className="mb-10 border-b border-steel/40 pb-8">
-          <h1 className="font-heading text-3xl font-semibold text-graphite lg:text-4xl">
+          <h1 className="font-heading text-[26px] font-semibold text-graphite sm:text-3xl lg:text-4xl">
             Политика конфиденциальности
           </h1>
           <p className="mt-3 font-body text-sm text-ash">

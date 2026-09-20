@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   CSSProperties,
   useCallback,
@@ -9,15 +8,9 @@ import {
   useRef,
   useState,
 } from "react";
+import { asset } from "../../lib/asset";
+import type { Client } from "../../lib/clients";
 import useDesktopMotion from "../ui/useDesktopMotion";
-
-type Client = {
-  name: string;
-  href?: string;
-  logo?: string;
-  logoText?: string;
-  logoTextClassName?: string;
-};
 
 type ClientsMarqueeProps = {
   clients: Client[];
@@ -27,10 +20,6 @@ const MOBILE_MEDIA_QUERY = "(max-width: 767px)";
 
 const SPEED_PX_PER_SEC_MOBILE = 50;
 const SPEED_PX_PER_SEC_DESKTOP = 34;
-
-const DESKTOP_VISIBLE_CARDS = 5;
-const DESKTOP_CARD_WIDTH_PX = 360;
-const DESKTOP_GAP_PX = 40;
 
 const getInitials = (name: string) =>
   name
@@ -42,38 +31,22 @@ const getInitials = (name: string) =>
 
 const normalizeLogoSrc = (src?: string) => {
   if (!src) return src;
-  if (src.endsWith(".svg")) return src.replace(/\.svg$/i, ".webp");
-  return src;
+  return asset(src.endsWith(".svg") ? src.replace(/\.svg$/i, ".webp") : src);
 };
 
 export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
-  const { isMounted, shouldAnimate, prefersReducedMotion } =
-    useDesktopMotion();
+  const { prefersReducedMotion } = useDesktopMotion();
 
   const [isMobile, setIsMobile] = useState(false);
   const [setWidthPx, setSetWidthPx] = useState(0);
-
   const [animKey, setAnimKey] = useState(0);
 
   const setWidthRef = useRef(0);
-
   const mobileTrackRef = useRef<HTMLUListElement | null>(null);
   const desktopTrackRef = useRef<HTMLUListElement | null>(null);
 
   const resizeTimeoutRef = useRef<number | null>(null);
   const rafMeasureRef = useRef<number | null>(null);
-
-  const fadeUp = (delay = 0) =>
-    shouldAnimate
-      ? {
-          initial: { opacity: 0, y: 20 },
-          whileInView: { opacity: 1, y: 0 },
-          transition: { duration: 0.6, ease: "easeOut", delay },
-          viewport: { once: true, amount: 0.3 },
-        }
-      : { initial: false };
-
-  const fadeUpProps = (delay = 0) => (isMounted ? fadeUp(delay) : {});
 
   const measureSetWidth = useCallback(() => {
     const track = isMobile ? mobileTrackRef.current : desktopTrackRef.current;
@@ -168,53 +141,28 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
     return {
       "--marquee-set-width": String(setWidthPx),
       "--marquee-mobile-duration": `${durationSeconds}s`,
-      "--marquee-desktop-duration": `${durationSeconds}s`,
       "--marquee-duration": `${durationSeconds}s`,
     } as CSSProperties;
   }, [setWidthPx, durationSeconds]);
 
-  const desktopViewportStyle = useMemo(() => {
-    const widthPx =
-      DESKTOP_VISIBLE_CARDS * DESKTOP_CARD_WIDTH_PX +
-      (DESKTOP_VISIBLE_CARDS - 1) * DESKTOP_GAP_PX;
-
-    return {
-      maxWidth: `${widthPx}px`,
-      marginLeft: "auto",
-      marginRight: "auto",
-    } as CSSProperties;
-  }, []);
-
   const Logo = ({
     client,
-    size,
     onAssetReady,
     eager,
   }: {
     client: Client;
-    size: "mobile" | "desktop";
     onAssetReady: () => void;
     eager?: boolean;
   }) => {
-    const isDesktop = size === "desktop";
-
-    // ✅ увеличенные лого на desktop
-    const imgClass = isDesktop
-      ? "h-24 sm:h-28 lg:h-[112px] w-auto max-w-[300px] object-contain"
-      : "h-24 w-auto max-w-[240px] object-contain";
-
-    const fallbackBoxClass = isDesktop
-      ? "h-16 sm:h-[72px] lg:h-[80px] w-[220px]"
-      : "h-12 w-[140px]";
-
     const src = normalizeLogoSrc(client.logo);
 
     if (src) {
       return (
+        /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={src}
           alt={`${client.name} логотип`}
-          className={imgClass}
+          className="h-10 w-auto max-w-[160px] object-contain opacity-[0.62] grayscale"
           loading={eager ? "eager" : "lazy"}
           decoding="async"
           draggable={false}
@@ -227,9 +175,8 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
     return (
       <span
         className={[
-          "flex items-center justify-center",
-          fallbackBoxClass,
-          "text-[11px] uppercase tracking-[0.18em] text-charcoal/85",
+          "flex h-10 w-[140px] items-center justify-center",
+          "text-[11px] uppercase tracking-[0.18em] text-ash",
           client.logoTextClassName ?? "",
         ].join(" ")}
         aria-hidden="true"
@@ -239,114 +186,72 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
     );
   };
 
-  return (
-    <section className="section-desktop bg-cream-light py-16 sm:py-20">
-      <motion.div {...fadeUpProps(0)} className="section-header">
-        <div className="section-title-row">
-          <div className="section-title-divider" aria-hidden="true" />
-          <h2 className="section-title">Нам доверяют</h2>
-        </div>
-      </motion.div>
+  const renderItems = (variant: "mobile" | "desktop") =>
+    [0, 1].map((setIndex) =>
+      clients.map((client, index) => (
+        <li
+          key={`${client.name}-${variant}-${setIndex}-${index}`}
+          aria-hidden={setIndex === 1}
+          title={client.name}
+          className={
+            variant === "mobile"
+              ? "flex min-w-[140px] flex-shrink-0 items-center justify-center px-6 py-7"
+              : "flex w-[220px] flex-shrink-0 items-center justify-center px-6 py-8"
+          }
+        >
+          <Logo
+            client={client}
+            onAssetReady={scheduleMeasure}
+            eager={setIndex === 0 && index < 3}
+          />
+          <span className="sr-only">{client.name}</span>
+        </li>
+      ))
+    );
 
-      <motion.div
-        {...fadeUpProps(0.1)}
-        className="mt-8 overflow-hidden lg:mt-10 lg:w-full"
-      >
+  return (
+    <section
+      id="clients"
+      tabIndex={-1}
+      aria-label="Клиенты мастерской"
+      className="scroll-mt-24 border-y border-steel bg-cream"
+    >
+      <div className="overflow-hidden">
         {/* MOBILE */}
         <div className="md:hidden">
           <ul
             key={`m-${animKey}`}
             ref={mobileTrackRef}
             className={[
-              "flex w-max items-center gap-5 flex-nowrap whitespace-nowrap box-border",
-              "transform-gpu will-change-transform [backface-visibility:hidden] [transform:translate3d(0,0,0)]",
+              "flex w-max items-center flex-nowrap whitespace-nowrap",
+              "transform-gpu will-change-transform [backface-visibility:hidden]",
               shouldAnimateMobile ? "marquee-mobile" : "",
             ].join(" ")}
             style={trackStyle}
             aria-label="Список клиентов"
           >
-            {[0, 1].map((setIndex) =>
-              clients.map((client, index) => {
-                const isVtb = /втб/i.test(client.name);
-                const vtbScale = isVtb ? "scale-[1.08]" : "scale-100";
-                const eager = setIndex === 0 && index < 3;
-
-                return (
-                  <li
-                    key={`${client.name}-mobile-${setIndex}-${index}`}
-                    aria-hidden={setIndex === 1}
-                    title={client.name}
-                    className="group relative flex min-w-[140px] flex-shrink-0 flex-col items-center justify-center py-3"
-                  >
-                    <div className={["transform-gpu", vtbScale].join(" ")}>
-                      <Logo
-                        client={client}
-                        size="mobile"
-                        onAssetReady={scheduleMeasure}
-                        eager={eager}
-                      />
-                    </div>
-
-                    <span className="mt-2 text-[12px] leading-none text-charcoal/70">
-                      {client.name}
-                    </span>
-
-                    <span className="sr-only">{client.name}</span>
-                  </li>
-                );
-              })
-            )}
+            {renderItems("mobile")}
           </ul>
         </div>
 
         {/* DESKTOP */}
         <div className="hidden md:block">
-          <div style={desktopViewportStyle} className="overflow-hidden">
-            <ul
-              key={`d-${animKey}`}
-              ref={desktopTrackRef}
-              className={[
-                "flex w-max items-center justify-start gap-10 flex-nowrap whitespace-nowrap",
-                "transform-gpu will-change-transform [backface-visibility:hidden] [transform:translate3d(0,0,0)]",
-                shouldAnimateDesktop ? "marquee marquee-desktop" : "",
-                "hover:[animation-play-state:paused]",
-              ].join(" ")}
-              style={trackStyle}
-              aria-label="Список клиентов"
-            >
-              {[0, 1].map((setIndex) =>
-                clients.map((client, index) => (
-                  <li
-                    key={`${client.name}-desktop-${setIndex}-${index}`}
-                    aria-hidden={setIndex === 1}
-                    className="group relative flex w-[360px] flex-shrink-0 flex-col items-center justify-center py-4 text-charcoal transition-transform duration-200 ease-out hover:-translate-y-0.5"
-                  >
-                    <Logo
-                      client={client}
-                      size="desktop"
-                      onAssetReady={scheduleMeasure}
-                      eager={setIndex === 0 && index < 3}
-                    />
-
-                    {/* ✅ подпись теперь всегда видна как на мобилке */}
-                    <span className="mt-3 text-[14px] font-medium tracking-[0.01em] leading-tight whitespace-nowrap text-charcoal/85 select-none">
-                      {client.name}
-                    </span>
-
-                    <span className="sr-only">{client.name}</span>
-                  </li>
-                ))
-              )}
-            </ul>
-          </div>
+          <ul
+            key={`d-${animKey}`}
+            ref={desktopTrackRef}
+            className={[
+              "flex w-max items-center justify-start flex-nowrap whitespace-nowrap",
+              "transform-gpu will-change-transform [backface-visibility:hidden]",
+              shouldAnimateDesktop ? "marquee" : "",
+              "hover:[animation-play-state:paused]",
+            ].join(" ")}
+            style={trackStyle}
+            aria-label="Список клиентов"
+          >
+            {renderItems("desktop")}
+          </ul>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
-
-
-
-
-
-

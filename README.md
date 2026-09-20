@@ -1,38 +1,71 @@
-# AstraLend Landing
+# АСТРА — лендинг мастерской мягкой мебели
 
-High-conversion furniture company landing page (lead generation).
+Статический сайт мастерской мягкой мебели «АСТРА» (Омск): главная страница
+с коллекциями, объектами и заявкой + каталог с фильтрами.
 
-## Tech stack
-- Next.js (App Router), TypeScript
-- TailwindCSS
+## Стек
+- Next.js (App Router) в режиме статического экспорта (`output: "export"`), TypeScript
+- Tailwind CSS v4 — токены живут в `@theme` внутри `app/globals.css`
 - Framer Motion
 - react-hook-form + zod
+- yet-another-react-lightbox
 
-## Getting started
-1. Install dependencies:
-   - `npm install`
-2. Create `.env.local`:
-   - `copy .env.example .env.local` (Windows)
-   - fill envs for Telegram and/or SMTP
-3. Add media assets:
-   - `public/video/hero.mp4`
-   - `public/images/hero-poster.jpg`
-   - `public/images/portfolio-01.jpg` ... `portfolio-04.jpg`
-4. Run dev server:
-   - `npm run dev`
+## Структура
+```
+app/
+  page.tsx              главная: Hero → Коллекции → Объекты → Клиенты →
+                        Мастерская → Отзывы → Заявка → Футер
+  catalog/page.tsx      каталог с фильтрами (коллекция / материал / помещение)
+  privacy-policy/       политика обработки персональных данных (ФЗ-152)
+components/
+  sections/             секции главной страницы
+  catalog/              сетка каталога и строки фильтров
+lib/
+  catalog.ts            коллекции, позиции, фильтры — единственный источник данных
+  clients.ts            логотипы клиентов для маркизы
+  cases.ts              кейсы по объектам (ЗАГЛУШКИ — ждут фактуру от владельца)
+  asset.ts              basePath для GitHub Pages
+  validators.ts         zod-схема лид-формы
+```
 
-## Environment variables
-Telegram (optional):
-- `TELEGRAM_BOT_TOKEN`
-- `TELEGRAM_CHAT_ID`
+## Запуск
+```bash
+npm install
+npm run dev       # разработка
+npm run build     # статическая сборка в out/
+npx serve out     # посмотреть собранную версию
+```
 
-Public lead endpoint (optional):
-- `NEXT_PUBLIC_LEAD_ENDPOINT` (defaults to `https://formsubmit.co/ajax/mebel@a-stra.ru`)
+`out/` и `.next/` не хранятся в репозитории — собираются локально и в CI.
 
-This project is static-first and sends form submissions from the browser. By default, leads are posted to FormSubmit and delivered to `mebel@a-stra.ru`.
+## Переменные окружения
+- `NEXT_PUBLIC_LEAD_ENDPOINT` — приёмник лид-формы
+  (по умолчанию FormSubmit → `mebel@a-stra.ru`)
+- `GITHUB_PAGES` / `NEXT_PUBLIC_BASE_PATH` — выставляются только в CI Pages,
+  см. ниже
 
-## Deployment
-1. Build: `npm run build`
-2. Start: `npm run start`
+Форма отправляется из браузера, серверного кода нет.
 
-Any platform that supports Next.js App Router will work (Vercel, Railway, etc.).
+## Публикация
+
+### GitHub Pages (превью)
+Workflow `.github/workflows/pages.yml` собирает сайт при пуше в `main`
+и публикует его. Project Pages живут на подпути, поэтому сборка идёт
+с `GITHUB_PAGES=true` и `NEXT_PUBLIC_BASE_PATH=/AstraLend` — Next
+подставляет `basePath: "/AstraLend"`, а локальные картинки из `public/`
+подключаются через `asset()` из `lib/asset.ts`.
+
+Один раз нужно включить: **Settings → Pages → Source = GitHub Actions**.
+После зелёного прогона сайт доступен по адресу
+<https://alexdmitrievi.github.io/AstraLend/>.
+
+### Боевой домен
+Обычная сборка (`npm run build`, без `GITHUB_PAGES`) даёт статику без
+`basePath` — её можно выкладывать в корень `a-stra.ru` или на любой хостинг
+статики.
+
+## Что ещё не заполнено
+`lib/cases.ts` содержит три пустых кейса. Секция «Объекты» честно показывает
+плашки «фото готовится» и не рендерит строки без текста. Чтобы кейсы ожили,
+нужно заполнить `cover`, `city`, `title`, `collection`, `task`, `solution`,
+`result`.
