@@ -147,13 +147,27 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
 
   const Logo = ({
     client,
+    variant,
     onAssetReady,
     eager,
   }: {
     client: Client;
+    variant: "mobile" | "desktop";
     onAssetReady: () => void;
     eager?: boolean;
   }) => {
+    const isDesktop = variant === "desktop";
+
+    // Логотипы идут крупно и в цвете: смысл полосы — чтобы заказчика
+    // можно было узнать. Обесцвечивание и приглушение убраны намеренно.
+    const imgClass = isDesktop
+      ? "h-24 w-auto max-w-[300px] object-contain sm:h-28 lg:h-[112px]"
+      : "h-24 w-auto max-w-[240px] object-contain";
+
+    const fallbackBoxClass = isDesktop
+      ? "h-16 w-[220px] sm:h-[72px] lg:h-[80px]"
+      : "h-12 w-[140px]";
+
     const src = normalizeLogoSrc(client.logo);
 
     if (src) {
@@ -162,7 +176,7 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
         <img
           src={src}
           alt={`${client.name} логотип`}
-          className="h-10 w-auto max-w-[160px] object-contain opacity-[0.62] grayscale"
+          className={imgClass}
           loading={eager ? "eager" : "lazy"}
           decoding="async"
           draggable={false}
@@ -175,8 +189,9 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
     return (
       <span
         className={[
-          "flex h-10 w-[140px] items-center justify-center",
-          "text-[11px] uppercase tracking-[0.18em] text-ash",
+          "flex items-center justify-center",
+          fallbackBoxClass,
+          "text-[11px] uppercase tracking-[0.18em] text-charcoal",
           client.logoTextClassName ?? "",
         ].join(" ")}
         aria-hidden="true"
@@ -192,19 +207,28 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
         <li
           key={`${client.name}-${variant}-${setIndex}-${index}`}
           aria-hidden={setIndex === 1}
-          title={client.name}
           className={
             variant === "mobile"
-              ? "flex min-w-[140px] flex-shrink-0 items-center justify-center px-6 py-7"
-              : "flex w-[220px] flex-shrink-0 items-center justify-center px-6 py-8"
+              ? "flex min-w-[140px] flex-shrink-0 flex-col items-center justify-center py-3"
+              : "flex w-[360px] flex-shrink-0 flex-col items-center justify-center py-4"
           }
         >
           <Logo
             client={client}
+            variant={variant}
             onAssetReady={scheduleMeasure}
             eager={setIndex === 0 && index < 3}
           />
-          <span className="sr-only">{client.name}</span>
+          {/* Название видно всегда: по одному логотипу заказчика не опознать */}
+          <span
+            className={
+              variant === "mobile"
+                ? "mt-2 text-[12px] leading-tight text-charcoal"
+                : "mt-3 whitespace-nowrap text-[14px] font-medium leading-tight tracking-[0.01em] text-charcoal"
+            }
+          >
+            {client.name}
+          </span>
         </li>
       ))
     );
@@ -226,7 +250,7 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
             key={`m-${animKey}`}
             ref={mobileTrackRef}
             className={[
-              "flex w-max items-center flex-nowrap whitespace-nowrap",
+              "flex w-max items-center gap-5 flex-nowrap whitespace-nowrap",
               "transform-gpu will-change-transform [backface-visibility:hidden]",
               shouldAnimateMobile ? "marquee-mobile" : "",
             ].join(" ")}
@@ -243,7 +267,7 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
             key={`d-${animKey}`}
             ref={desktopTrackRef}
             className={[
-              "flex w-max items-center justify-start flex-nowrap whitespace-nowrap",
+              "flex w-max items-center justify-start gap-10 flex-nowrap whitespace-nowrap",
               "transform-gpu will-change-transform [backface-visibility:hidden]",
               shouldAnimateDesktop ? "marquee" : "",
               "hover:[animation-play-state:paused]",
