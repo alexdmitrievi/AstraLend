@@ -4,6 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import useDesktopMotion from "../ui/useDesktopMotion";
 
+type HowWeWorkProps = {
+  /** Кадр производства 4:5 или null, если файла ещё нет в public/. */
+  workshopSrc?: string | null;
+};
+
 /* ─── useCountUp ──────────────────────────────────────────────── */
 function useCountUp(target: number, duration = 1400) {
   // Стартуем сразу с целевого значения: так статический HTML и режим
@@ -38,21 +43,23 @@ function useCountUp(target: number, duration = 1400) {
 }
 
 const metrics = [
-  { target: 120, suffix: "+", label: "проектов" },
-  { target: 20, suffix: "+", label: "лет" },
-  { target: 47, suffix: "", label: "городов" },
+  { target: 120, suffix: "+", label: "проектов выполнено" },
+  { target: 20, suffix: "+", label: "лет на рынке" },
+  { target: 47, suffix: "", label: "городов России" },
 ];
 
 const steps = [
   {
     number: "01",
     title: "Заявка и обсуждение",
-    description: "Обсуждаем стиль, размеры, материалы и бюджет.",
+    description:
+      "Обсуждаем стиль, размеры, материалы и бюджет — по телефону или в мессенджере.",
   },
   {
     number: "02",
     title: "Замер и эскиз",
-    description: "Выезжаем на замер, готовим эскиз и согласовываем вариант.",
+    description:
+      "Выезжаем на замер, готовим эскиз и согласовываем финальный вариант.",
   },
   {
     number: "03",
@@ -63,7 +70,8 @@ const steps = [
   {
     number: "04",
     title: "Доставка и монтаж",
-    description: "Доставляем по России, собираем и устанавливаем на месте.",
+    description:
+      "Доставляем по всей России, аккуратно собираем и устанавливаем на месте.",
   },
 ];
 
@@ -82,19 +90,20 @@ function Metric({
     <div>
       <span
         ref={ref as React.RefObject<HTMLSpanElement>}
-        className="block font-heading text-[40px] font-medium leading-none text-ink lg:text-[52px]"
+        className="block font-heading font-medium leading-none text-ink"
+        style={{ fontSize: "clamp(30px, 3.4vw, 44px)" }}
       >
         {count}
         {suffix}
       </span>
-      <span className="mt-3 block text-[12px] uppercase tracking-[0.16em] text-ash">
+      <span className="mt-2 block text-[12px] uppercase leading-relaxed tracking-[0.1em] text-ash">
         {label}
       </span>
     </div>
   );
 }
 
-export default function HowWeWork() {
+export default function HowWeWork({ workshopSrc = null }: HowWeWorkProps) {
   return (
     <section
       id="process"
@@ -102,44 +111,58 @@ export default function HowWeWork() {
       aria-label="Мастерская"
       className="section-pad scroll-mt-24 bg-cream"
     >
-      <div className="wrap grid gap-14 lg:grid-cols-2 lg:gap-24">
-        {/* Слева: заявление + цифры */}
-        <div>
-          <p className="eyebrow">Мастерская</p>
-          <h2 className="h-section mt-4 max-w-[16ch]">
-            Полный цикл под одной крышей
-          </h2>
-          <p className="mt-6 max-w-[52ch] text-[15px] leading-relaxed text-charcoal">
-            От первого эскиза до монтажа на объекте мебель ведёт одна команда:
-            замер, конструкция, обивка, сборка. Производство собственное —
-            поэтому размеры, обивка и сроки остаются под нашим контролем.
-          </p>
+      <div className="wrap">
+        <div className="grid items-start gap-12 lg:gap-16 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
+          <div className="aspect-[4/5] w-full overflow-hidden bg-stone">
+            {workshopSrc ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={workshopSrc}
+                alt="Кадр производства мастерской АСТРА"
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center">
+                <span className="text-[12px] uppercase tracking-[0.24em] text-charcoal">
+                  фото готовится
+                </span>
+              </div>
+            )}
+          </div>
 
-          <div className="mt-12 grid grid-cols-3 gap-6 border-t border-steel pt-10">
-            {metrics.map((metric) => (
-              <Metric key={metric.label} {...metric} />
-            ))}
+          <div>
+            <p className="eyebrow">Мастерская</p>
+            <h2 className="h-section mt-4 max-w-[16ch]">
+              Полный цикл под одной крышей
+            </h2>
+            <p className="mt-6 max-w-[46ch] text-[16px] leading-relaxed text-charcoal">
+              Проект, каркас, обивка, доставка и монтаж — всё внутри одной
+              мастерской. Поэтому мы отвечаем за результат договором и
+              гарантией.
+            </p>
+
+            <div className="mt-10 grid grid-cols-3 gap-6 border-t border-steel pt-8">
+              {metrics.map((metric) => (
+                <Metric key={metric.label} {...metric} />
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Справа: 4 шага */}
-        <ol className="border-t border-steel">
+        <ol className="mt-16 grid gap-8 [grid-template-columns:repeat(auto-fit,minmax(230px,1fr))] lg:mt-[72px]">
           {steps.map((step) => (
-            <li
-              key={step.number}
-              className="grid grid-cols-[54px_1fr] gap-4 border-b border-steel py-7"
-            >
-              <span className="font-heading text-[22px] font-medium leading-none text-walnut">
+            <li key={step.number} className="border-t border-steel pt-5">
+              <span className="mb-3.5 block font-heading text-[20px] leading-none text-walnut">
                 {step.number}
               </span>
-              <div>
-                <h3 className="font-heading text-[19px] font-medium leading-tight text-ink">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-charcoal">
-                  {step.description}
-                </p>
-              </div>
+              <h3 className="font-body text-[17px] font-semibold leading-snug text-ink">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-charcoal">
+                {step.description}
+              </p>
             </li>
           ))}
         </ol>

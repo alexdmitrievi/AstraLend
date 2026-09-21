@@ -8,19 +8,24 @@ import Stats from "../components/sections/Stats";
 import LeadForm from "../components/sections/LeadForm";
 import Footer from "../components/sections/Footer";
 import { clients } from "../lib/clients";
+import { resolveMedia } from "../lib/media";
 
 export default function HomePage() {
+  // Проверяется во время сборки: ассета нет в public/ → компонент получает
+  // null и рендерит фолбэк вместо битой ссылки.
+  const media = resolveMedia();
+
   return (
     <div className="bg-cream text-charcoal">
       <Header />
       <main id="main">
-        <Hero heroImageSrc="/astra_main.webp" />
+        <Hero heroImageSrc="/astra_main.webp" videoSrc={media.heroVideo} />
         <Collections />
-        <Cases />
+        <Cases textureSrc={media.textureDark} />
         <ClientsMarquee clients={clients} />
-        <HowWeWork />
+        <HowWeWork workshopSrc={media.workshop} />
         <Stats />
-        <LeadForm />
+        <LeadForm textureSrc={media.textureDark} />
       </main>
       <Footer />
     </div>

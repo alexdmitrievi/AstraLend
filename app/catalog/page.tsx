@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import Header from "../../components/sections/Header";
 import Footer from "../../components/sections/Footer";
@@ -84,12 +85,21 @@ export default function CatalogPage() {
       <main id="main" className="bg-cream">
         <section className="section-pad">
           <div className="wrap">
-            <p className="eyebrow">Коллекции</p>
-            <h1 className="h-section mt-4">Каталог</h1>
-            <p className="mt-6 max-w-[58ch] text-[15px] leading-relaxed text-charcoal">
-              Все модели изменяемы: размеры, глубину посадки, высоту спинки и
-              обивку подбираем под ваш интерьер. Фото показывают конструкцию —
-              ткань, кожа и цвет выбираются отдельно.
+            <Link
+              href="/"
+              className="focus-ring text-[12px] uppercase tracking-[0.16em] text-ash transition-colors duration-300 hover:text-ink"
+            >
+              ← На главную
+            </Link>
+            <h1
+              className="mt-5 font-heading font-medium leading-[1.05] text-ink"
+              style={{ fontSize: "clamp(34px, 5vw, 68px)" }}
+            >
+              Каталог
+            </h1>
+            <p className="mt-5 max-w-[56ch] text-[16px] leading-relaxed text-charcoal">
+              Все модели мастерской. Любая позиция меняется по размеру, обивке и
+              основанию — каталог здесь отправная точка, а не готовый склад.
             </p>
 
             <div className="mt-12 border-t border-steel">

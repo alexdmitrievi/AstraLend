@@ -9,16 +9,21 @@ import { track } from "../../lib/track";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
+type LeadFormProps = {
+  /** Путь к фактуре или null, если файла ещё нет в public/. */
+  textureSrc?: string | null;
+};
+
 const TELEGRAM_USERNAME = "R2D2_55";
 const PHONE_RAW = "+79136263444";
 
 const MIN_PHONE_DIGITS = 10;
 
 const benefits = [
-  "Договор и гарантия",
-  "Собственное производство",
-  "Доставка и монтаж в 47 городах",
-  "20+ лет на рынке",
+  "Договор и гарантия на изделие",
+  "Собственное производство полного цикла",
+  "Доставка и монтаж в 47 городах России",
+  "20+ лет на рынке мягкой мебели",
 ];
 
 const CheckIcon = () => (
@@ -33,7 +38,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-export default function LeadForm() {
+export default function LeadForm({ textureSrc = null }: LeadFormProps) {
   const [status, setStatus] = useState<FormStatus>("idle");
 
   const leadEndpoint =
@@ -107,15 +112,37 @@ export default function LeadForm() {
     <section
       id="lead"
       tabIndex={-1}
-      className="section-pad scroll-mt-24 bg-graphite"
+      className="section-pad relative scroll-mt-24 overflow-hidden bg-graphite"
     >
-      <div className="wrap grid gap-14 lg:grid-cols-2 lg:gap-24">
+      {textureSrc ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={textureSrc}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.22]"
+        />
+      ) : null}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, rgba(44,44,44,.9) 0%, rgba(44,44,44,.96) 100%)",
+        }}
+      />
+
+      <div className="wrap relative grid items-start gap-14 lg:gap-16 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
         {/* Слева: предложение */}
         <div>
-          <p className="eyebrow text-white/60">Заявка</p>
+          <p className="eyebrow text-white/60">Расчёт проекта</p>
           <h2 className="h-section mt-4 max-w-[18ch] text-white">
             Пришлём каталог и смету по вашим размерам
           </h2>
+          <p className="mt-6 max-w-[46ch] text-[16px] leading-relaxed text-white/80">
+            Оставьте телефон — отправим каталог в WhatsApp или Telegram, без
+            звонка. Менеджер свяжется в течение рабочего дня.
+          </p>
 
           <ul className="mt-10 border-t border-white/15">
             {benefits.map((benefit) => (
@@ -131,26 +158,24 @@ export default function LeadForm() {
             ))}
           </ul>
 
-          <p className="mt-8 text-[13px] text-white/60">
-            Или напишите напрямую:{" "}
+          <div className="mt-9 flex flex-wrap gap-3.5">
             <a
               href={whatsappLink}
               target="_blank"
               rel="noreferrer"
-              className="focus-ring text-white/85 underline underline-offset-4 transition-colors duration-300 hover:text-white"
+              className="focus-ring inline-flex min-h-[44px] items-center border border-white/35 px-6 text-[13px] tracking-[0.08em] text-white transition-colors duration-300 hover:border-white hover:bg-white/10"
             >
               WhatsApp
             </a>
-            {" · "}
             <a
               href={telegramLink}
               target="_blank"
               rel="noreferrer"
-              className="focus-ring text-white/85 underline underline-offset-4 transition-colors duration-300 hover:text-white"
+              className="focus-ring inline-flex min-h-[44px] items-center border border-white/35 px-6 text-[13px] tracking-[0.08em] text-white transition-colors duration-300 hover:border-white hover:bg-white/10"
             >
               Telegram
             </a>
-          </p>
+          </div>
         </div>
 
         {/* Справа: карточка формы */}
@@ -174,9 +199,11 @@ export default function LeadForm() {
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} aria-live="polite" noValidate>
-              <p className="eyebrow">Бесплатно</p>
-              <p className="mt-4 font-heading text-[24px] font-medium leading-tight text-ink">
-                Получить каталог и смету
+              <p className="font-heading text-[24px] font-medium leading-tight text-ink">
+                Каталог и смета
+              </p>
+              <p className="mt-2.5 text-[14px] text-ash">
+                Телефон или мессенджер — на выбор.
               </p>
 
               <div className="mt-8">

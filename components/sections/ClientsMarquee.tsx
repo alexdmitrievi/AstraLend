@@ -214,9 +214,12 @@ export default function ClientsMarquee({ clients }: ClientsMarqueeProps) {
       id="clients"
       tabIndex={-1}
       aria-label="Клиенты мастерской"
-      className="scroll-mt-24 border-y border-steel bg-cream"
+      className="scroll-mt-24 bg-cream pt-16 lg:pt-24"
     >
-      <div className="overflow-hidden">
+      <div className="wrap">
+        <p className="eyebrow mb-8">Нам доверяют</p>
+      </div>
+      <div className="overflow-hidden border-y border-steel">
         {/* MOBILE */}
         <div className="md:hidden">
           <ul

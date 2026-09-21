@@ -120,12 +120,7 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col gap-3 border-t border-white/15 pt-8 text-[13px] text-white/60 sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 АСТРА. Все права защищены.</span>
-          <a
-            className="focus-ring transition-colors duration-300 hover:text-white"
-            href={`tel:${PHONE_TEL}`}
-          >
-            {PHONE_RAW}
-          </a>
+          <span>Омск · доставка по России</span>
         </div>
       </div>
     </footer>

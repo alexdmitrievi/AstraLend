@@ -73,7 +73,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru">
+    // Переменные шрифтов обязаны жить на <html>: Tailwind объявляет
+    // --font-heading: var(--font-playfair) в :root, и если --font-playfair
+    // определён только на <body>, var() в :root не разрешается и все
+    // заголовки уезжают в системный sans-serif.
+    <html lang="ru" className={`${montserrat.variable} ${playfair.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -84,7 +88,7 @@ export default function RootLayout({
         <link rel="canonical" href={BASE_URL} />
       </head>
       <body
-        className={`${montserrat.variable} ${playfair.variable} min-h-screen bg-cream text-charcoal font-body antialiased`}
+        className="min-h-screen bg-cream text-charcoal font-body antialiased"
       >
         <a
           href="#main"

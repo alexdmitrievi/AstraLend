@@ -2,6 +2,11 @@
  * Единственный источник данных каталога.
  * Раньше массив жил прямо в app/page.tsx — вынесен, чтобы главная
  * и /catalog/ читали одни и те же позиции.
+ *
+ * Теги материалов и помещений заданы явно по утверждённому макету
+ * (design/redesign-reference.dc.html) — он источник истины. Выводить их
+ * регуляркой из поля `material` нельзя: макет, например, не считает
+ * латунные гвозди металлом.
  */
 
 export type MaterialTag = "leather" | "fabric" | "wood" | "metal";
@@ -37,54 +42,58 @@ export const roomLabels: Record<RoomTag, string> = {
   horeca: "Отели и рестораны",
 };
 
-/** Теги материала выводятся из текстового поля material — одно место правды. */
-function materialTags(material: string): MaterialTag[] {
-  const tags: MaterialTag[] = [];
-  if (/кож/i.test(material)) tags.push("leather");
-  if (/ткан|велюр|бархат|текстил/i.test(material)) tags.push("fabric");
-  if (/массив/i.test(material)) tags.push("wood");
-  if (/металл|латун|хром/i.test(material)) tags.push("metal");
-  return tags;
-}
+const IMG = {
+  modular: "https://i.postimg.cc/28YBLJs8/06864f01252556d06a45281bffd903ed-1770245125.png",
+  chester: "https://i.postimg.cc/7L9TV6D1/a3ce72d274c2a75847a8fe18b32b1091-1770241389.png",
+  lounge: "https://i.postimg.cc/1XKmqyQy/196f01ad-e165-4ff4-83c9-eedd43b4d7d1.png",
+  minimal: "https://i.postimg.cc/tRF7tkbW/771f0af22663800624a9fc8c4300639e-1770247764.png",
+  corner: "https://i.postimg.cc/jSDTsHLw/38246aa2-9ced-4ea6-9a5a-32de4b893e25.png",
+  carved: "https://i.postimg.cc/ZnbB2vFd/17091dd7206c2c4550150e55426f61ad-1770240229.png",
+  wheels: "https://i.postimg.cc/cJSQh23G/1c51eec6e84c002d0d9310cb10b26ec0-1770243052.png",
+  classic: "https://i.postimg.cc/KzvGxWVV/photo-2026-02-09-00-33-28.jpg",
+  bedArch: "https://i.postimg.cc/k41M1Y0N/720490c15029dad280131423b2d53b27-1770732955.png",
+  bedQuilt: "https://i.postimg.cc/jjnFnLfH/15cf1e42e21d4141d4ec6a52abbedb2f-1770652377.png",
+  bench: "https://i.postimg.cc/W1rKYd9w/0f154305120eb542bd0b0ce9e9d04798-1770247952.png",
+  pouf: "https://i.postimg.cc/GpdMMqT4/eddeff193c92e25e89c1018110825040-1770247153.png",
+  meeting: "https://i.postimg.cc/k55tTbsm/d29350da0f0e5772c0e15acbc1dae661-1770245979.png",
+} as const;
 
-type RawItem = Omit<CatalogItem, "materials">;
-
-const rawItems: RawItem[] = [
+export const catalogItems: CatalogItem[] = [
   /* ─── Диваны ─── */
   {
     id: "sofa-modular",
     collection: "sofas",
     title: "Модульный архитектурный диван",
     material: "Велюр, высокоэластичный ППУ",
-    image:
-      "https://i.postimg.cc/28YBLJs8/06864f01252556d06a45281bffd903ed-1770245125.png",
-    rooms: ["home", "office"],
+    image: IMG.modular,
+    materials: ["fabric"],
+    rooms: ["home"],
   },
   {
     id: "sofa-chesterfield",
     collection: "sofas",
     title: "Современный Chesterfield-диван",
     material: "Натуральная кожа, металлическое основание",
-    image:
-      "https://i.postimg.cc/7L9TV6D1/a3ce72d274c2a75847a8fe18b32b1091-1770241389.png",
-    rooms: ["home", "office", "horeca"],
+    image: IMG.chester,
+    materials: ["leather", "metal"],
+    rooms: ["home", "horeca"],
   },
   {
     id: "sofa-lounge",
     collection: "sofas",
     title: "Лаунж-диван с цилиндрическими валиками",
     material: "Бархат, массив дерева",
-    image:
-      "https://i.postimg.cc/1XKmqyQy/196f01ad-e165-4ff4-83c9-eedd43b4d7d1.png",
-    rooms: ["home", "horeca"],
+    image: IMG.lounge,
+    materials: ["fabric", "wood"],
+    rooms: ["horeca"],
   },
   {
     id: "sofa-minimal",
     collection: "sofas",
     title: "Минималистичный диван для гостиной",
     material: "Ткань премиум-класса, металл",
-    image:
-      "https://i.postimg.cc/tRF7tkbW/771f0af22663800624a9fc8c4300639e-1770247764.png",
+    image: IMG.minimal,
+    materials: ["fabric", "metal"],
     rooms: ["home"],
   },
   {
@@ -92,9 +101,9 @@ const rawItems: RawItem[] = [
     collection: "sofas",
     title: "Угловой диван представительского класса",
     material: "Натуральная кожа, массив дерева",
-    image:
-      "https://i.postimg.cc/jSDTsHLw/38246aa2-9ced-4ea6-9a5a-32de4b893e25.png",
-    rooms: ["home", "office"],
+    image: IMG.corner,
+    materials: ["leather", "wood"],
+    rooms: ["office", "home"],
   },
 
   /* ─── Кресла ─── */
@@ -103,26 +112,27 @@ const rawItems: RawItem[] = [
     collection: "armchairs",
     title: "Резное кожаное кресло Heritage",
     material: "Натуральная кожа, массив дерева, латунные гвозди",
-    image:
-      "https://i.postimg.cc/ZnbB2vFd/17091dd7206c2c4550150e55426f61ad-1770240229.png",
-    rooms: ["home", "office"],
+    image: IMG.carved,
+    materials: ["leather", "wood"],
+    rooms: ["home"],
   },
   {
     id: "armchair-heritage-castors",
     collection: "armchairs",
-    title: "Кресло Heritage на колесной базе",
+    title: "Кресло Heritage на колёсной базе",
     material: "Натуральная кожа, массив дерева, металлическая крестовина",
-    image:
-      "https://i.postimg.cc/cJSQh23G/1c51eec6e84c002d0d9310cb10b26ec0-1770243052.png",
-    rooms: ["home", "office"],
+    image: IMG.wheels,
+    materials: ["leather", "wood", "metal"],
+    rooms: ["office"],
   },
   {
     id: "armchair-heritage-classic",
     collection: "armchairs",
-    title: "Кресло Heritage Classic (кампейн / statement версия)",
+    title: "Кресло Heritage Classic",
     material: "Натуральная кожа, массив дерева, латунные гвозди",
-    image: "https://i.postimg.cc/KzvGxWVV/photo-2026-02-09-00-33-28.jpg",
-    rooms: ["home", "horeca"],
+    image: IMG.classic,
+    materials: ["leather", "wood"],
+    rooms: ["horeca"],
   },
 
   /* ─── Кровати ─── */
@@ -131,8 +141,8 @@ const rawItems: RawItem[] = [
     collection: "beds",
     title: "Кровать с мягким архитектурным изголовьем",
     material: "Велюр, МДФ, металл",
-    image:
-      "https://i.postimg.cc/k41M1Y0N/720490c15029dad280131423b2d53b27-1770732955.png",
+    image: IMG.bedArch,
+    materials: ["fabric", "metal"],
     rooms: ["home"],
   },
   {
@@ -140,8 +150,8 @@ const rawItems: RawItem[] = [
     collection: "beds",
     title: "Современная кровать с вертикальной простёжкой",
     material: "Текстиль, массив дерева",
-    image:
-      "https://i.postimg.cc/jjnFnLfH/15cf1e42e21d4141d4ec6a52abbedb2f-1770652377.png",
+    image: IMG.bedQuilt,
+    materials: ["fabric", "wood"],
     rooms: ["home"],
   },
 
@@ -151,8 +161,8 @@ const rawItems: RawItem[] = [
     collection: "benches",
     title: "Банкетка на металлическом основании",
     material: "Ткань, массив дерева, хромированный металл",
-    image:
-      "https://i.postimg.cc/W1rKYd9w/0f154305120eb542bd0b0ce9e9d04798-1770247952.png",
+    image: IMG.bench,
+    materials: ["fabric", "wood", "metal"],
     rooms: ["home", "horeca"],
   },
   {
@@ -160,8 +170,8 @@ const rawItems: RawItem[] = [
     collection: "benches",
     title: "Мягкий пуф для интерьера",
     material: "Ткань, ППУ",
-    image:
-      "https://i.postimg.cc/GpdMMqT4/eddeff193c92e25e89c1018110825040-1770247153.png",
+    image: IMG.pouf,
+    materials: ["fabric"],
     rooms: ["home", "horeca"],
   },
 
@@ -171,8 +181,8 @@ const rawItems: RawItem[] = [
     collection: "business",
     title: "Диван для переговорной зоны",
     material: "Натуральная кожа, металл",
-    image:
-      "https://i.postimg.cc/k55tTbsm/d29350da0f0e5772c0e15acbc1dae661-1770245979.png",
+    image: IMG.meeting,
+    materials: ["leather", "metal"],
     rooms: ["office"],
   },
   {
@@ -180,16 +190,11 @@ const rawItems: RawItem[] = [
     collection: "business",
     title: "Кресло для кабинета руководителя",
     material: "Натуральная кожа, массив дерева",
-    image:
-      "https://i.postimg.cc/cJSQh23G/1c51eec6e84c002d0d9310cb10b26ec0-1770243052.png",
+    image: IMG.wheels,
+    materials: ["leather", "wood"],
     rooms: ["office"],
   },
 ];
-
-export const catalogItems: CatalogItem[] = rawItems.map((item) => ({
-  ...item,
-  materials: materialTags(item.material),
-}));
 
 export const collections: Collection[] = [
   {
@@ -197,34 +202,33 @@ export const collections: Collection[] = [
     title: "Диваны",
     description:
       "Прямые, угловые и модульные диваны архитектурного и представительского уровня",
-    image: "https://i.postimg.cc/28YBLJs8/06864f01252556d06a45281bffd903ed-1770245125.png",
+    image: IMG.modular,
   },
   {
     id: "armchairs",
     title: "Кресла",
     description:
       "Акцентные кресла для интерьеров, кабинетов и общественных пространств",
-    image: "https://i.postimg.cc/ZnbB2vFd/17091dd7206c2c4550150e55426f61ad-1770240229.png",
+    image: IMG.carved,
   },
   {
     id: "beds",
     title: "Кровати",
     description: "Кровати с мягким изголовьем и архитектурным характером",
-    image: "https://i.postimg.cc/k41M1Y0N/720490c15029dad280131423b2d53b27-1770732955.png",
+    image: IMG.bedArch,
   },
   {
     id: "benches",
     title: "Банкетки и пуфы",
     description:
       "Функциональные элементы для спален, холлов и общественных зон",
-    image: "https://i.postimg.cc/W1rKYd9w/0f154305120eb542bd0b0ce9e9d04798-1770247952.png",
+    image: IMG.bench,
   },
   {
     id: "business",
     title: "Мебель для бизнеса",
-    description:
-      "Решения для офисов, переговорных, лобби и частных кабинетов",
-    image: "https://i.postimg.cc/k55tTbsm/d29350da0f0e5772c0e15acbc1dae661-1770245979.png",
+    description: "Решения для офисов, переговорных, лобби и частных кабинетов",
+    image: IMG.meeting,
   },
 ];
 
