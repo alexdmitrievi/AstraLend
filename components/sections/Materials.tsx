@@ -42,10 +42,13 @@ export default function Materials({
       return;
     }
 
-    // В Safari play() отклоняется промисом — без catch это unhandled rejection.
+    // play() отклоняется промисом, если браузер запретил автоплей
+    // (энергосбережение, экономия трафика, политика автовоспроизведения).
+    // Тогда честно переключаем кнопку в «play», иначе она предлагает
+    // остановить то, что и так стоит, и тапать приходится дважды.
     const played = video.play();
     if (played && typeof played.catch === "function") {
-      played.catch(() => {});
+      played.catch(() => setIsPaused(true));
     }
   }, [shouldRender, isPaused]);
 
@@ -57,6 +60,8 @@ export default function Materials({
       aria-label="Материалы"
       className="relative w-full overflow-hidden bg-[#141413] pb-24 pt-16 lg:h-[46vh] lg:min-h-[340px] lg:py-0"
     >
+      {/* onPlay/onPause: состояние кнопки идёт от самого элемента — систему
+          может поставить ролик на паузу и без нас (энергосбережение). */}
       <video
         ref={videoRef}
         src={videoSrc}
@@ -67,6 +72,8 @@ export default function Materials({
         playsInline
         preload="none"
         aria-hidden="true"
+        onPlay={() => setIsPaused(false)}
+        onPause={() => setIsPaused(true)}
         className="absolute inset-0 h-full w-full object-cover"
       />
 
