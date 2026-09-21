@@ -19,6 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # enablement: true включает Pages через API, если он ещё не включён —
+      # иначе deploy-pages падает с «Not Found». Требует permissions: pages: write,
+      # который уже выдан ниже. Если Pages включён вручную, шаг просто no-op.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/setup-node@v4
         with:
           node-version: 20
