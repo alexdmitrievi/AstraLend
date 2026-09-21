@@ -112,7 +112,7 @@ export default function HowWeWork({ workshopSrc = null }: HowWeWorkProps) {
       className="section-pad scroll-mt-24 bg-cream"
     >
       <div className="wrap">
-        <div className="grid items-start gap-12 lg:gap-16 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
+        <div className="grid items-start gap-12 lg:gap-16 [grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))]">
           <div className="aspect-[4/5] w-full overflow-hidden bg-stone">
             {workshopSrc ? (
               /* eslint-disable-next-line @next/next/no-img-element */
@@ -151,7 +151,7 @@ export default function HowWeWork({ workshopSrc = null }: HowWeWorkProps) {
           </div>
         </div>
 
-        <ol className="mt-16 grid gap-8 [grid-template-columns:repeat(auto-fit,minmax(230px,1fr))] lg:mt-[72px]">
+        <ol className="mt-16 grid gap-8 [grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))] lg:mt-[72px]">
           {steps.map((step) => (
             <li key={step.number} className="border-t border-steel pt-5">
               <span className="mb-3.5 block font-heading text-[20px] leading-none text-walnut">

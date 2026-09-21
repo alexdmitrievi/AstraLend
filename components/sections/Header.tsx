@@ -7,7 +7,6 @@ type NavLink = { href: string; label: string; page?: boolean };
 
 const navLinks: NavLink[] = [
   { href: "/catalog/", label: "Коллекции", page: true },
-  { href: "/#projects", label: "Объекты" },
   { href: "/#process", label: "Мастерская" },
   { href: "/#contacts", label: "Контакты" },
 ];

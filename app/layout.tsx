@@ -78,15 +78,6 @@ export default function RootLayout({
     // определён только на <body>, var() в :root не разрешается и все
     // заголовки уезжают в системный sans-serif.
     <html lang="ru" className={`${montserrat.variable} ${playfair.variable}`}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="canonical" href={BASE_URL} />
-      </head>
       <body
         className="min-h-screen bg-cream text-charcoal font-body antialiased"
       >

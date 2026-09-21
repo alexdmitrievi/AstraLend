@@ -2,10 +2,8 @@ import Header from "../components/sections/Header";
 import Hero from "../components/sections/Hero";
 import Collections from "../components/sections/Collections";
 import Materials from "../components/sections/Materials";
-import Cases from "../components/sections/Cases";
 import ClientsMarquee from "../components/sections/ClientsMarquee";
 import HowWeWork from "../components/sections/HowWeWork";
-import Stats from "../components/sections/Stats";
 import LeadForm from "../components/sections/LeadForm";
 import Footer from "../components/sections/Footer";
 import { clients } from "../lib/clients";
@@ -20,16 +18,17 @@ export default function HomePage() {
     <div className="bg-cream text-charcoal">
       <Header />
       <main id="main">
-        <Hero heroImageSrc="/astra_main.webp" />
+        <Hero
+          heroImageSrc="/astra_main.webp"
+          heroImageMobileSrc="/astra_main_mobile.webp"
+        />
         <Collections />
         <Materials
           videoSrc={media.materialVideo}
           posterSrc={media.textureDark}
         />
-        <Cases textureSrc={media.textureDark} />
         <ClientsMarquee clients={clients} />
         <HowWeWork workshopSrc={media.workshop} />
-        <Stats />
         <LeadForm textureSrc={media.textureDark} />
       </main>
       <Footer />

@@ -55,8 +55,7 @@ export default function Materials({
   return (
     <section
       aria-label="Материалы"
-      className="relative w-full overflow-hidden bg-[#141413]"
-      style={{ height: "46vh", minHeight: "340px" }}
+      className="relative w-full overflow-hidden bg-[#141413] pb-24 pt-16 lg:h-[46vh] lg:min-h-[340px] lg:py-0"
     >
       <video
         ref={videoRef}
@@ -71,23 +70,34 @@ export default function Materials({
         className="absolute inset-0 h-full w-full object-cover"
       />
 
+      {/* На узком экране текст идёт во всю ширину — подложка вертикальная,
+          иначе правый край строк попадает на светлую часть кадра. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 lg:hidden"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, rgba(20,20,19,.82) 0%, rgba(20,20,19,.72) 50%, rgba(20,20,19,.86) 100%)",
+        }}
+      />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 hidden lg:block"
         style={{
           backgroundImage:
             "linear-gradient(90deg, rgba(20,20,19,.9) 0%, rgba(20,20,19,.62) 40%, rgba(20,20,19,.15) 100%)",
         }}
       />
 
-      <div className="wrap relative flex h-full flex-col justify-center">
+      <div className="wrap relative flex flex-col justify-center lg:h-full">
         <p className="text-[12px] uppercase tracking-[0.24em] text-white/60">
           Материалы
         </p>
         <h2 className="h-section mt-4 max-w-[18ch] text-white">
           Кожа, велюр, массив дуба
         </h2>
-        <p className="mt-5 max-w-[46ch] text-[16px] leading-relaxed text-white/80">
+        <p className="mt-5 max-w-[46ch] text-[15px] leading-relaxed text-white/80 sm:text-[16px]">
           Обивку подбираем под объект: износостойкую для ресторана и лобби,
           тактильную для дома. Образцы привозим на замер — решение принимается
           по фактуре в руках, а не по картинке на экране.
@@ -100,7 +110,7 @@ export default function Materials({
         aria-label={
           isPaused ? "Воспроизвести фоновое видео" : "Остановить фоновое видео"
         }
-        className="focus-ring absolute bottom-6 right-6 z-10 flex h-11 w-11 cursor-pointer items-center justify-center border border-white/40 bg-ink/40 text-[13px] text-white backdrop-blur-sm transition-colors duration-300 hover:bg-ink/70"
+        className="focus-ring absolute bottom-4 left-4 z-10 flex h-11 w-11 lg:bottom-6 lg:left-auto lg:right-6 cursor-pointer items-center justify-center border border-white/40 bg-ink/40 text-[13px] text-white backdrop-blur-sm transition-colors duration-300 hover:bg-ink/70"
       >
         <span aria-hidden="true">{isPaused ? "▶" : "❚❚"}</span>
       </button>
