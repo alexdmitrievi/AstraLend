@@ -1,54 +1,37 @@
-// Header.tsx
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type MouseEvent,
-} from "react";
+import Link from "next/link";
+import { useCallback, useState, type MouseEvent } from "react";
 
-const navLinks = [
-  { href: "#portfolio", label: "Портфолио" },
-  { href: "#clients", label: "Клиенты" },
-  { href: "#lead", label: "Заявка" },
-  { href: "#contacts", label: "Контакты" },
+type NavLink = { href: string; label: string; page?: boolean };
+
+const navLinks: NavLink[] = [
+  { href: "/catalog/", label: "Коллекции", page: true },
+  { href: "/#projects", label: "Объекты" },
+  { href: "/#process", label: "Мастерская" },
+  { href: "/#contacts", label: "Контакты" },
 ];
 
-function BrandWordmark() {
+export function BrandWordmark() {
   return (
-    <span className="font-heading text-[1.15em] font-semibold tracking-[0.08em]">
+    <span className="font-heading text-[22px] font-medium tracking-[0.14em]">
       А<span className="inline-block -translate-y-[0.08em] px-[0.08em]">·</span>СТРА
     </span>
   );
 }
 
 export default function Header() {
-  const headerRef = useRef<HTMLElement | null>(null);
-  const desktopLogoRef = useRef<HTMLAnchorElement | null>(null);
-
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 8);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleAnchorClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement>) => {
       setIsOpen(false);
-      const target = event.currentTarget.getAttribute("href");
-      if (!target || !target.startsWith("#")) return;
 
+      const href = event.currentTarget.getAttribute("href") ?? "";
+      const hashIndex = href.indexOf("#");
+      if (hashIndex < 0) return;
+
+      const target = href.slice(hashIndex);
       const element = document.querySelector(target);
       if (element instanceof HTMLElement) {
         window.setTimeout(() => {
@@ -59,173 +42,83 @@ export default function Header() {
     []
   );
 
-  const writeHeroVars = useCallback(() => {
-    if (typeof window === "undefined") return;
-    const logo = desktopLogoRef.current;
-    const header = headerRef.current;
-    if (!logo || !header) return;
-
-    const left = Math.round(logo.getBoundingClientRect().left);
-    const height = Math.round(header.getBoundingClientRect().height);
-
-    document.documentElement.style.setProperty("--brand-left", `${left}px`);
-    document.documentElement.style.setProperty("--header-height", `${height}px`);
-  }, []);
-
-  useLayoutEffect(() => {
-    writeHeroVars();
-  }, [writeHeroVars]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    writeHeroVars();
-
-    let ro: ResizeObserver | null = null;
-    if (typeof ResizeObserver !== "undefined") {
-      ro = new ResizeObserver(() => writeHeroVars());
-      ro.observe(document.documentElement);
-      if (headerRef.current) ro.observe(headerRef.current);
-      if (desktopLogoRef.current) ro.observe(desktopLogoRef.current);
-    }
-
-    const onResize = () => writeHeroVars();
-    window.addEventListener("resize", onResize, { passive: true });
-
-    return () => {
-      ro?.disconnect();
-      window.removeEventListener("resize", onResize);
-    };
-  }, [writeHeroVars]);
+  const renderLink = (link: NavLink, className: string) =>
+    link.page ? (
+      <Link key={link.href} href={link.href} className={className} onClick={() => setIsOpen(false)}>
+        {link.label}
+      </Link>
+    ) : (
+      <Link key={link.href} href={link.href} className={className} onClick={handleAnchorClick}>
+        {link.label}
+      </Link>
+    );
 
   return (
-    <header
-      ref={headerRef}
-      className={`sticky top-0 z-50 border-b border-steel/60 bg-stone/95 backdrop-blur-sm transition-shadow duration-300 lg:bg-cream/90 lg:backdrop-blur-xl ${
-        isScrolled
-          ? "shadow-[0_2px_16px_rgba(44,44,44,0.07)] lg:shadow-[0_10px_30px_rgba(44,44,44,0.08)]"
-          : ""
-      }`}
-    >
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:hidden">
-        <div className="flex items-center justify-between gap-4 py-3">
-          <a href="#hero" className="focus-ring text-lg text-graphite">
-            <BrandWordmark />
-          </a>
+    <header className="sticky top-0 z-50 border-b border-steel bg-cream">
+      <div className="wrap flex items-center justify-between gap-6 py-4 lg:py-5">
+        <Link href="/" className="focus-ring text-ink" aria-label="АСТРА — на главную">
+          <BrandWordmark />
+        </Link>
 
-          <nav
-            className="hidden items-center gap-3 text-sm text-charcoal/80 md:flex"
-            aria-label="Основная навигация"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                className="focus-ring rounded-full px-3 py-1 text-charcoal transition-all duration-200 hover:text-graphite hover:bg-stone/60"
-                href={link.href}
-                onClick={handleAnchorClick}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="#lead"
-              className="focus-ring hidden cursor-pointer rounded-lg bg-graphite px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#1a1a1a] hover:shadow-md md:inline-flex"
-              onClick={handleAnchorClick}
-            >
-              Рассчитать проект
-            </a>
-            <button
-              type="button"
-              className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-none border border-steel text-graphite md:hidden"
-              aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
-              aria-expanded={isOpen}
-              aria-controls="mobile-navigation"
-              onClick={() => setIsOpen((prev) => !prev)}
-            >
-              <span className="sr-only">
-                {isOpen ? "Закрыть меню" : "Открыть меню"}
-              </span>
-              <span className="flex flex-col items-center gap-1">
-                <span className="block h-0.5 w-5 bg-graphite" />
-                <span className="block h-0.5 w-5 bg-graphite" />
-                <span className="block h-0.5 w-5 bg-graphite" />
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="hidden w-full px-12 py-4 lg:block">
-        <div className="flex items-center justify-between">
-          <a
-            ref={desktopLogoRef}
-            href="#hero"
-            className="focus-ring text-[1.375rem] text-graphite"
-          >
-            <BrandWordmark />
-          </a>
-
-          <div className="flex items-center gap-10">
-            <nav
-              className="flex items-center gap-8 text-[length:var(--font-nav)] text-charcoal/80 xl:gap-10"
-              aria-label="Основная навигация"
-            >
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  className="focus-ring rounded-full px-4 py-2 text-charcoal transition-all duration-200 hover:text-graphite hover:bg-stone/60"
-                  href={link.href}
-                  onClick={handleAnchorClick}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-
-            <a
-              href="#lead"
-              className="focus-ring inline-flex cursor-pointer items-center rounded-lg bg-graphite px-8 py-3.5 text-[length:var(--font-nav)] font-semibold text-white transition-all duration-200 hover:bg-[#1a1a1a] hover:shadow-lg"
-              onClick={handleAnchorClick}
-            >
-              Рассчитать проект
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className={`border-t border-steel/60 bg-stone/95 md:hidden ${
-          isOpen ? "block" : "hidden"
-        }`}
-      >
         <nav
-          id="mobile-navigation"
-          className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-4 text-sm text-charcoal/80 sm:px-6"
-          aria-label="Мобильная навигация"
+          className="hidden items-center gap-9 lg:flex"
+          aria-label="Основная навигация"
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              className="focus-ring rounded-2xl px-3 py-2 text-charcoal transition hover:text-graphite"
-              href={link.href}
-              onClick={handleAnchorClick}
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="#lead"
-            className="focus-ring mt-2 cursor-pointer rounded-lg bg-graphite px-5 py-3 text-center text-sm font-semibold text-white transition-all duration-200 hover:bg-[#1a1a1a]"
+          {navLinks.map((link) =>
+            renderLink(
+              link,
+              "focus-ring text-[13px] uppercase tracking-[0.1em] text-charcoal transition-colors duration-300 hover:text-ink"
+            )
+          )}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <Link
+            href="/#lead"
+            className="focus-ring btn btn-outline hidden lg:inline-flex"
             onClick={handleAnchorClick}
           >
             Рассчитать проект
-          </a>
+          </Link>
+
+          <button
+            type="button"
+            className="focus-ring inline-flex h-11 w-11 items-center justify-center border border-steel text-ink lg:hidden"
+            aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
+            <span className="flex flex-col items-center gap-[5px]">
+              <span className="block h-px w-5 bg-ink" />
+              <span className="block h-px w-5 bg-ink" />
+              <span className="block h-px w-5 bg-ink" />
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div className={`border-t border-steel bg-cream lg:hidden ${isOpen ? "block" : "hidden"}`}>
+        <nav
+          id="mobile-navigation"
+          className="wrap flex flex-col py-2"
+          aria-label="Мобильная навигация"
+        >
+          {navLinks.map((link) =>
+            renderLink(
+              link,
+              "focus-ring border-b border-steel py-4 text-[13px] uppercase tracking-[0.1em] text-charcoal transition-colors duration-300 hover:text-ink"
+            )
+          )}
+          <Link
+            href="/#lead"
+            className="focus-ring btn btn-dark my-4 w-full"
+            onClick={handleAnchorClick}
+          >
+            Рассчитать проект
+          </Link>
         </nav>
       </div>
     </header>
   );
 }
-
