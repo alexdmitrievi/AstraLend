@@ -132,7 +132,7 @@ export default function LeadForm({ textureSrc = null }: LeadFormProps) {
         }}
       />
 
-      <div className="wrap relative grid items-start gap-14 lg:gap-16 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
+      <div className="wrap relative grid items-start gap-14 lg:gap-16 [grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))]">
         {/* Слева: предложение */}
         <div>
           <p className="eyebrow text-white/60">Расчёт проекта</p>

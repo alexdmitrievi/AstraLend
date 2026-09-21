@@ -1,30 +1,27 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-
-import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
-
 import type { CatalogItem } from "../../lib/catalog";
+import type { Slide } from "./CatalogLightbox";
+
+// Лайтбокс со своими стилями — отдельный чанк, подгружается по первому клику.
+const CatalogLightbox = dynamic(() => import("./CatalogLightbox"), {
+  ssr: false,
+});
 
 type CatalogGridProps = {
   items: CatalogItem[];
 };
 
-type Slide = {
-  src: string;
-  alt?: string;
-  title?: string;
-  description?: string;
-};
-
 export default function CatalogGrid({ items }: CatalogGridProps) {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  // Один раз открыли — компонент остаётся смонтированным, иначе пропадает
+  // анимация закрытия.
+  const [isLightboxLoaded, setIsLightboxLoaded] = useState(false);
 
   const slides: Slide[] = useMemo(
     () =>
@@ -40,6 +37,7 @@ export default function CatalogGrid({ items }: CatalogGridProps) {
   /* ─── Лайтбокс: открытие / закрытие + кнопка «назад» браузера ─── */
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
+    setIsLightboxLoaded(true);
     setIsLightboxOpen(true);
     if (typeof window !== "undefined") {
       window.history.pushState({ portfolioLightbox: true }, "");
@@ -77,7 +75,7 @@ export default function CatalogGrid({ items }: CatalogGridProps) {
 
   return (
     <>
-      <ul className="catalog-grid grid gap-x-7 gap-y-10 [grid-template-columns:repeat(auto-fill,minmax(260px,1fr))]">
+      <ul className="catalog-grid grid gap-x-7 gap-y-10 [grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr))]">
         {items.map((item, index) => (
           <li key={item.id} className="group flex flex-col">
             <button
@@ -115,23 +113,14 @@ export default function CatalogGrid({ items }: CatalogGridProps) {
         ))}
       </ul>
 
-      <Lightbox
-        open={isLightboxOpen}
-        close={() => closeLightbox()}
-        index={lightboxIndex}
-        slides={slides}
-        plugins={[Fullscreen, Zoom]}
-        carousel={{ finite: false }}
-        controller={{ closeOnPullDown: true, closeOnBackdropClick: true }}
-        zoom={{
-          maxZoomPixelRatio: 4,
-          zoomInMultiplier: 1.8,
-          doubleTapDelay: 250,
-          doubleClickDelay: 250,
-          wheelZoomDistanceFactor: 140,
-          pinchZoomDistanceFactor: 140,
-        }}
-      />
+      {isLightboxLoaded ? (
+        <CatalogLightbox
+          open={isLightboxOpen}
+          index={lightboxIndex}
+          slides={slides}
+          onClose={() => closeLightbox()}
+        />
+      ) : null}
     </>
   );
 }

@@ -229,6 +229,26 @@ html {
   }
 }
 
+/* ─── Пульс у плавающей кнопки WhatsApp ───────────────────────── */
+/* animate-ping растягивает кольцо вдвое — при отступе 20px оно вылезало
+   за правый край вьюпорта. 1.35 укладывается в отступ. */
+@keyframes wa-pulse {
+  0%   { transform: scale(1);    opacity: 0.32; }
+  70%  { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.wa-pulse {
+  animation: wa-pulse 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-pulse {
+    animation: none;
+    opacity: 0;
+  }
+}
+
 /* ─── Маркиза клиентов ────────────────────────────────────────── */
 .marquee {
   animation: marquee var(--marquee-duration, 18s) linear infinite;
