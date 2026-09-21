@@ -17,7 +17,7 @@ import { join } from "node:path";
 import { asset } from "./asset";
 
 export const mediaFiles = {
-  heroVideo: "/hero.mp4",
+  materialVideo: "/material.mp4",
   textureDark: "/texture-dark.webp",
   workshop: "/workshop.webp",
 } as const;
