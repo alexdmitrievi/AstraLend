@@ -9,7 +9,7 @@
 set -euo pipefail
 
 REF="eed389e879ed324ed148dee3e6d664b851d525d5"   # chore: добавить WebP-файлы в статический экспорт out/
-PREFIX="${1:-/AstraLend/before}"
+PREFIX="${1:-/before}"
 DEST="${2:-out/before}"
 
 if ! git cat-file -e "$REF^{commit}" 2>/dev/null; then
