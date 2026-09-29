@@ -42,33 +42,39 @@ npx serve out     # посмотреть собранную версию
 ## Переменные окружения
 - `NEXT_PUBLIC_LEAD_ENDPOINT` — приёмник лид-формы
   (по умолчанию FormSubmit → `mebel@a-stra.ru`)
-- `GITHUB_PAGES` / `NEXT_PUBLIC_BASE_PATH` — выставляются только в CI Pages,
-  см. ниже
+- `GITHUB_PAGES` / `NEXT_PUBLIC_BASE_PATH` — только для исторической сборки
+  под подпуть GitHub Pages, см. «Публикация»; основной деплой идёт без них
 
 Форма отправляется из браузера, серверного кода нет.
 
 ## Публикация
 
-### GitHub Pages (превью)
-Workflow `.github/workflows/pages.yml` собирает сайт при пуше в `main`
-и публикует его. Project Pages живут на подпути, поэтому сборка идёт
-с `GITHUB_PAGES=true` и `NEXT_PUBLIC_BASE_PATH=/AstraLend` — Next
-подставляет `basePath: "/AstraLend"`, а локальные картинки из `public/`
-подключаются через `asset()` из `lib/asset.ts`.
+Сайт деплоится через GitHub Actions (`.github/workflows/pages.yml`) при пуше
+в `main` и публикуется **GitHub Pages** на кастомный домен
+[m-astra.ru](https://m-astra.ru). Домен зафиксирован файлом `public/CNAME`,
+сборка идёт без `basePath` — статика кладётся в корень домена.
 
-Pages включён, источник — **GitHub Actions**. После зелёного прогона сайт
-доступен по адресу <https://alexdmitrievi.github.io/AstraLend/>.
+DNS домена (управляется в личном кабинете reg.ru) указывает на GitHub Pages:
 
-Если понадобится настроить Pages заново: **Settings → Pages → Source =
-GitHub Actions**. Автоматизировать это шагом `actions/configure-pages`
-с `enablement: true` нельзя — `GITHUB_TOKEN` умеет деплоить в Pages, но
-не создавать сам Pages-сайт, и шаг падает с
+- `A` для `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`,
+  `185.199.111.153`
+- `CNAME` для `www` → `alexdmitrievi.github.io`
+
+Дальше один раз: **Settings → Pages → Custom domain = `m-astra.ru`**, после
+проверки домена — галочка **Enforce HTTPS**. Источник Pages — **GitHub
+Actions** (не ветка); при необходимости пересоздать сайт: **Settings →
+Pages → Source = GitHub Actions**. Автоматизировать это шагом
+`actions/configure-pages` с `enablement: true` нельзя — `GITHUB_TOKEN` умеет
+деплоить в Pages, но не создавать сам Pages-сайт, и шаг падает с
 `Resource not accessible by integration`.
 
-### Боевой домен
-Обычная сборка (`npm run build`, без `GITHUB_PAGES`) даёт статику без
-`basePath` — её можно выкладывать в корень `a-stra.ru` или на любой хостинг
-статики.
+### Исторический режим подпути
+
+Раньше сайт жил на `alexdmitrievi.github.io/AstraLend` (Project Pages):
+сборка шла с `GITHUB_PAGES=true` и `NEXT_PUBLIC_BASE_PATH=/AstraLend`
+(`basePath: "/AstraLend"`, картинки — через `asset()` из `lib/asset.ts`).
+Основной деплой этот режим больше не использует; код сохранён на случай,
+если понадобится подпуть снова.
 
 ## Медиа-ассеты
 
@@ -124,9 +130,8 @@ cwebp -q 80 -resize 1200 0 workshop-src.png -o public/workshop.webp
 предупреждения «preloaded but not used».
 
 ## Версия до редизайна
-Лежит на том же сайте по адресу
-<https://alexdmitrievi.github.io/AstraLend/before/> — это статический экспорт
-из коммита `eed389e8` (31 марта), последнего перед сентябрьскими правками.
+Лежит на том же сайте по адресу <https://m-astra.ru/before/> — это статический
+экспорт из коммита `eed389e8` (31 марта), последнего перед сентябрьскими правками.
 Пересборки нет: на том коммите папка `out/` была закоммичена в репозиторий,
 так что показывается ровно тот билд.
 

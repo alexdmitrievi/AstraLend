@@ -28,12 +28,12 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # Сборка без basePath: сайт отдаётся из корня кастомного домена
+      # m-astra.ru (домен фиксируется файлом public/CNAME и настройкой
+      # repo → Settings → Pages → Custom domain).
       - run: npm run build
-        env:
-          GITHUB_PAGES: "true"
-          NEXT_PUBLIC_BASE_PATH: "/AstraLend"
       - name: Превью версии до редизайна на /before/
-        run: ./scripts/build-before-preview.sh /AstraLend/before out/before
+        run: ./scripts/build-before-preview.sh /before out/before
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
