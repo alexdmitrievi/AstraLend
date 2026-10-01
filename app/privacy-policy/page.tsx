@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const UPDATED = "01 января 2026 г.";
+const UPDATED = "01 октября 2026 г.";
 const INN = "550516401202";
 const EMAIL = "mebel@a-stra.ru";
 const PHONE = "+7 913 626-34-44";
@@ -64,7 +64,7 @@ export default function PrivacyPolicyPage() {
               27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок
               обработки и защиты персональных данных физических лиц,
               пользующихся сайтом{" "}
-              <strong className="text-graphite">a-stra.ru</strong> (далее —
+              <strong className="text-graphite">m-astra.ru</strong> (далее —
               «Сайт»).
             </p>
             <p className="mt-3">
