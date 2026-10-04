@@ -105,6 +105,21 @@ export default function RootLayout({
       <body
         className="min-h-screen bg-cream text-charcoal font-body antialiased"
       >
+        {/* Yandex.Metrika counter — Мастерская АСТРА (m-astra.ru), счётчик 113393959 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=113393959','ym');ym(113393959,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});`,
+          }}
+        />
+        <noscript>
+          <div>
+            <img
+              src="https://mc.yandex.ru/watch/113393959"
+              style={{ position: "absolute", left: "-9999px" }}
+              alt=""
+            />
+          </div>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: STRUCTURED_DATA }}
