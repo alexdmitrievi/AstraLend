@@ -43,7 +43,7 @@ export default function LeadForm({ textureSrc = null }: LeadFormProps) {
 
   const leadEndpoint =
     process.env.NEXT_PUBLIC_LEAD_ENDPOINT ??
-    "https://formsubmit.co/ajax/4e68de28843824cca972a99dd03c9caf";
+    "https://rnqalafmuyrlfioqdore.supabase.co/functions/v1/astra-lead";
 
   const {
     register,
@@ -90,13 +90,22 @@ export default function LeadForm({ textureSrc = null }: LeadFormProps) {
         },
         body: JSON.stringify({
           contact: values.contact,
-          _subject: "Новая заявка — каталог и расчёт сметы",
-          _template: "table",
-          _captcha: "false",
+          honeypot: values.honeypot,
+          source: "m-astra.ru",
+          page: `${window.location.pathname}${window.location.hash}`,
         }),
       });
 
       if (!response.ok) throw new Error("Request failed");
+      // The lead endpoint reports delivery failures with {"ok": false}
+      // even on HTTP 200, so check the payload as well as the status code.
+      let payload: { ok?: boolean } = {};
+      try {
+        payload = await response.json();
+      } catch {
+        // Non-JSON body is unexpected; fall back to the HTTP status verdict.
+      }
+      if (payload.ok === false) throw new Error("Delivery failed");
 
       setStatus("success");
       track("lead_success");
