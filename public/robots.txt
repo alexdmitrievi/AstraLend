@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /blog/rss.xml
 
 Disallow: /api/
 
-Sitemap: https://a-stra.ru/sitemap.xml
+Sitemap: https://m-astra.ru/sitemap.xml
