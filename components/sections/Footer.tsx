@@ -68,6 +68,16 @@ export default function Footer() {
                   Telegram
                 </a>
               </li>
+              <li>
+                <a
+                  className={columnLink}
+                  href="https://dzen.ru/id/6ac24e6dfe1edc0c70ac3e2c"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Дзен
+                </a>
+              </li>
               <li className="text-[14px] text-white/65">Омск</li>
             </ul>
           </div>

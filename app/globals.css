@@ -287,3 +287,93 @@ html {
   -webkit-user-select: none;
   -webkit-user-drag: none;
 }
+
+/* ─── Блог: тело статьи ───────────────────────────────────────── */
+.article-body {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--color-charcoal);
+}
+
+.article-body p {
+  margin: 0 0 1.15em;
+}
+
+.article-body h2 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(22px, 2.8vw, 30px);
+  line-height: 1.25;
+  color: var(--color-ink);
+  margin: 1.9em 0 0.75em;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 0 0 1.3em;
+  padding-left: 1.3em;
+}
+
+.article-body ul {
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body li {
+  margin-bottom: 0.45em;
+}
+
+.article-body li::marker {
+  color: var(--color-walnut);
+}
+
+.article-body blockquote {
+  margin: 1.7em 0;
+  padding: 18px 22px;
+  border-left: 3px solid var(--color-gold);
+  background: var(--color-cream-light);
+  font-style: italic;
+}
+
+.article-body blockquote p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+
+.article-body figure {
+  margin: 1.8em 0;
+}
+
+.article-body figure img {
+  display: block;
+  width: 100%;
+  background: var(--color-stone);
+}
+
+.article-body figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--color-ash);
+}
+
+.article-body a {
+  color: var(--color-walnut);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color 0.3s ease;
+}
+
+.article-body a:hover {
+  color: var(--color-ink);
+}
+
+.article-body b {
+  font-weight: 600;
+  color: var(--color-ink);
+}
