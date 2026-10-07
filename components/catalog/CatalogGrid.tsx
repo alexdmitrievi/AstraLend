@@ -89,6 +89,8 @@ export default function CatalogGrid({ items }: CatalogGridProps) {
                 <img
                   src={item.image}
                   alt={item.title}
+                  width={item.imageWidth}
+                  height={item.imageHeight}
                   loading="lazy"
                   decoding="async"
                   draggable={false}

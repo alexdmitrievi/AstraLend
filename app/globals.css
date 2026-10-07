@@ -213,6 +213,22 @@ html {
     transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  /* ─── Мобильный каталог: фото от края до края, изделие целиком ───
+     Пока сетка одноколоночная (вьюпорт < 580px: 2×260px + gap не влезают
+     в контейнер), фото растягивается на всю ширину экрана — компенсируем
+     паддинг .wrap (16px). aspect-ratio гасится: пропорцию задают
+     натуральные width/height у img, поэтому кадр не обрезается. */
+  @media (max-width: 579px) {
+    .catalog-grid .photo {
+      aspect-ratio: auto;
+      margin-inline: -16px;
+    }
+
+    .catalog-grid .photo img {
+      height: auto;
+    }
+  }
+
   .group:hover .photo img,
   .photo:hover img {
     transform: scale(1.04);
