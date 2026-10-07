@@ -14,12 +14,24 @@
   </url>
   <url>
     <loc>https://m-astra.ru/blog/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://m-astra.ru/blog/divan-na-zakaz-novosibirsk-kuhnya-gostinaya/</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://m-astra.ru/blog/kuhonnyy-ugolok-na-zakaz-omsk/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://m-astra.ru/blog/rogozhka-ili-velyur-dlya-divana/</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -37,7 +49,19 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://m-astra.ru/blog/kak-vybrat-divan-kotoryy-ne-prosyadet/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://m-astra.ru/blog/uglovoy-divan-na-zakaz/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://m-astra.ru/blog/divan-na-zakaz-ekaterinburg-kolonna-erker/</loc>
     <lastmod>2026-10-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -49,8 +73,26 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://m-astra.ru/blog/divan-na-zakaz-tyumen-kuhnya-gostinaya/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://m-astra.ru/blog/krovat-s-myagkim-izgolovem/</loc>
     <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://m-astra.ru/blog/mebel-dlya-kafe-i-restoranov-kontraktnaya/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://m-astra.ru/blog/trendy-myagkoy-mebeli-2026/</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
