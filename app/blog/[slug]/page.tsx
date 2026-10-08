@@ -46,16 +46,49 @@ export default async function ArticlePage({
   const article = articles.find((item) => item.slug === slug);
   if (!article) notFound();
 
+  const faq: { q: string; a: string }[] =
+    (article as unknown as { faq?: { q: string; a: string }[] }).faq ?? [];
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    description: article.description,
-    datePublished: article.date,
-    author: { "@type": "Organization", name: "Мастерская АСТРА" },
-    publisher: { "@type": "Organization", name: "Мастерская АСТРА", url: SITE },
-    mainEntityOfPage: `${SITE}/blog/${article.slug}/`,
-    ...(article.cover ? { image: `${SITE}${article.cover}` } : {}),
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: article.title,
+        description: article.description,
+        datePublished: article.date,
+        author: { "@type": "Organization", name: "Мастерская АСТРА" },
+        publisher: { "@type": "Organization", name: "Мастерская АСТРА", url: SITE },
+        mainEntityOfPage: `${SITE}/blog/${article.slug}/`,
+        inLanguage: "ru",
+        ...(article.cover ? { image: `${SITE}${article.cover}` } : {}),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE}/` },
+          { "@type": "ListItem", position: 2, name: "Статьи", item: `${SITE}/blog/` },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: article.title,
+            item: `${SITE}/blog/${article.slug}/`,
+          },
+        ],
+      },
+      ...(faq.length
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: faq.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            },
+          ]
+        : []),
+    ],
   };
 
   return (
