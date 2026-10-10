@@ -1,7 +1,18 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Header from "../../components/sections/Header";
 import Footer from "../../components/sections/Footer";
 import articles from "../../content/blog/articles.json";
+
+export const metadata: Metadata = {
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        { url: "https://m-astra.ru/blog/rss.xml", title: "Мастерская АСТРА — статьи (RSS)" },
+      ],
+    },
+  },
+};
 
 const DZEN_CHANNEL = "https://dzen.ru/id/6ac24e6dfe1edc0c70ac3e2c";
 
