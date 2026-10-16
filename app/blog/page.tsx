@@ -6,6 +6,7 @@ import articles from "../../content/blog/articles.json";
 
 export const metadata: Metadata = {
   alternates: {
+    canonical: "https://m-astra.ru/blog/",
     types: {
       "application/rss+xml": [
         { url: "https://m-astra.ru/blog/rss.xml", title: "Мастерская АСТРА — статьи (RSS)" },
