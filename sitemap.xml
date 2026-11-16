@@ -14,9 +14,15 @@
   </url>
   <url>
     <loc>https://m-astra.ru/blog/</loc>
-    <lastmod>2026-11-15</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://m-astra.ru/blog/mebel-dlya-peregovornoy-razmery-stoly-i-ceny/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://m-astra.ru/blog/peretyazhka-divana-v-omske-ceny-sroki-i-chto-vazhno-znat/</loc>
